@@ -49,12 +49,30 @@
                 </div>
                 <div class="index_drawer closed">
                     <div class="drawer_content">
-                        <p>{{ index.about }}</p>
+                        <p>{{ index.about|richtext }}</p>
+                        {% if index.contributed_by != None %}
+                        <p>{{ index.contributed_by }}</p>
+                        {% endif %}
+                        <p class="external_links">
+                            {% if index.external_link != None %}
+                            <a href="{{index.external_link}}" target="_blank">{{ index.external_link }}</a>
+                            {% endif %}
+                            {% if index.external_link_two != None %}
+                            <a href="{{index.external_link_two}}" target="_blank">{{ index.external_link_two }}</a>
+                            {% endif %}
+                        </p>
+                        {% if index.location != None %}
+                        <p>{{ index.location }}</p>
+                        {% endif %}
+
                         {% for loop_cycle in index.images_list.all %}
                             {% image loop_cycle.images fill-120x120 as img %} 
                             {% if loop_cycle.images is None %}
                             {% else %}
-                                <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}" onclick="enlarge_img(this)">
+                                <div class="img_container">
+                                    <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}" onclick="enlarge_img(this)">
+                                    <p>{{ loop_cycle.caption }}</p>
+                                </div>
                             {% endif %}
                         {% endfor %}
                         <p>

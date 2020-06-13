@@ -41,7 +41,21 @@
                             <div class="sm"><p>{{ index.pub_date }}</p></div>
                             <div class="lg"><p>{{ index.title }}</p></div>
                             <div class="md"><p>{{ index.author_founder }}</p></div>
-                            <p>{{ index.about }}</p>
+                            <p>{{ index.about|richtext }}</p>
+                            {% if index.contributed_by != None %}
+                            <p>{{ index.contributed_by }}</p>
+                            {% endif %}
+                            <p class="external_links">
+                                {% if index.external_link != None %}
+                                <a href="{{index.external_link}}" target="_blank">{{ index.external_link }}</a>
+                                {% endif %}
+                                {% if index.external_link_two != None %}
+                                <a href="{{index.external_link_two}}" target="_blank">{{ index.external_link_two }}</a>
+                                {% endif %}
+                            </p>
+                            {% if index.location != None %}
+                            <p>{{ index.location }}</p>
+                            {% endif %}
                             <p>
                                 {% for cat in index.categories.all %}
                                     <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>

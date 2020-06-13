@@ -67,6 +67,7 @@ function slideIndex_drawer(elm, url) {
     elm.classList.add("green_text");
     selected_drawer.classList.toggle('closed');
 
+    console.log(url)
     var hist_str = "#" + url
     window.history.pushState(hist_str, 'Title', hist_str);
 
