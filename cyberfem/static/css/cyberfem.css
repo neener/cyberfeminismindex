@@ -39,6 +39,9 @@ select, button {
 .images_pg .index_entry {
   padding: 10px 0;
 }
+.images_pg .drawer_content div {
+  display: inline-block;
+}
 .images_pg img {
   width: 150px;
   display: inline-block;
@@ -85,17 +88,17 @@ select, button {
 .main_index_style .index_entry div p {
   margin: 5px 0;
 }
-.main_index_style .index_entry .sm {
+.main_index_style .sm {
   width: 7%;
 }
-.main_index_style .index_entry .sm.num {
+.main_index_style .sm.num {
   padding-left: 20px;
 }
-.main_index_style .index_entry .lg {
+.main_index_style .lg {
   width: 60%;
   word-break: break-word;
 }
-.main_index_style .index_entry .md {
+.main_index_style .md {
   width: 18%;
 }
 
@@ -113,8 +116,8 @@ select, button {
 .index_drawer img {
   cursor: pointer;
 }
-.index_drawer .enlarge_img {
-  width: 300px;
+.enlarge_img {
+  width: 250px !important;
 }
 .index_drawer .drawer_content {
   padding: 20px;

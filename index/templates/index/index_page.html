@@ -57,7 +57,7 @@
                                 <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}" onclick="enlarge_img(this)">
                             {% endif %}
                         {% endfor %}
-                        <p>Categories:
+                        <p>
                             {% for cat in index.categories.all %}
                                 <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
                             {% endfor %}
