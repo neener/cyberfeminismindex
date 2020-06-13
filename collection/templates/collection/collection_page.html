@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+{% load static wagtailuserbar %}
+
+{% load wagtailcore_tags wagtailimages_tags cache %}
+
+
+	<div class="left_content">
+	    <header>
+	        <div class="menu_section">
+	            <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)">
+	                <option disabled selected value></option>
+	                {% for item in navigation.menu_items.all %}
+	                <option value="{{ item.title }}">{{ item.title }}</option>
+	                {% endfor %}
+	            </select>
+	        </div>
+	    </header>   
+
+	    <div class="collections_pg">
+	    	<div id="curator_list">
+	    		{% for index_col in index_collections %}
+		       	<input type="radio" name="collection" value="{{ index_col.slug }}" onclick="collection_url('{{index_col.slug}}')">
+				<label for="{{ index_col.slug }}">{{ index_col }}</label><br>
+				{% endfor %}
+			</div>
+			{% if curated_entries %}
+			<div id="collections_list" class="main_index_style">
+				<div class="index_entry arrows">
+		            <div class="sm num">
+		                <a href="{{ post.specific.get_parent.url }}/orderby/id/">↓</a>
+		            </div>
+		            <div class="sm pub_date">
+		                <a href="{{ post.specific.get_parent.url }}/orderby/pub_date/">↓</a>
+		            </div>
+		            <div class="lg title">
+		                <a href="{{ post.specific.get_parent.url }}/orderby/title/">↓</a>
+		            </div>
+		            <div class="md author_founder">
+		                <a href="{{ post.specific.get_parent.url }}/orderby/author_founder/">↓</a>
+		            </div>
+       			</div>
+       			{% endif %}
+				{% for index in curated_entries %}
+            		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.url}}')" id="{{ index.url }}">
+	                    <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
+	                    <div class="sm"><p>{{ index.pub_date }}</p></div>
+	                    <div class="lg"><p>{{ index.title }}</p></div>
+	                    <div class="md"><p>{{ index.author_founder }}</p></div>
+	                </div>	
+	                <div class="index_drawer closed">
+	                    <div class="drawer_content">
+	                        <p>{{ index.about }}</p>
+	                        {% for loop_cycle in index.images_list.all %}
+	                            {% image loop_cycle.images fill-120x120 as img %} 
+	                            {% if loop_cycle.images is None %}
+	                            {% else %}
+	                                <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}" onclick="enlarge_img(this)">
+	                            {% endif %}
+	                        {% endfor %}
+	                        <p>Categories:
+	                            {% for cat in index.categories.all %}
+	                                <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
+	                            {% endfor %}
+	                        </p>
+	                    </div>
+                	</div>
+		    	{% endfor %}
+	    	</div>
+			
+
+	    </div>	
+
+
+
+
+
+   	</div>
+{% endblock %}

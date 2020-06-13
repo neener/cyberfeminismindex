@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+{% load static wagtailuserbar menu_tags %}
+{% get_menu "main" as navigation %}
+
+	<div class="left_content">
+	    <header>
+	        <div class="menu_section">
+	            <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)">
+	                <option disabled selected value></option>
+	                {% for item in navigation.menu_items.all %}
+	                <option value="{{ item.title }}">{{ item.title }}</option>
+	                {% endfor %}
+	            </select>
+	            <div id="tag_btn"></div>
+	        </div>
+	    </header>
+	    <div class="internal_pg_container about_pg">
+		    <div class="about_buttons">
+				<button>contact</button>
+				<button>submit</button>
+			</div>
+			{{ page.body|richtext }}
+		</div>
+   	</div>
+{% endblock %}

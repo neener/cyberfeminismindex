@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-indexpage{% endblock %}
+
+{% block content %}
+    <h1>Index Detail Page</h1>
+    <h1>{{ page.title }}</h1>
+    <div class="intro">{{ page.intro|richtext }}</div>
+
+
+    <p>Categories</p>
+    <ul>
+    	{% for cat in page.categories.all %}
+        <li>
+        	<a href="{{ post.specific.get_parent.url }}?category={{ cat.slug }}">
+                {{ cat.name}}
+            </a>
+        </li>
+    	{% endfor %}
+	</ul>
+
+
+
+{% endblock %}

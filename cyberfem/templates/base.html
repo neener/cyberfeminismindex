@@ -1,0 +1,67 @@
+{% load static wagtailuserbar %}
+{% load wagtailcore_tags cache %}
+{% load static wagtailuserbar menu_tags %}
+{% get_menu "main" as navigation %}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/cyberfem.css' %}">
+
+
+       <!--  {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %} -->
+    </head>
+
+    <body id="main_content" class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        <div id="right_content">
+            <div id="base_index_list">
+                <table>
+                    <tbody>
+                    {% cache 604800 base_index index.id %}
+                        {% for index in index_context %}
+                            <tr class="base_tr" onclick="base_reference('{{ index.url }}')" id="base{{ index.url }}">
+                                <td>{{ index.autoincrement_num }}</td>
+                                <td>{{ index.pub_date }}</td>
+                                <td>{{ index.title }}</td>
+                                <td>{{ index.author_founder }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endcache %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+
+        {% block content %}
+        {% endblock %}
+
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/cyberfem.js' %}"></script>
+<!--         {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %} -->
+    </body>
+</html>

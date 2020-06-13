@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-indexpage{% endblock %}
+
+{% block content %}
+
+{% load static wagtailuserbar menu_tags %}
+{% get_menu "main" as navigation %}
+
+{% load wagtailcore_tags wagtailimages_tags cache %}
+
+<div class="left_content">
+    <header>
+        <div class="menu_section">
+            <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)">
+                <option disabled selected value></option>
+                {% for item in navigation.menu_items.all %}
+                <option value="{{ item.title }}">{{ item.title }}</option>
+                {% endfor %}
+            </select>
+            <div id="tag_btn"></div>
+        </div>
+    </header>
+
+    <div id="index_list" class="main_index_style">
+        <div class="index_entry arrows">
+            <div class="sm num">
+                <a href="{{ post.specific.get_parent.url }}/orderby/id/">↓</a>
+            </div>
+            <div class="sm pub_date">
+                <a href="{{ post.specific.get_parent.url }}/orderby/pub_date/">↓</a>
+            </div>
+            <div class="lg title">
+                <a href="{{ post.specific.get_parent.url }}/orderby/title/">↓</a>
+            </div>
+            <div class="md author_founder">
+                <a href="{{ post.specific.get_parent.url }}/orderby/author_founder/">↓</a>
+            </div>
+        </div>
+        {% cache 604800 preview_index index.id %}
+            {% for index in posts %}
+                <div class="index_entry" onclick="slideIndex_drawer(this, '{{index.url}}')" id="{{ index.url }}">
+                    <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
+                    <div class="sm"><p>{{ index.pub_date }}</p></div>
+                    <div class="lg"><p>{{ index.title }}</p></div>
+                    <div class="md"><p>{{ index.author_founder }}</p></div>
+                </div>
+                <div class="index_drawer closed">
+                    <div class="drawer_content">
+                        <p>{{ index.about }}</p>
+                        {% for loop_cycle in index.images_list.all %}
+                            {% image loop_cycle.images fill-120x120 as img %} 
+                            {% if loop_cycle.images is None %}
+                            {% else %}
+                                <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}" onclick="enlarge_img(this)">
+                            {% endif %}
+                        {% endfor %}
+                        <p>Categories:
+                            {% for cat in index.categories.all %}
+                                <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endcache %} 
+<!--         <h3>internal links</h3>
+        <ul>
+            {% for int in post.specific.internal_links.all %}
+            <li>
+                    {{ int.link_copy}} [{{int.link_page_id}}]
+            </li>
+            {% endfor %}
+        </ul> -->
+                    <!-- <h1>{{ page.title }}</h1> -->
+
+
+    </div>
+    
+</div>
+
+
+
+
+{% endblock %}

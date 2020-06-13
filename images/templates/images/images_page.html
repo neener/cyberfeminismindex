@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+{% load static wagtailuserbar menu_tags %}
+{% get_menu "main" as navigation %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+	<div class="left_content">
+	    <header>
+	        <div class="menu_section">
+	            <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)">
+	                <option disabled selected value></option>
+	                {% for item in navigation.menu_items.all %}
+	                <option value="{{ item.title }}">{{ item.title }}</option>
+	                {% endfor %}
+	            </select>
+	        </div>
+	    </header>
+	    
+	  	<div class="images_pg main_index_style">
+            {% for index in image_entries %}
+                    <div onclick="slideIndex_drawer(this, '{{index.url}}')" id="{{ index.url }}" class="index_entry">
+                        <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
+                        {% for loop_cycle in index.images_list.all %}
+                            {% image loop_cycle.images fill-120x120 as img %} 
+                            {% if loop_cycle.images is None %}
+                            {% else %}
+                                <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}" onclick="enlarge_img(this)">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="index_drawer closed">
+                        <div class="drawer_content">
+                            <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
+                            <div class="sm"><p>{{ index.pub_date }}</p></div>
+                            <div class="lg"><p>{{ index.title }}</p></div>
+                            <div class="md"><p>{{ index.author_founder }}</p></div>
+                            <p>{{ index.about }}</p>
+                            <p>Categories:
+                                {% for cat in index.categories.all %}
+                                    <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+       
+    	</div>
+
+
+   	</div>
+{% endblock %}
