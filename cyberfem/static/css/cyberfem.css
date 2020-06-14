@@ -53,6 +53,7 @@ select, button {
 .search_pg #categories_list {
   margin-top: 55px;
   padding: 0 20px;
+  columns: 900px 4;
 }
 .search_pg form {
   padding: 0 20px;

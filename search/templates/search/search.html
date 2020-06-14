@@ -25,16 +25,14 @@
                 <input type="text" placeholder="enter search term" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
                 <!-- <input type="submit" value="Search" class="button"> -->
                 <input type="submit" style="display: none" />
-            </form>
-            
-            {% for index in index_context %}
-                <div id="categories_list">
-                    {% for cat in index.categories.all %}
-                    <input type="radio" name="categories_search_pg" value="{{ cat.name }}" onclick="collection_url('{{cat.name}}')">
-                    <label for="{{ cat.name }}">{{ cat.name }}</label><br>
-                    {% endfor %}
-                </div>
-            {% endfor %}  
+            </form> 
+
+            <div id="categories_list">
+                {% for cat in search_categories %}
+                <input type="radio" name="categories_search_pg" value="{{ cat.slug }}" onclick="collection_url('{{cat.slug}}')">
+                <label for="{{ cat.slug }}">{{ cat.name }}</label><br>
+                {% endfor %}
+            </div>
 
             {% if search_results %}
                 {% for result in search_results %}
