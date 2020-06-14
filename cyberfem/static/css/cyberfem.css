@@ -51,7 +51,7 @@ select, button {
   margin: 85px 0 50px;
 }
 .search_pg #categories_list {
-  margin-top: 55px;
+  margin: 40px 0;
   padding: 0 20px;
   columns: 900px 4;
 }

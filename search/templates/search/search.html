@@ -28,7 +28,7 @@
 
             <div id="categories_list">
                 {% for cat in search_categories %}
-                <input type="radio" name="categories_search_pg" value="{{ cat.slug }}" onclick="collection_url('{{cat.slug}}')">
+                <input type="radio" name="categories_search_pg" value="{{ cat.slug }}" onclick="search_url('{{cat.slug}}')">
                 <label for="{{ cat.slug }}">{{ cat.name }}</label><br>
                 {% endfor %}
             </div>
