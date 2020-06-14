@@ -6,33 +6,60 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-    <h1>Search</h1>
+    <div class="left_content">
+        <header>
+            <div class="menu_section">
+                <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)">
+                    <option disabled selected value></option>
+                    {% for item in navigation.menu_items.all %}
+                    <option value="{{ item.title }}">{{ item.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </header>
+        <div class="search_pg">
+            <form action="{% url 'search' %}" method="get">
+                <input type="text" placeholder="enter search term" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                <!-- <input type="submit" value="Search" class="button"> -->
+                <input type="submit" style="display: none" />
+            </form>
+            
+            {% for index in index_context %}
+                <div id="categories_list">
+                    {% for cat in index.categories.all %}
+                    <input type="radio" name="categories_search_pg" value="{{ cat.name }}" onclick="collection_url('{{cat.name}}')">
+                    <label for="{{ cat.name }}">{{ cat.name }}</label><br>
+                    {% endfor %}
+                </div>
+            {% endfor %}  
 
-    <form action="{% url 'search' %}" method="get">
-        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search" class="button">
-    </form>
+            {% if search_results %}
+            {{search_results}}
+                {% for result in search_results %}
 
-    {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
+                    <div class="index_entry" onclick="slideIndex_drawer(this, '{{result.slug}}')" id="{{result.slug}}">
+                        <div class="sm num"><p>{{ result.autoincrement_num }}</p></div>
+                        <div class="sm"><p>{{ result.pub_date }}</p></div>
+                        <div class="lg"><p>{{ result.title }}</p></div>
+                        <div class="md"><p>{{ result.author_founder }}</p></div>
+                    </div>  
+
+
                     {% if result.search_description %}
                         {{ result.search_description }}
                     {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+                {% endfor %}
 
-        {% if search_results.has_previous %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-        {% endif %}
+                {% if search_results.has_previous %}
+                    <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
+                {% endif %}
 
-        {% if search_results.has_next %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-        {% endif %}
-    {% elif search_query %}
-        No results found
-    {% endif %}
+                {% if search_results.has_next %}
+                    <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
+                {% endif %}
+            {% elif search_query %}
+                No results found
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

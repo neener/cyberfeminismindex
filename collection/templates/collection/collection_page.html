@@ -48,7 +48,7 @@
        			</div>
        			{% endif %}
 				{% for index in curated_entries %}
-            		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.url}}')" id="{{ index.url }}">
+            		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}">
 	                    <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
 	                    <div class="sm"><p>{{ index.pub_date }}</p></div>
 	                    <div class="lg"><p>{{ index.title }}</p></div>

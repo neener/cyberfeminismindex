@@ -47,6 +47,17 @@ select, button {
   display: inline-block;
   vertical-align: middle;
 }
+.search_pg {
+  margin: 85px 20px 50px;
+}
+.search_pg #categories_list {
+  margin-top: 55px;
+}
+.search_pg form input {
+  width: 99.5%;
+  font-size: 1.5vw;
+  padding: 5px;
+}
 .collections_pg, .images_pg {
   margin: 100px 0 50px;
   height: 100%;
@@ -124,9 +135,11 @@ select, button {
 }
 .index_drawer .external_links a {
   display: block;
+  word-break: break-all;
 }
 .index_drawer .drawer_content {
   padding: 20px;
+  overflow-x: hidden;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -224,6 +237,9 @@ header #menu select {
 header #menu.with_tag {
   /*width: 82%;*/
 }
+header #menu.with_about {
+  width: 79%;
+}
 header #tag_btn {
   display: inline-block;
   height: 100%;
@@ -244,10 +260,12 @@ header #tag_btn button span {
 	width: 100%;
 	display: inline-block;
 }
-.about_buttons {
+#about_buttons {
   display: inline-block;
+  height: 100%;
+  vertical-align: top;
 }
-.about_buttons button {
+#about_buttons button {
   float: left;
   margin-right: 10px;
 }

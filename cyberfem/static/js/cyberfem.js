@@ -17,18 +17,18 @@ function getUrl() {
     var secondLevelLocation = pathArray[1];
     var selected_tag = pathArray[2]
     
-    str = secondLevelLocation[0].toUpperCase() + secondLevelLocation.slice(1);;
+    str = secondLevelLocation
     switch(secondLevelLocation) {
       case "":
-        menu.value = "Index";
+        menu.value = "index";
         console.log(1)
         break;
       case "orderby":
-        menu.value = "Index";
+        menu.value = "index";
         console.log(2)
         break;
       case "tag":
-        menu.value = "Index";
+        menu.value = "index";
         add_tag_button(selected_tag)
         console.log(3)
         break;
@@ -68,7 +68,7 @@ function slideIndex_drawer(elm, url) {
     selected_drawer.classList.toggle('closed');
 
     console.log(url)
-    var hist_str = "#" + url
+    var hist_str = "#/" + url
     window.history.pushState(hist_str, 'Title', hist_str);
 
 }

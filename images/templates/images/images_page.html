@@ -25,7 +25,7 @@
 	    
 	  	<div class="images_pg main_index_style">
             {% for index in image_entries %}
-                    <div onclick="slideIndex_drawer(this, '{{index.url}}')" id="{{ index.url }}" class="index_entry">
+                    <div onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}" class="index_entry">
                         <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
                         {% for loop_cycle in index.images_list.all %}
                             {% image loop_cycle.images fill-120x120 as img %} 
