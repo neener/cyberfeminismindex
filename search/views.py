@@ -4,6 +4,11 @@ from django.shortcuts import render
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from django.shortcuts import render
+
+from index.models import IndexDetailPage
+
 
 def search(request):
     search_query = request.GET.get('query', None)
@@ -11,13 +16,13 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = IndexDetailPage.objects.live().search(search_query)
         query = Query.get(search_query)
 
         # Record hit
         query.add_hit()
     else:
-        search_results = Page.objects.none()
+        search_results = IndexDetailPage.objects.none()
 
     # Pagination
     paginator = Paginator(search_results, 10)

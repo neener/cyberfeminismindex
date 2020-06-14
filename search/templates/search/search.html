@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags cache %}
+
 
 {% block body_class %}template-searchresults{% endblock %}
 
 {% block title %}Search{% endblock %}
 
 {% block content %}
+
     <div class="left_content">
         <header>
             <div class="menu_section">
@@ -34,17 +37,49 @@
             {% endfor %}  
 
             {% if search_results %}
-            {{search_results}}
                 {% for result in search_results %}
-
+            <div id="search_list" class="main_index_style">
                     <div class="index_entry" onclick="slideIndex_drawer(this, '{{result.slug}}')" id="{{result.slug}}">
                         <div class="sm num"><p>{{ result.autoincrement_num }}</p></div>
                         <div class="sm"><p>{{ result.pub_date }}</p></div>
                         <div class="lg"><p>{{ result.title }}</p></div>
                         <div class="md"><p>{{ result.author_founder }}</p></div>
+                    </div>
+                    <div class="index_drawer closed">
+                        <div class="drawer_content">
+                            <p>{{ result.about|richtext }}</p>
+                            {% if result.contributed_by != None %}
+                            <p>{{ result.contributed_by }}</p>
+                            {% endif %}
+                            <p class="external_links">
+                                {% if result.external_link != None %}
+                                <a href="{{result.external_link}}" target="_blank">{{ result.external_link }}</a>
+                                {% endif %}
+                                {% if result.external_link_two != None %}
+                                <a href="{{result.external_link_two}}" target="_blank">{{ result.external_link_two }}</a>
+                                {% endif %}
+                            </p>
+                            {% if result.location != None %}
+                            <p>{{ result.location }}</p>
+                            {% endif %}
+
+                            {% for loop_cycle in index.images_list.all %}
+                                {% image loop_cycle.images fill-120x120 as img %} 
+                                {% if loop_cycle.images is None %}
+                                {% else %}
+                                    <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}" onclick="enlarge_img(this)">
+                                {% endif %}
+                            {% endfor %}
+                            <p>
+                            {% for cat in index.categories.all %}
+                                <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
+                            {% endfor %}
+                            </p>
+
+
+
+                        </div>
                     </div>  
-
-
                     {% if result.search_description %}
                         {{ result.search_description }}
                     {% endif %}

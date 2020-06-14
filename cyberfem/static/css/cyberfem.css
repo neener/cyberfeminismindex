@@ -48,10 +48,14 @@ select, button {
   vertical-align: middle;
 }
 .search_pg {
-  margin: 85px 20px 50px;
+  margin: 85px 0 50px;
 }
 .search_pg #categories_list {
   margin-top: 55px;
+  padding: 0 20px;
+}
+.search_pg form {
+  padding: 0 20px;
 }
 .search_pg form input {
   width: 99.5%;
@@ -129,6 +133,9 @@ select, button {
 }
 .index_drawer .img_container {
   display: inline-block;
+}
+.index_drawer .img_container p {
+  font-size: 1.1vw;
 }
 .enlarge_img {
   width: 250px !important;
