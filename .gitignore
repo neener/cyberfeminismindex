@@ -6,6 +6,6 @@
 /static/
 /media/
 /cache/
-
+db.sqlite3
 
 .vscode/
