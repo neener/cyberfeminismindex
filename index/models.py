@@ -106,7 +106,7 @@ class IndexPage(RoutablePageMixin, Page):
     context["posts"] = IndexDetailPage.objects.live().public()
     context["categories"] = IndexCategory.objects.all()
     return context
-
+  
   @route(r"^orderby/(?P<order>[-\w]+)/$", name="orderby_view")
   def orderby_view(self,request,order):
     context = self.get_context(request)
