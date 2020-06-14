@@ -160,13 +160,14 @@ function img_click(url) {
     console.log(s)
 }
 
+function search_url(cat_name) {
+    window.location = base_url+"/tag/"+ cat_name;
+}
+
 function collection_url(col_name) {
     window.location = base_url+"/collections/"+ col_name;
 }
 
-function search_url(cat_name) {
-    window.location = base_url+"/tag/"+ cat_name;
-}
 
 getUrl()
 
