@@ -20,15 +20,15 @@ function getUrl() {
     str = secondLevelLocation
     switch(secondLevelLocation) {
       case "":
-        menu.value = "index";
+        menu.value = "cyberfeminism index";
         console.log(1)
         break;
       case "orderby":
-        menu.value = "index";
+        menu.value = "cyberfeminism index";
         console.log(2)
         break;
       case "tag":
-        menu.value = "index";
+        menu.value = "cyberfeminism index";
         add_tag_button(selected_tag)
         console.log(3)
         break;
@@ -50,6 +50,8 @@ function getUrl() {
 
 function slideIndex_drawer(elm, url) {
     var elems = document.querySelectorAll(".index_drawer");
+    var selected_drawer = elm.nextSibling.nextSibling;
+
     [].forEach.call(elems, function(el) {
         if (el.classList.contains('closed')) {
         } else {
@@ -61,9 +63,13 @@ function slideIndex_drawer(elm, url) {
         if (el.classList.contains('green_text')) {
             el.classList.remove("green_text");
         }
+        if (el.classList.contains('green_text')) {
+            el.classList.remove("green_text");
+        } else {
+            elm.classList.add("green_text");
+        }
     })
-
-    var selected_drawer = elm.nextSibling.nextSibling;
+    
     elm.classList.add("green_text");
     selected_drawer.classList.toggle('closed');
 

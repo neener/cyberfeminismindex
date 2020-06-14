@@ -133,32 +133,30 @@ class IndexPage(RoutablePageMixin, Page):
 
     context["posts"] = IndexDetailPage.objects.live().public().filter(categories__in=[category])
     print(context["posts"])
-
-
-    def category_sort():
-      print("sorrrrtttt")
-      parent_page = IndexPage.objects.get(title='Index').specific
-      cindex_pages = Cindex.objects.all()
-      
-      print(cindex_pages)
-      for c in cindex_pages:
-        print(c.custom_title)
-
-        # new_page = IndexDetailPage(
-        #   title = c.custom_title,
-        #   about = c.about,
-        #   sourceforabouttext = c.sourceforabouttext,
-        #   author_founder = c.author_founder,
-        #   # pub_date = c.pub_date,
-        #   external_link = c.external_link,
-        #   external_link_two = c.external_link2,
-        # )
-        # parent_page.add_child(instance=new_page)
-        # new_page.save()
-        # print("done")
-    category_sort()
-
     return render(request, "index/index_page.html", context)
+
+    # def category_sort():
+    #   print("sorrrrtttt")
+    #   parent_page = IndexPage.objects.get(title='Index').specific
+    #   cindex_pages = Cindex.objects.all()
+      
+    #   print(cindex_pages)
+    #   for c in cindex_pages:
+    #     print(c.custom_title)
+
+    #     new_page = IndexDetailPage(
+    #       title = c.custom_title,
+    #       about = c.about,
+    #       sourceforabouttext = c.sourceforabouttext,
+    #       author_founder = c.author_founder,
+    #       # pub_date = c.pub_date,
+    #       external_link = c.external_link,
+    #       external_link_two = c.external_link2,
+    #     )
+    #     parent_page.add_child(instance=new_page)
+    #     new_page.save()
+    #     print("done")
+    # category_sort()
 
 class CollectionsOrderable(Orderable):
     """This allows us to select one or more blog authors from Snippets."""
@@ -178,10 +176,12 @@ class ImagesOrderable(Orderable):
     page = ParentalKey('index.IndexDetailPage', on_delete=models.CASCADE, related_name='images_list')
     images = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.CASCADE)
     caption = models.CharField("caption", max_length=255, null=True, blank=True)
+    custom_alt = models.CharField("Custom Alt", max_length=255, null=True, blank=True)
 
     panels = [
         ImageChooserPanel("images"),
         FieldPanel("caption"),
+        FieldPanel("custom_alt"),
     ]
 
     def __str__(self):
@@ -194,7 +194,7 @@ class IndexDetailPage(Page):
   sourceforabouttext = models.CharField("Source for about text", max_length=255, null=True, blank=True)
   categories = ParentalManyToManyField("index.IndexCategory", blank=True)
   pub_date = models.PositiveSmallIntegerField("Date Published / Created", null=True, blank=True)
-  range_date = models.PositiveSmallIntegerField("Date Range", null=True, blank=True)
+  end_date = models.PositiveSmallIntegerField("End Date", null=True, blank=True)
   author_founder = models.CharField("Author/Founder", max_length=500, null=True, blank=True)
   contributed_by = models.CharField("Contributed By", max_length=500, null=True, blank=True)
   external_link = models.URLField(null=True, blank=True)
@@ -207,7 +207,7 @@ class IndexDetailPage(Page):
          MultiFieldPanel([
             FieldRowPanel([
         		FieldPanel('pub_date'),
-        		FieldPanel('range_date'),
+        		FieldPanel('end_date'),
             ]),
             FieldRowPanel([
             	FieldPanel('author_founder'),
