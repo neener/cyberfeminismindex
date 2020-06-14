@@ -39,7 +39,7 @@
                     <tbody>
                     {% cache 604800 base_index index.id %}
                         {% for index in index_context %}
-                            <tr class="base_tr" onclick="base_reference('{{ index.url }}')" id="base{{ index.url }}">
+                            <tr class="base_tr" onclick="base_reference('{{ index.slug }}')" id="base{{ index.slug }}">
                                 <td>{{ index.autoincrement_num }}</td>
                                 <td>{{ index.pub_date }}</td>
                                 <td>{{ index.title }}</td>
