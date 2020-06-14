@@ -4,7 +4,7 @@ let menu = document.getElementById('menu');
 function handleMenu(id, elm) {
     str = elm.value
     str = str.toLowerCase();
-    if (str == "index") {
+    if (str == "cyberfeminism index") {
         window.location = base_url + "/"
     } else {
         window.location = base_url + "/" + str;
@@ -16,7 +16,6 @@ function getUrl() {
     var pathArray = window.location.pathname.split('/');
     var secondLevelLocation = pathArray[1];
     var selected_tag = pathArray[2]
-    
     str = secondLevelLocation
     switch(secondLevelLocation) {
       case "":
