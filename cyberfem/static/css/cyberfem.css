@@ -75,6 +75,7 @@ select, button {
 }
 #index_list {
   margin-top: 87px;
+  margin-bottom: 60px;
 }
 .main_index_style .arrows div {
   display: inline-block;
@@ -289,7 +290,10 @@ header #tag_btn button span {
   cursor: pointer;
 }
 
-
+.back_to_top {
+  padding: 7px 10px;
+  margin-left: 20px;
+}
 
 ::-webkit-scrollbar {
   -webkit-appearance: none;

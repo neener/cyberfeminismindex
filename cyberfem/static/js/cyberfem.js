@@ -100,6 +100,11 @@ function base_reference(id) {
     selected_drawer.classList.toggle('closed');
 }
 
+function back_to_top(id) {
+    var e = document.getElementById(id);
+    e.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+}
+
 function add_tag_button(selected_tag) {
     var elem = document.createElement("button");
     elem.innerHTML = "<span>x</span> " + selected_tag;

@@ -23,7 +23,7 @@
             <div id="tag_btn"></div>
         </div>
     </header>
-
+    <div id="top_location"></div>
     <div id="index_list" class="main_index_style">
         <div class="index_entry arrows">
             <div class="sm num">
@@ -84,6 +84,7 @@
                 </div>
             {% endfor %}
         {% endcache %} 
+        <button class="back_to_top" onclick="back_to_top('top_location')">↑</button>
 <!--         <h3>internal links</h3>
         <ul>
             {% for int in post.specific.internal_links.all %}
