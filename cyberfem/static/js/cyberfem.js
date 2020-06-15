@@ -57,33 +57,19 @@ function slideIndex_drawer(elm, url) {
             el.classList.add("closed");
         }
     })
+
     var elems = document.querySelectorAll(".index_entry");
-    [].forEach.call(elems, function(el) {
-        if (el.classList.contains('green_text')) {
-            el.classList.remove("green_text");
-        }
-        if (el.classList.contains('green_text')) {
-            el.classList.remove("green_text");
-        } else {
-            elm.classList.add("green_text");
-        }
-    })
     
     elm.classList.add("green_text");
     selected_drawer.classList.toggle('closed');
 
-    console.log(url)
     var hist_str = "#/" + url
     window.history.pushState(hist_str, 'Title', hist_str);
-
 }
 
 function base_reference(id) {
-    var hist_str = "#" + id
+    var hist_str = "#/" + id
     window.history.pushState(hist_str, 'Title', hist_str);
-    // the next line is required to work around a bug in WebKit (Chrome / Safari)
-    // location.href = "#";
-    // location.href = "#" + id;
     var e = document.getElementById(id);
     e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
 
