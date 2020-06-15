@@ -57,7 +57,6 @@ function slideIndex_drawer(elm, url) {
             el.classList.add("closed");
         }
     })
-
     var elems = document.querySelectorAll(".index_entry");
     
     elm.classList.add("green_text");
