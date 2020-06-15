@@ -45,6 +45,13 @@ function getUrl() {
         console.log(5)
         menu.value = str;
     }
+
+    // force all external links to be target=_blank
+    for (var links = document.links, i = 0, a; a = links[i]; i++) {
+        if (a.host !== location.host) {
+            a.target = '_blank';
+        }
+    }
 }
 
 function slideIndex_drawer(elm, url) {
@@ -152,6 +159,7 @@ function search_url(cat_name) {
 function collection_url(col_name) {
     window.location = base_url+"/collections/"+ col_name;
 }
+
 
 
 getUrl()
