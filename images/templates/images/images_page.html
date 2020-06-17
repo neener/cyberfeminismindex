@@ -41,7 +41,14 @@
                     <div class="index_drawer closed">
                         <div class="drawer_content">
                             <div class="sm"><p>{{ index.autoincrement_num }}</p></div>
-                            <div class="sm"><p>{{ index.pub_date }}</p></div>
+                            <div class="sm">
+                                <p>
+                                {{ index.pub_date }}
+                                {% if index.end_date != None %}
+                                    -{{ index.end_date }}
+                                {% endif %}
+                                </p>
+                            </div>
                             <div class="lg"><p>{{ index.title|markdown }}</p></div>
                             <div class="md"><p>{{ index.author_founder }}</p></div>
                             <p>{{ index.about|markdown }}</p>

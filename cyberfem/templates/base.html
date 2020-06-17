@@ -41,7 +41,12 @@
                         {% for index in index_context %}
                             <tr class="base_tr" onclick="base_reference('{{ index.slug }}')" id="base{{index.slug}}">
                                 <td>{{ index.autoincrement_num }}</td>
-                                <td>{{ index.pub_date }}</td>
+                                <td>
+                                    {{ index.pub_date }}
+                                    {% if index.end_date != None %}
+                                        -{{ index.end_date }}
+                                    {% endif %}
+                                </td>
                                 <td>{{ index.title|markdown }}</td>
                                 <td>{{ index.author_founder|markdown }}</td>
                             </tr>
