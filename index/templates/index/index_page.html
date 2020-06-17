@@ -49,7 +49,7 @@
                 </div>
                 <div class="index_drawer closed">
                     <div class="drawer_content">
-                        <p>{{ index.about|richtext }}</p>
+                        <p>{{ index.about|markdown }}</p>
                         {% if index.contributed_by != None %}
                         <p>{{ index.contributed_by }}</p>
                         {% endif %}
