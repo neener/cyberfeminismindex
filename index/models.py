@@ -12,6 +12,8 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from autoslug import AutoSlugField
 from django.shortcuts import render
 from django.core.cache import cache
+from wagtailmarkdown.fields import MarkdownField
+from wagtailmarkdown.edit_handlers import MarkdownPanel
 
 
 class Cindex(models.Model):
@@ -188,9 +190,10 @@ class ImagesOrderable(Orderable):
       str_return = str(self.images)
       return str_return
 
+
 class IndexDetailPage(Page):
   # custom_title = AutoSlugField(populate_from='title')
-  about = models.TextField(null=True, blank=True)
+  about = MarkdownField(null=True, blank=True)
   sourceforabouttext = models.CharField("Source for about text", max_length=255, null=True, blank=True)
   categories = ParentalManyToManyField("index.IndexCategory", blank=True)
   pub_date = models.PositiveSmallIntegerField("Date Published / Created", null=True, blank=True)
@@ -203,7 +206,7 @@ class IndexDetailPage(Page):
   location = models.CharField("location", max_length=255, null=True, blank=True)
 
   content_panels = Page.content_panels + [
-		FieldPanel('about', classname="full"),
+		MarkdownPanel('about', classname="full"),
          MultiFieldPanel([
             FieldRowPanel([
         		FieldPanel('pub_date'),

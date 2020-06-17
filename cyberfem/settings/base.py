@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'menus',
     'wagtailmenus',
     'wagtail.contrib.modeladmin',
+    'wagtailmarkdown',
 
     'bakery',
     'wagtailbakery',
