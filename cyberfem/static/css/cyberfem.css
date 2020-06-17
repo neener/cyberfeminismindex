@@ -138,6 +138,7 @@ select, button {
 }
 .index_drawer .img_container p {
   font-size: 1.1vw;
+  display: none;
 }
 .enlarge_img {
   width: 250px !important;

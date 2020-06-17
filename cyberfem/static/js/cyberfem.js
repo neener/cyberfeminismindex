@@ -132,8 +132,12 @@ function get_curator() {
 function enlarge_img(el) {
     if (el.classList.contains('enlarge_img')) {
         el.classList.remove("enlarge_img");
+        caption = el.nextElementSibling
+        caption.style.display = "none";
     } else {
         el.classList.add("enlarge_img")
+        caption = el.nextElementSibling
+        caption.style.display = "block";
     }
 }
 

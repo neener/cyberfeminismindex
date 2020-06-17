@@ -73,12 +73,12 @@
 	                        {% endif %}
 
 	                        {% for loop_cycle in index.images_list.all %}
-	                            {% image loop_cycle.images fill-120x120 as img %} 
+	                            {% image loop_cycle.images fill-150x110 as img %} 
 	                            {% if loop_cycle.images is None %}
 	                            {% else %}
 	                                <div class="img_container">
 	                                    <img src="{{ img.url }}" class="d-block w-100" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
-	                                    <p>{{ loop_cycle.caption }}</p>
+	                                    <p>{{ loop_cycle.caption|markdown }}</p>
 	                                </div>
 	                            {% endif %}
 	                        {% endfor %}
