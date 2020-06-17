@@ -2,7 +2,7 @@
 {% load wagtailcore_tags cache %}
 {% load static wagtailuserbar menu_tags %}
 {% get_menu "main" as navigation %}
-
+{% load wagtailmarkdown %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -42,8 +42,8 @@
                             <tr class="base_tr" onclick="base_reference('{{ index.slug }}')" id="base{{index.slug}}">
                                 <td>{{ index.autoincrement_num }}</td>
                                 <td>{{ index.pub_date }}</td>
-                                <td>{{ index.title }}</td>
-                                <td>{{ index.author_founder }}</td>
+                                <td>{{ index.title|markdown }}</td>
+                                <td>{{ index.author_founder|markdown }}</td>
                             </tr>
                         {% endfor %}
                     {% endcache %}

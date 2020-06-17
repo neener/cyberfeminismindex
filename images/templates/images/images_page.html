@@ -11,6 +11,9 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% load wagtailmarkdown %}
+
+
 	<div class="left_content">
 	    <header>
 	        <div class="menu_section">
@@ -39,9 +42,9 @@
                         <div class="drawer_content">
                             <div class="sm"><p>{{ index.autoincrement_num }}</p></div>
                             <div class="sm"><p>{{ index.pub_date }}</p></div>
-                            <div class="lg"><p>{{ index.title }}</p></div>
+                            <div class="lg"><p>{{ index.title|markdown }}</p></div>
                             <div class="md"><p>{{ index.author_founder }}</p></div>
-                            <p>{{ index.about|richtext }}</p>
+                            <p>{{ index.about|markdown }}</p>
                             {% if index.contributed_by != None %}
                             <p>{{ index.contributed_by }}</p>
                             {% endif %}
