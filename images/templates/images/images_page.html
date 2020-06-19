@@ -28,19 +28,9 @@
 	    
 	  	<div class="images_pg main_index_style">
             {% for index in image_entries %}
-                    <div onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}" class="index_entry">
-                        <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
-                        {% for loop_cycle in index.images_list.all %}
-                            {% image loop_cycle.images fill-150x110 as img %} 
-                            {% if loop_cycle.images is None %}
-                            {% else %}
-                                <img src="{{ img.url }}" alt="{{ img.alt }}" onclick="enlarge_img(this)">
-                            {% endif %}
-                        {% endfor %}
-                    </div>
                     <div class="index_drawer closed">
                         <div class="drawer_content">
-                            <div class="sm"><p>{{ index.autoincrement_num }}</p></div>
+                            <!-- <div class="sm"><p></p></div> -->
                             <div class="sm">
                                 <p>
                                 {{ index.pub_date }}
@@ -66,18 +56,6 @@
                             {% if index.location != None %}
                             <p>{{ index.location }}</p>
                             {% endif %}
-                            
-                            {% for loop_cycle in index.images_list.all %}
-                                {% image loop_cycle.images fill-120x120 as img %} 
-                                {% if loop_cycle.images is None %}
-                                {% else %}
-                                    <div class="img_container">
-                                        <img src="{{ img.url }}" class="d-block w-100" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
-                                        <p>{{ loop_cycle.caption|markdown }}</p>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-
                             <p>
                                 {% for cat in index.categories.all %}
                                     <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
@@ -85,6 +63,20 @@
                             </p>
                         </div>
                     </div>
+                    <div onclick="slideIndex_drawer_images(this, '{{index.slug}}')" id="{{index.slug}}" class="index_entry">
+                        <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
+                        {% for loop_cycle in index.images_list.all %}
+                            {% image loop_cycle.images height-220 as img %} 
+                            {% if loop_cycle.images is None %}
+                            {% else %}
+                                <div class="img_container">
+                                    <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}">
+                                    <p>{{ loop_cycle.caption|markdown }}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                   
                 {% endfor %}
        
     	</div>

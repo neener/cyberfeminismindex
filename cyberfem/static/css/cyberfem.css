@@ -12,6 +12,9 @@ select, button {
   margin:0;
   padding: 0;
 }
+/*#left_index {
+  height: 100%;
+}*/
 .left_content {
   width: 73%;
   display: inline-block;
@@ -29,7 +32,7 @@ select, button {
   display: inline-block;
   float: right;
   height: 100vh;
-  /*overflow: hidden;*/
+  overflow: hidden;
   overflow-y: scroll;
   padding: 0 10px;
   box-sizing: border-box;
@@ -42,8 +45,12 @@ select, button {
 .images_pg .drawer_content div {
   display: inline-block;
 }
+.images_pg .img_container p {
+  display: none;
+  font-size: 1.1vw;
+}
 .images_pg img {
-  width: 150px;
+  height: 100px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -130,8 +137,9 @@ select, button {
   transition-duration: .3s;
   height: 100%
 }
-.index_drawer img {
+.index_drawer .img_container img {
   cursor: pointer;
+  height: 100px;
 }
 .index_drawer .img_container {
   display: inline-block;
@@ -141,7 +149,7 @@ select, button {
   display: none;
 }
 .enlarge_img {
-  width: 250px !important;
+  height: 220px !important;
 }
 .index_drawer .external_links a {
   display: block;
@@ -172,6 +180,9 @@ select, button {
   overflow: hidden;
   text-overflow: ellipsis;
 } 
+#base_index_list td p {
+  margin: 0;
+}
 #base_index_list thead,
 tbody,
 tr {
@@ -293,8 +304,42 @@ header #tag_btn button span {
 
 .back_to_top {
   padding: 7px 10px;
-  margin-left: 20px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
 }
+
+
+
+
+
+
+ 
+#green_box {
+  height:1px;
+  background: linear-gradient(90deg, rgba(0,255,0,0.4514180672268907) 0%, rgba(0,255,0,0.4514180672268907) 35%);
+}
+#green_box.extend_green {
+  box-shadow: 1px 1px 800px 20px #00ff00;
+}
+#green_box.extend_green_two {
+  height: 6px;
+  box-shadow: 1px 1px 2000px 50px #00ff00;
+}
+#green_box.extend_green_three {
+  height: 6px;
+  box-shadow: 1px 1px 3000px 80px #00ff00;
+}
+
+
+
+
+
+
+
+
+
+
 
 ::-webkit-scrollbar {
   -webkit-appearance: none;

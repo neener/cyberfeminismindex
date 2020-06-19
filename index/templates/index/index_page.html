@@ -12,15 +12,16 @@
 {% load wagtailcore_tags wagtailimages_tags cache %}
 {% load wagtailmarkdown %}
 
-<div class="left_content">
+<div class="left_content" id="left_index">
     <header>
         <div class="menu_section">
-            <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)">
+            <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)" class="nav">
                 <option disabled selected value></option>
                 {% for item in navigation.menu_items.all %}
                 <option value="{{ item.title }}">{{ item.title }}</option>
                 {% endfor %}
             </select>
+            <div id="green_box"></div>
             <div id="tag_btn"></div>
         </div>
     </header>
@@ -72,11 +73,11 @@
                         {% endif %}
 
                         {% for loop_cycle in index.images_list.all %}
-                            {% image loop_cycle.images fill-150x110 as img %} 
+                            {% image loop_cycle.images height-220 as img %} 
                             {% if loop_cycle.images is None %}
                             {% else %}
                                 <div class="img_container">
-                                    <img src="{{ img.url }}" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
+                                    <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
                                     <p>{{ loop_cycle.caption|markdown }}</p>
                                 </div>
                             {% endif %}
@@ -108,7 +109,31 @@
     
 </div>
 
+<script>
 
+//scroll reader
+function get() {
+d = document.getElementById("left_index")
+g = document.getElementById("green_box")
+    d.addEventListener('scroll', function() {
+      console.log('test');
+       g.classList.remove("extend_green_two")
+       g.classList.remove("extend_green_three")
+    if (d.scrollTop >= 200 ) {
+        g.classList.add("extend_green")
+    } 
+    if (d.scrollTop >= 700 ) {
+        g.classList.remove("extend_green")
+        g.classList.add("extend_green_two")
+    }
+    if (d.scrollTop >= 1200 ) {
+        g.classList.remove("extend_green_two")
+        g.classList.add("extend_green_three")
+    }
+    });
+}
+// get()
 
+</script>
 
 {% endblock %}
