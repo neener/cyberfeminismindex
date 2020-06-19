@@ -9,6 +9,9 @@
 
 {% block content %}
 
+{% load wagtailmarkdown %}
+
+
     <div class="left_content">
         <header>
             <div class="menu_section">
@@ -22,7 +25,7 @@
         </header>
         <div class="search_pg">
             <form action="{% url 'search' %}" method="get">
-                <input type="text" placeholder="enter search term" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                <input id="user-input" type="text" placeholder="enter search term" action=”{{ search_query }}” name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
                 <input type="submit" style="display: none" />
             </form> 
 
@@ -32,6 +35,12 @@
                 <label for="{{ cat.slug }}">{{ cat.name }}</label><br>
                 {% endfor %}
             </div>
+            
+
+            {# search-list section #}
+          <div id="replaceable-content" class="col-6">
+            {% include 'search/search-results-partial.html' %}
+          </div>
 
             {% if search_results %}
                 {% for result in search_results %}
@@ -87,8 +96,42 @@
 
 
             {% elif search_query %}
-                No results found
+                <p class="no_results">No results found</p>
             {% endif %}
         </div>
     </div>
+
+    <script>
+        const user_input = $("#user-input")
+        const search_list = $("#search_list")
+        const artists_div = $('#replaceable-content')
+        const endpoint = '/ajax/search/'
+        const delay_by_in_ms = 100
+        let scheduled_function = false
+
+        let ajax_call = function (endpoint, request_parameters) {
+            $.getJSON(endpoint, request_parameters)
+                .done(response => {
+                    // fade out the artists_div, then:
+                    artists_div.fadeTo('fast', 0).promise().then(() => {
+                        // replace the HTML contents
+                        artists_div.html(response['html_from_view'])
+                        // fade-in the div with new contents
+                        artists_div.fadeTo('fast', 1)
+                    })
+                })
+        }
+        user_input.on('keyup', function () {
+            search_list.hide()
+            const request_parameters = {
+                q: $(this).val() // value of user_input: the HTML element with ID user-input
+            }
+            // if scheduled_function is NOT false, cancel the execution of the function
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+            // setTimeout returns the ID of the function to be executed
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+        })
+    </script>
 {% endblock %}

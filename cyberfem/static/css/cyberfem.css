@@ -70,6 +70,9 @@ select, button {
   font-size: 1.5vw;
   padding: 5px;
 }
+p.no_results {
+  margin-left: 20px;
+}
 .collections_pg, .images_pg {
   margin: 100px 0 50px;
   height: 100%;
