@@ -78,6 +78,30 @@ function slideIndex_drawer_images(elm, url) {
     window.history.pushState(hist_str, 'Title', hist_str);
 }
 
+function remove_trail_entry(elm) {
+    elm.remove();
+}
+
+var trail_array = []
+function add_to_trail(title, id) {
+    var trail_list = document.getElementById("trail_list");
+    var trail_list_kids = trail_list.getElementsByTagName("SPAN");
+    var span = document.createElement("SPAN");
+    span.innerText = title + " " + "→";
+    span.setAttribute("id", id);
+    span.setAttribute("title", title);
+    span.addEventListener("click",  function(){ remove_trail_entry(this); });
+
+    if (!trail_array.includes(title)) {
+        trail_array.push(title);
+        trail_list.appendChild(span); 
+    }
+
+    if (trail_array.length <= 0) {
+       trail_list.appendChild(span); 
+    }
+}
+
 function slideIndex_drawer(elm, url) {
     var elems = document.querySelectorAll(".index_drawer");
     var selected_drawer = elm.nextSibling.nextSibling;
