@@ -78,17 +78,22 @@ function slideIndex_drawer_images(elm, url) {
     window.history.pushState(hist_str, 'Title', hist_str);
 }
 
+var trail_array = []
+var trail_list_kids = trail_list.getElementsByTagName("SPAN");
 function remove_trail_entry(elm, slug) {
     elm.remove();
     var index_elm = document.getElementById(slug);
     index_elm.classList.remove("green_text");
     index_elm.nextSibling.nextSibling.classList.add("closed")
+
+    trail_array.length = 0
+    for (var i=0, item; item = trail_list_kids[i]; i++) {
+        trail_array.push(trail_list_kids[i].title);
+    }
 }
 
-var trail_array = []
 function add_to_trail(title, id, slug) {
     var trail_list = document.getElementById("trail_list");
-    var trail_list_kids = trail_list.getElementsByTagName("SPAN");
     var span = document.createElement("SPAN");
     span.innerText = title + " " + "→";
     span.setAttribute("id", id);
