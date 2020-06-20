@@ -49,7 +49,7 @@
         </div>
         {% cache 604800 preview_index index.id %}
             {% for index in posts %}
-                <div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}'); add_to_trail('{{ index.title }}', '{{ index.id }}')" id="{{index.slug}}">
+                <div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}'); add_to_trail('{{ index.title }}', '{{ index.id }}', '{{ index.slug }}')" id="{{index.slug}}">
                     <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
                     <div class="sm"><p>
                         {{ index.pub_date }}

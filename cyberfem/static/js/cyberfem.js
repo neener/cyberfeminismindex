@@ -78,19 +78,22 @@ function slideIndex_drawer_images(elm, url) {
     window.history.pushState(hist_str, 'Title', hist_str);
 }
 
-function remove_trail_entry(elm) {
+function remove_trail_entry(elm, slug) {
     elm.remove();
+    var index_elm = document.getElementById(slug);
+    index_elm.classList.remove("green_text");
+    index_elm.nextSibling.nextSibling.classList.add("closed")
 }
 
 var trail_array = []
-function add_to_trail(title, id) {
+function add_to_trail(title, id, slug) {
     var trail_list = document.getElementById("trail_list");
     var trail_list_kids = trail_list.getElementsByTagName("SPAN");
     var span = document.createElement("SPAN");
     span.innerText = title + " " + "→";
     span.setAttribute("id", id);
     span.setAttribute("title", title);
-    span.addEventListener("click",  function(){ remove_trail_entry(this); });
+    span.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
 
     if (!trail_array.includes(title)) {
         trail_array.push(title);
