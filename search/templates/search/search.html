@@ -23,6 +23,8 @@
                 </select>
             </div>
         </header>
+        <div id="top_location"></div>
+
         <div class="search_pg">
             <form action="{% url 'search' %}" method="get">
                 <input id="user-input" type="text" placeholder="enter search term" action=”{{ search_query }}” name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
@@ -94,11 +96,11 @@
                     {% endif %}
                 {% endfor %}
 
-
             {% elif search_query %}
                 <p class="no_results">No results found</p>
             {% endif %}
-        </div>
+            </div>
+            <button class="back_to_top" onclick="back_to_top('top_location')">↑</button>
     </div>
 
     <script>

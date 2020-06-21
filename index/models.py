@@ -85,10 +85,12 @@ class IndexInternalLinks(models.Model):
         PageChooserPanel("link_page", 'index.IndexDetailPage'),
     ]
 
+    print("INTERNALlllllllllllllll")
+
     class Meta:
         unique_together = ('page', 'link_page')
     def __str__(self):
-        return self.link_page
+        return self.link_copy
 
 
 class IndexPage(RoutablePageMixin, Page):
@@ -107,6 +109,7 @@ class IndexPage(RoutablePageMixin, Page):
     context = super().get_context(request, *args, **kwargs)
     context["posts"] = IndexDetailPage.objects.live().public()
     context["categories"] = IndexCategory.objects.all()
+    context["internal_links"] = IndexInternalLinks.objects.all()
     return context
   
   @route(r"^orderby/(?P<order>[-\w]+)/$", name="orderby_view")

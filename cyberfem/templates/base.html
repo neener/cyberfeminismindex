@@ -36,8 +36,13 @@
         {% wagtailuserbar %}
 
         <div id="right_content">
+            <div id="trail_container">
+                <button class="download_btn">Download</button>
+                <div id="trail_list">
+                </div>
+            </div>
             <div id="base_index_list">
-                <table>
+<!--                 <table>
                     <tbody>
                     {% cache 604800 base_index index.id %}
                         {% for index in index_context %}
@@ -55,7 +60,7 @@
                         {% endfor %}
                     {% endcache %}
                     </tbody>
-                </table>
+                </table> -->
             </div>
 
         </div>

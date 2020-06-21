@@ -22,7 +22,8 @@
 	            </select>
 	        </div>
 	    </header>   
-
+	    <div id="top_location"></div>
+	    
 	    <div class="collections_pg">
 	    	<div id="curator_list">
 	    		{% for index_col in index_collections %}
@@ -98,7 +99,7 @@
                 	</div>
 		    	{% endfor %}
 	    	</div>
-			
+			<button class="back_to_top" onclick="back_to_top('top_location')">↑</button>
 
 	    </div>	
 

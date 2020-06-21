@@ -1,3 +1,21 @@
+/* ligature */
+@font-face {
+      font-family: 'arial_lc_symbol_regularRg';
+      src: url('Arial_LC_Symbol_v7-yoti.woff2') format('woff2'),
+               url('Arial_LC_Symbol_v7.otf') format('otf');
+      font-weight: normal;
+      font-style: normal;
+}
+.cr { /*I called the class .cr for “cross reference”*/
+    font-family: 'arial_lc_symbol_regularRg';
+    font-variant-ligatures: common-ligatures;
+    -moz-font-feature-settings: "liga", "clig";
+    -webkit-font-feature-settings: "liga", "clig";
+    font-feature-settings: "liga", "clig";
+}
+
+
+
 body {
 	margin: 0;
   font-size: 1.5vw;
@@ -38,6 +56,9 @@ select, button {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+}
+.sm.num {
+  font-family: 'arial_lc_symbol_regularRg', Arial, sans-serif;
 }
 .images_pg .index_entry {
   padding: 10px 0;
@@ -177,11 +198,9 @@ p.no_results {
 
 #trail_container {
   display: inline-block;
-  margin-left: 20px;
   margin-bottom: 10px;
-  width: 100%;
+  width: calc(100% - 40px);
   text-align: left;
-  background: white;
 }
 #trail_container .download_btn {
   font-size: .85vw;
@@ -191,6 +210,7 @@ p.no_results {
 #trail_container span {
   font-size: .85vw;
   display: inline-block;
+  background: white;
   padding: 0 3px 0 0;
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="30" style="font-size: 20px;"><text y="15">×</text></svg>'), auto;
 }
@@ -198,7 +218,7 @@ p.no_results {
   margin-left: 5px;
   display: inline-block;
   word-break: break-all;
-  width: 91%;
+  width: 90%;
   float: right;
 }
 
@@ -250,7 +270,8 @@ header {
   text-align: center;
 }
 header .menu_section {
-	width: 95.5%;
+	/*width: 95.5%;*/
+  width: calc(100% - 40px);
   display:inline-block;
   height: 100%;
   background: white;
@@ -363,14 +384,6 @@ header #tag_btn button span {
 
 
 
-
-
-
-
-
-
-
-
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 10px;
@@ -381,3 +394,24 @@ header #tag_btn button span {
   background-color: rgba(0,0,0,.5);
   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
+
+
+
+@media (min-width: 300px) and (max-width: 800px) {
+  body, select, button {
+    font-size: 2.9vw;
+  }
+  .left_content {
+    width: 100%;
+  }
+  #right_content {
+    display: none;
+  }
+  #index_list {
+      margin-top: 100px;
+  }
+  #trail_container span {
+    font-size: 2vw;
+  }
+}
+

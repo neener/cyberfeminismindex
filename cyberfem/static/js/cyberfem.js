@@ -1,5 +1,6 @@
 var base_url = window.location.origin;
 let menu = document.getElementById('menu');
+var external_links = document.querySelectorAll('.external_links a')
 
 function handleMenu(id, elm) {
     str = elm.value
@@ -46,8 +47,8 @@ function getUrl() {
         menu.value = str;
     }
 
-    // force all external links to be target=_blank
-    for (var links = document.links, i = 0, a; a = links[i]; i++) {
+    // force all external links only to be target=_blank
+    for (var links = external_links, i = 0, a; a = links[i]; i++) {
         if (a.host !== location.host) {
             a.target = '_blank';
         }
@@ -79,6 +80,7 @@ function slideIndex_drawer_images(elm, url) {
 }
 
 var trail_array = []
+var trail_list = document.getElementById("trail_list");
 var trail_list_kids = trail_list.getElementsByTagName("SPAN");
 function remove_trail_entry(elm, slug) {
     elm.remove();
@@ -93,7 +95,6 @@ function remove_trail_entry(elm, slug) {
 }
 
 function add_to_trail(title, id, slug) {
-    var trail_list = document.getElementById("trail_list");
     var span = document.createElement("SPAN");
     span.innerText = title + " " + "→";
     span.setAttribute("id", id);
@@ -114,20 +115,57 @@ function slideIndex_drawer(elm, url) {
     var elems = document.querySelectorAll(".index_drawer");
     var selected_drawer = elm.nextSibling.nextSibling;
 
-    [].forEach.call(elems, function(el) {
-        if (el.classList.contains('closed')) {
+    if (elm.classList.contains("green_text")) {
+        console.log("green");
+        elm.classList.remove("green_text")
+        if (selected_drawer.classList.contains("closed")) {
         } else {
-            el.classList.add("closed");
+            selected_drawer.classList.add("closed")
         }
-    });
-    var elems = document.querySelectorAll(".index_entry");
-    
-    elm.classList.add("green_text");
-    selected_drawer.classList.toggle('closed');
+    } else {
+        console.log("else green")
+        elm.classList.add("green_text")
+        selected_drawer.classList.remove("closed")
+    }
 
     var hist_str = "#/" + url
     window.history.pushState(hist_str, 'Title', hist_str);
+
+
+
+
+    about_text = selected_drawer.querySelectorAll('.about_text')
+    console.log(about_text[0].nextSibling.children)
+    for (var links = about_text[0].nextSibling.children, i = 0, a; a = links[i]; i++) {
+        if (a.host !== location.host) {
+            // a.target = '_blank';
+            console.log(a.href)
+            a.href= base_url+"#/" + "okay"
+        }
+    }
+
+
+
 }
+
+// function slideIndex_drawer(elm, url) {
+//     var elems = document.querySelectorAll(".index_drawer");
+//     var selected_drawer = elm.nextSibling.nextSibling;
+
+//     [].forEach.call(elems, function(el) {
+//         if (el.classList.contains('closed')) {
+//         } else {
+//             el.classList.add("closed");
+//         }
+//     });
+//     var elems = document.querySelectorAll(".index_entry");
+    
+//     elm.classList.add("green_text");
+//     selected_drawer.classList.toggle('closed');
+
+//     var hist_str = "#/" + url
+//     window.history.pushState(hist_str, 'Title', hist_str);
+// }
 
 function base_reference(id) {
     var hist_str = "#/" + id

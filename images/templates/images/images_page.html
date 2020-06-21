@@ -25,6 +25,7 @@
 	            </select>
 	        </div>
 	    </header>
+        <div id="top_location"></div>
 	    
 	  	<div class="images_pg main_index_style">
             {% for index in image_entries %}
@@ -76,10 +77,9 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                   
                 {% endfor %}
-       
     	</div>
+        <button class="back_to_top" onclick="back_to_top('top_location')">↑</button>
 
 
    	</div>
