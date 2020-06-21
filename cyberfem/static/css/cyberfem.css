@@ -58,7 +58,7 @@ select, button {
   -moz-box-sizing: border-box;
 }
 .sm.num {
-  font-family: 'arial_lc_symbol_regularRg', Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 .images_pg .index_entry {
   padding: 10px 0;
