@@ -1,3 +1,20 @@
+@font-face {
+      font-family: 'arial_lc_symbol_regularRg';
+      src: url('Arial_LC_Symbol_v7-yoti.woff2') format('woff2'),
+               url('Arial_LC_Symbol_v7.otf') format('otf');
+      font-weight: normal;
+      font-style: normal;
+}
+.cr { 
+    font-family: 'arial_lc_symbol_regularRg';
+    font-variant-ligatures: common-ligatures;
+    -moz-font-feature-settings: "liga", "clig";
+    -webkit-font-feature-settings: "liga", "clig";
+    font-feature-settings: "liga", "clig";
+}
+
+
+
 body {
 	margin: 0;
   font-size: 1.5vw;
@@ -87,7 +104,7 @@ p.no_results {
   margin-top: 30px;
 }
 #index_list {
-  margin-top: 128px;
+  margin-top: 95px;
   margin-bottom: 60px;
 }
 .main_index_style .arrows div {
@@ -180,14 +197,15 @@ p.no_results {
 
 #trail_container {
   display: inline-block;
-  margin-bottom: 10px;
-  width: calc(100% - 40px);
+  width: 100%;
   text-align: left;
+  padding: 20px 0 15px;
 }
 #trail_container .download_btn {
   font-size: .85vw;
   vertical-align: top;
   float: left;
+  width: 100%
 }
 #trail_container span {
   font-size: .85vw;
@@ -198,12 +216,10 @@ p.no_results {
 }
 #trail_container #trail_list {
   margin-left: 5px;
-  display: inline-block;
-  word-break: break-all;
-  width: 90%;
-  float: right;
 }
-
+#trail_container #trail_list tr {
+  font-size: .85vw;
+}
 
 
 #base_index_list td, #base_index_list th {
@@ -230,13 +246,14 @@ th {
 }
 #base_index_list tr.base_tr:hover {
   color: #00ff00;
-  cursor: pointer;
+  /*cursor: pointer;*/
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="30" style="font-size: 20px;"><text y="15">×</text></svg>'), auto;
+
 }
 #base_index_list table {
   display: grid;
   border-collapse: collapse;
   min-width: 100%;
-  margin-top: 25px;
   grid-template-columns: 
   minmax(30px, .2fr)
   minmax(30px, .2fr)
@@ -246,7 +263,7 @@ th {
 
 
 header {
-	margin: 30px 0 30px 0;
+	margin: 20px 0 30px 0;
 	width: inherit;
   position: fixed;
   text-align: center;
@@ -256,7 +273,6 @@ header .menu_section {
   width: calc(100% - 40px);
   display:inline-block;
   height: 100%;
-  background: white;
 }
 header #menu {
 	box-shadow: 1px 1px 10px 1px #00ff00;
@@ -390,7 +406,7 @@ header #tag_btn button span {
     display: none;
   }
   #index_list {
-      margin-top: 100px;
+      margin-top: 80px;
   }
   #trail_container span {
     font-size: 2vw;

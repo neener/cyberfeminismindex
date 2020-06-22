@@ -94,58 +94,75 @@ function remove_trail_entry(elm, slug) {
     }
 }
 
-function add_to_trail(title, id, slug) {
-    var span = document.createElement("SPAN");
-    span.innerText = title + " " + "→";
-    span.setAttribute("id", id);
-    span.setAttribute("title", title);
-    span.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
+function add_to_trail(title, id, slug, author_founder, pub_date, end_date) {
+    // var span = document.createElement("SPAN");
+    // span.innerText = title + " " + "→";
+    table = document.getElementById("base_index_table");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+
+    cell1.innerHTML = "(1)";
+    cell2.innerHTML = pub_date;
+    cell3.innerHTML = title;
+    cell4.innerHTML = author_founder;
+
+    row.classList.add("base_tr")
+    row.setAttribute("id", id);
+    row.setAttribute("title", title);
+    row.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
 
     if (!trail_array.includes(title)) {
         trail_array.push(title);
-        trail_list.appendChild(span); 
+        table.appendChild(row); 
     }
 
     if (trail_array.length <= 0) {
-       trail_list.appendChild(span); 
+       table.appendChild(row); 
     }
 }
 
+function interal_reference(id) {
+    var e = document.getElementById(id);
+    e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+    slideIndex_drawer(e, id)
+}
+
 function slideIndex_drawer(elm, url) {
-    var elems = document.querySelectorAll(".index_drawer");
     var selected_drawer = elm.nextSibling.nextSibling;
 
     if (elm.classList.contains("green_text")) {
-        console.log("green");
         elm.classList.remove("green_text")
         if (selected_drawer.classList.contains("closed")) {
         } else {
             selected_drawer.classList.add("closed")
         }
     } else {
-        console.log("else green")
         elm.classList.add("green_text")
         selected_drawer.classList.remove("closed")
     }
-
     var hist_str = "#/" + url
     window.history.pushState(hist_str, 'Title', hist_str);
 
 
-
-
+    // internal links
     about_text = selected_drawer.querySelectorAll('.about_text')
     console.log(about_text[0].nextSibling.children)
-    for (var links = about_text[0].nextSibling.children, i = 0, a; a = links[i]; i++) {
-        if (a.host !== location.host) {
-            // a.target = '_blank';
-            console.log(a.href)
-            a.href= base_url+"#/" + "okay"
+
+    if(about_text[0].nextSibling.children) {
+        for (var links = about_text[0].nextSibling.children, i = 0, a; a = links[i]; i++) {
+            if (a.host !== location.host) {
+                var inline_link = a.href
+                var parts = inline_link.split('/');
+                var title = parts[parts.length - 2];
+                // console.log(title)
+                a.href= base_url+"#/" + title
+                a.addEventListener("click", function(){interal_reference(title)}); 
+            }
         }
     }
-
-
-
 }
 
 // function slideIndex_drawer(elm, url) {
@@ -167,32 +184,6 @@ function slideIndex_drawer(elm, url) {
 //     window.history.pushState(hist_str, 'Title', hist_str);
 // }
 
-function base_reference(id) {
-    var hist_str = "#/" + id
-    window.history.pushState(hist_str, 'Title', hist_str);
-    var e = document.getElementById(id);
-    e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-
-    var elems = document.querySelectorAll(".index_drawer");
-    [].forEach.call(elems, function(el) {
-        if (el.classList.contains('closed')) {
-        } else {
-            el.classList.add("closed");
-        }
-    })
-    var elems = document.querySelectorAll(".index_entry");
-    [].forEach.call(elems, function(el) {
-        if (el.classList.contains('green_text')) {
-            el.classList.remove("green_text");
-        }
-    })
-
-    // add classname only to clicked element
-    var elm = document.getElementById(id);
-    var selected_drawer = elm.nextSibling.nextSibling;
-    elm.classList.add("green_text");
-    selected_drawer.classList.toggle('closed');
-}
 
 function back_to_top(id) {
     var e = document.getElementById(id);

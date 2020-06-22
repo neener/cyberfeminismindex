@@ -38,29 +38,26 @@
         <div id="right_content">
             <div id="trail_container">
                 <button class="download_btn">Download</button>
-                <div id="trail_list">
-                </div>
+                <div id="trail_list"></div>
             </div>
+
             <div id="base_index_list">
-<!--                 <table>
+                <table id="base_index_table">
                     <tbody>
-                    {% cache 604800 base_index index.id %}
-                        {% for index in index_context %}
-                            <tr class="base_tr" onclick="base_reference('{{ index.slug }}')" id="base{{index.slug}}">
-                                <td>{{ index.autoincrement_num }}</td>
-                                <td>
-                                    {{ index.pub_date }}
-                                    {% if index.end_date != None %}
-                                        -{{ index.end_date }}
-                                    {% endif %}
-                                </td>
-                                <td>{{ index.title|markdown }}</td>
-                                <td>{{ index.author_founder|markdown }}</td>
-                            </tr>
-                        {% endfor %}
-                    {% endcache %}
+                        <div id="base_index_rows"></div>
+<!--                         <tr class="base_tr">
+                            <td>{{ index.autoincrement_num }}</td>
+                            <td>
+                                {{ index.pub_date }}
+                                {% if index.end_date != None %}
+                                    -{{ index.end_date }}
+                                {% endif %}
+                            </td>
+                            <td>{{ index.title|markdown }}</td>
+                            <td>{{ index.author_founder|markdown }}</td>
+                        </tr> -->
                     </tbody>
-                </table> -->
+                </table>
             </div>
 
         </div>
