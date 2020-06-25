@@ -94,7 +94,7 @@ function remove_trail_entry(elm, slug) {
     }
 }
 
-function add_to_trail(title, id, slug, author_founder, pub_date, end_date) {
+function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownum) {
     // var span = document.createElement("SPAN");
     // span.innerText = title + " " + "→";
     table = document.getElementById("base_index_table");
@@ -104,7 +104,7 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date) {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
 
-    cell1.innerHTML = "(1)";
+    cell1.innerHTML = "("+rownum+")";
     cell2.innerHTML = pub_date;
     cell3.innerHTML = title;
     cell4.innerHTML = author_founder;
@@ -150,7 +150,7 @@ function slideIndex_drawer(elm, url) {
     // internal links
     about_text = selected_drawer.querySelectorAll('.about_text')
     console.log(about_text[0].nextSibling.children)
-
+    
     if(about_text[0].nextSibling.children) {
         for (var links = about_text[0].nextSibling.children, i = 0, a; a = links[i]; i++) {
             if (a.host !== location.host) {

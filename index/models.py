@@ -14,7 +14,10 @@ from django.shortcuts import render
 from django.core.cache import cache
 from wagtailmarkdown.fields import MarkdownField
 from wagtailmarkdown.edit_handlers import MarkdownPanel
+from django.db import connection
 
+from django.db.models import F, Window
+from django.db.models.functions.window import RowNumber
 
 class Cindex(models.Model):
     cindex_id = models.IntegerField(primary_key=True)
@@ -124,6 +127,27 @@ class IndexPage(RoutablePageMixin, Page):
 
     context["posts"] = orderby
     cache.clear()
+
+    def custom_sql(self):
+      print("ran")
+      with connection.cursor() as cursor:
+          # query = """
+          #     WITH cte AS (SELECT *, ROW_NUMBER() OVER(ORDER BY index_indexdetailpage.pub_date asc) AS rn FROM index_indexdetailpage) UPDATE index_indexdetailpage SET rownum = (SELECT rn FROM cte WHERE cte.page_ptr_id = index_indexdetailpage.page_ptr_id);
+
+          #     SELECT * FROM index_indexdetailpage;
+
+          # """
+          cursor.execute("select d.* from index_indexdetailpage d where d.pub_date = (select d2.pub_date from index_indexdetailpage d2 where d2.page_ptr_id = d.page_ptr_id);")
+          #cursor.execute("WITH cte AS (SELECT *, ROW_NUMBER() OVER(ORDER BY index_indexdetailpage.pub_date asc) AS rn FROM index_indexdetailpage) UPDATE index_indexdetailpage SET rownum = (SELECT rn FROM cte WHERE cte.page_ptr_id = index_indexdetailpage.page_ptr_id);")
+          #cursor.execute("SELECT rownum FROM index_indexdetailpage;")
+          # cursor.execute(query)
+          result = cursor.fetchall()
+
+      print(result)
+      return result
+    custom_sql(self)
+
+
     return render(request, "index/index_page.html", context)
 
   @route(r"^tag/(?P<cat_slug>[-\w]+)/$", name="tag_view")
@@ -206,6 +230,7 @@ class IndexDetailPage(Page):
   external_link = models.URLField(null=True, blank=True)
   external_link_two = models.URLField(null=True, blank=True)
   autoincrement_num = models.PositiveSmallIntegerField(null=True, blank=True)
+  rownum = models.PositiveSmallIntegerField(null=True, blank=True)
   location = models.CharField("location", max_length=255, null=True, blank=True)
 
   content_panels = Page.content_panels + [
