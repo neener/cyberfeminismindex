@@ -137,14 +137,14 @@ class IndexPage(RoutablePageMixin, Page):
           #     SELECT * FROM index_indexdetailpage;
 
           # """
-          cursor.execute("select d.rownum from index_indexdetailpage d where d.pub_date = (select d2.pub_date from index_indexdetailpage d2 where d2.page_ptr_id = d.page_ptr_id);")
-          #cursor.execute("WITH cte AS (SELECT *, ROW_NUMBER() OVER(ORDER BY index_indexdetailpage.pub_date asc) AS rn FROM index_indexdetailpage) UPDATE index_indexdetailpage SET rownum = (SELECT rn FROM cte WHERE cte.page_ptr_id = index_indexdetailpage.page_ptr_id);")
+          # cursor.execute("select d.rownum from index_indexdetailpage d where d.pub_date = (select d2.pub_date from index_indexdetailpage d2 where d2.page_ptr_id = d.page_ptr_id);")
+          # cursor.execute("WITH cte AS (SELECT *, ROW_NUMBER() OVER(ORDER BY index_indexdetailpage.pub_date asc) AS rn FROM index_indexdetailpage) UPDATE index_indexdetailpage SET rownum = (SELECT rn FROM cte WHERE cte.page_ptr_id = index_indexdetailpage.page_ptr_id);")
           #cursor.execute("SELECT rownum FROM index_indexdetailpage;")
           # cursor.execute(query)
           result = cursor.fetchall()
 
       return result
-    custom_sql(self)
+    #custom_sql(self)
 
 
     return render(request, "index/index_page.html", context)
@@ -261,13 +261,6 @@ class IndexDetailPage(Page):
             FieldPanel("categories", widget=forms.CheckboxSelectMultiple)
             ],
             heading="Categories"
-        ),
-        MultiFieldPanel(
-    		[
-            InlinePanel('internal_links', label='Link'),
-            ],
-            heading="Cross Reference",
-            classname="collapsible"
         ),
         MultiFieldPanel([
           InlinePanel('collections_list', label='Curator'),
