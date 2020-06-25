@@ -143,7 +143,6 @@ class IndexPage(RoutablePageMixin, Page):
           # cursor.execute(query)
           result = cursor.fetchall()
 
-      print(result)
       return result
     custom_sql(self)
 
