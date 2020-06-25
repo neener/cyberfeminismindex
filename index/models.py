@@ -137,7 +137,7 @@ class IndexPage(RoutablePageMixin, Page):
           #     SELECT * FROM index_indexdetailpage;
 
           # """
-          cursor.execute("select d.* from index_indexdetailpage d where d.pub_date = (select d2.pub_date from index_indexdetailpage d2 where d2.page_ptr_id = d.page_ptr_id);")
+          cursor.execute("select d.rownum from index_indexdetailpage d where d.pub_date = (select d2.pub_date from index_indexdetailpage d2 where d2.page_ptr_id = d.page_ptr_id);")
           #cursor.execute("WITH cte AS (SELECT *, ROW_NUMBER() OVER(ORDER BY index_indexdetailpage.pub_date asc) AS rn FROM index_indexdetailpage) UPDATE index_indexdetailpage SET rownum = (SELECT rn FROM cte WHERE cte.page_ptr_id = index_indexdetailpage.page_ptr_id);")
           #cursor.execute("SELECT rownum FROM index_indexdetailpage;")
           # cursor.execute(query)
