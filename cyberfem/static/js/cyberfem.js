@@ -105,6 +105,7 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
     var cell4 = row.insertCell(3);
 
     cell1.innerHTML = "("+rownum+")";
+    cell1.classList.add("cr")
     cell2.innerHTML = pub_date;
     cell3.innerHTML = title;
     cell4.innerHTML = author_founder;
@@ -148,21 +149,22 @@ function slideIndex_drawer(elm, url) {
 
 
     // internal links
-    about_text = selected_drawer.querySelectorAll('.about_text')
-    console.log(about_text[0].nextSibling.children)
+    console.log(selected_drawer.nextElementSibling)
+    var node = selected_drawer.querySelector(".about_text").childNodes;
+    console.log(node)
     
-    if(about_text[0].nextSibling.children) {
-        for (var links = about_text[0].nextSibling.children, i = 0, a; a = links[i]; i++) {
-            if (a.host !== location.host) {
-                var inline_link = a.href
-                var parts = inline_link.split('/');
-                var title = parts[parts.length - 2];
-                // console.log(title)
-                a.href= base_url+"#/" + title
-                a.addEventListener("click", function(){interal_reference(title)}); 
-            }
-        }
-    }
+    // if(about_text[0].nextSibling.children) {
+    //     for (var links = about_text[0].nextSibling.children, i = 0, a; a = links[i]; i++) {
+    //         if (a.host !== location.host) {
+    //             var inline_link = a.href
+    //             var parts = inline_link.split('/');
+    //             var title = parts[parts.length - 2];
+    //             // console.log(title)
+    //             a.href= base_url+"#/" + title
+    //             a.addEventListener("click", function(){interal_reference(title)}); 
+    //         }
+    //     }
+    // }
 }
 
 // function slideIndex_drawer(elm, url) {
