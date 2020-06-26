@@ -95,13 +95,8 @@ function remove_trail_entry(elm, slug) {
 }
 
 function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownum) {
-    // var span = document.createElement("SPAN");
-    // span.innerText = title + " " + "→";
     table = document.getElementById("base_index_table");
 
-
-
-    console.log(trail_array)
     if (!trail_array.includes(title)) {
         trail_array.push(title);
 
@@ -167,7 +162,7 @@ function slideIndex_drawer(elm, url) {
     // internal links
     var node = selected_drawer.children[0].children[1];
     
-    if(node.firstElementChild) {
+    if(node.firstElementChild && node.firstElementChild.nodeName == "A") {
         console.log("yes")
         console.log(node)
         console.log(node.firstElementChild)
