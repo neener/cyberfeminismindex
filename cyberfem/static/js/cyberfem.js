@@ -79,7 +79,7 @@ function slideIndex_drawer_images(elm, url) {
     window.history.pushState(hist_str, 'Title', hist_str);
 }
 
-var trail_array = []
+var trail_array = [];
 var trail_list = document.getElementById("trail_list");
 var trail_list_kids = trail_list.getElementsByTagName("SPAN");
 function remove_trail_entry(elm, slug) {
@@ -98,30 +98,46 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
     // var span = document.createElement("SPAN");
     // span.innerText = title + " " + "→";
     table = document.getElementById("base_index_table");
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
 
-    cell1.innerHTML = "("+rownum+")";
-    cell1.classList.add("cr")
-    cell2.innerHTML = pub_date;
-    cell3.innerHTML = title;
-    cell4.innerHTML = author_founder;
 
-    row.classList.add("base_tr")
-    row.setAttribute("id", id);
-    row.setAttribute("title", title);
-    row.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
 
+    console.log(trail_array)
     if (!trail_array.includes(title)) {
         trail_array.push(title);
+
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = "("+rownum+")";
+        cell1.classList.add("cr")
+        cell2.innerHTML = pub_date;
+        cell3.innerHTML = title;
+        cell4.innerHTML = author_founder;
+        row.classList.add("base_tr")
+        row.setAttribute("id", id);
+        row.setAttribute("title", title);
+        row.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
         table.appendChild(row); 
     }
 
     if (trail_array.length <= 0) {
-       table.appendChild(row); 
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = "("+rownum+")";
+        cell1.classList.add("cr")
+        cell2.innerHTML = pub_date;
+        cell3.innerHTML = title;
+        cell4.innerHTML = author_founder;
+        row.classList.add("base_tr")
+        row.setAttribute("id", id);
+        row.setAttribute("title", title);
+        row.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
+        table.appendChild(row); 
     }
 }
 
@@ -149,22 +165,19 @@ function slideIndex_drawer(elm, url) {
 
 
     // internal links
-    console.log(selected_drawer.nextElementSibling)
-    var node = selected_drawer.querySelector(".about_text").childNodes;
-    console.log(node)
+    var node = selected_drawer.children[0].children[1];
     
-    // if(about_text[0].nextSibling.children) {
-    //     for (var links = about_text[0].nextSibling.children, i = 0, a; a = links[i]; i++) {
-    //         if (a.host !== location.host) {
-    //             var inline_link = a.href
-    //             var parts = inline_link.split('/');
-    //             var title = parts[parts.length - 2];
-    //             // console.log(title)
-    //             a.href= base_url+"#/" + title
-    //             a.addEventListener("click", function(){interal_reference(title)}); 
-    //         }
-    //     }
-    // }
+    if(node.firstElementChild) {
+        console.log("yes")
+        console.log(node)
+        console.log(node.firstElementChild)
+        var first = node.firstElementChild
+        var inline_link = first.href
+        var parts = inline_link.split('/');
+        var title = parts[parts.length - 2];
+        first.href= base_url+"#/" + title
+        first.addEventListener("click", function(){interal_reference(title)});
+    }
 }
 
 // function slideIndex_drawer(elm, url) {
