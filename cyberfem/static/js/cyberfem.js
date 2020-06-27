@@ -168,6 +168,7 @@ function slideIndex_drawer(elm, url) {
         if(n[i] && n[i].nodeName == "A") {
             var inline_link = n[i].href
             var parts = inline_link.split('/');
+            var entry_title = ""
             var entry_title = parts[parts.length - 2];
             n[i].href= base_url+"#/" + entry_title
             n[i].addEventListener("click", function(){interal_reference(entry_title)});
