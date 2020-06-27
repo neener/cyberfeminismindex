@@ -161,38 +161,23 @@ function slideIndex_drawer(elm, url) {
 
     // internal links
     var node = selected_drawer.children[0].children[1];
-    
-    if(node.firstElementChild && node.firstElementChild.nodeName == "A") {
-        console.log("yes")
-        console.log(node)
-        console.log(node.firstElementChild)
-        var first = node.firstElementChild
-        var inline_link = first.href
-        var parts = inline_link.split('/');
-        var title = parts[parts.length - 2];
-        first.href= base_url+"#/" + title
-        first.addEventListener("click", function(){interal_reference(title)});
+    var n = node.children
+    var arr = [{"rownum":1,"title":"test"},{"rownum":2,"title":"test2"},{"rownum":3,"title":"test3"}]
+
+    for (i = 0; i < n.length; i++) { 
+        if(n[i] && n[i].nodeName == "A") {
+            var inline_link = n[i].href
+            var parts = inline_link.split('/');
+            var entry_title = parts[parts.length - 2];
+            n[i].href= base_url+"#/" + entry_title
+            n[i].addEventListener("click", function(){interal_reference(entry_title)});
+            n[i].classList.add("cr")
+
+            let obj = arr.find(o => o.title === 'test2');
+            n[i].innerHTML = "("+ obj.rownum + ")";
+        }
     }
 }
-
-// function slideIndex_drawer(elm, url) {
-//     var elems = document.querySelectorAll(".index_drawer");
-//     var selected_drawer = elm.nextSibling.nextSibling;
-
-//     [].forEach.call(elems, function(el) {
-//         if (el.classList.contains('closed')) {
-//         } else {
-//             el.classList.add("closed");
-//         }
-//     });
-//     var elems = document.querySelectorAll(".index_entry");
-    
-//     elm.classList.add("green_text");
-//     selected_drawer.classList.toggle('closed');
-
-//     var hist_str = "#/" + url
-//     window.history.pushState(hist_str, 'Title', hist_str);
-// }
 
 
 function back_to_top(id) {
