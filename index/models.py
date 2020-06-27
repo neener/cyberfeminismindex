@@ -19,6 +19,7 @@ from django.db import connection
 from django.db.models import F, Window
 from django.db.models.functions.window import RowNumber
 from django.db.models.expressions import RawSQL
+from django.db.models.functions import Lower
 
 class Cindex(models.Model):
     cindex_id = models.IntegerField(primary_key=True)
@@ -120,7 +121,7 @@ class IndexPage(RoutablePageMixin, Page):
   def orderby_view(self,request,order):
     context = self.get_context(request)
     try:
-      orderby = IndexDetailPage.objects.live().public().order_by(order)
+      orderby = IndexDetailPage.objects.live().public().order_by(Lower(order))
     except Exception:
       orderby = None
     if orderby is None:

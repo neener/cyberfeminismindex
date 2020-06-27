@@ -50,7 +50,7 @@
        			{% endif %}
 				{% for index in curated_entries %}
             		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}">
-	                    <div class="sm num"><p>{{ index.autoincrement_num }}</p></div>
+	                    <div class="sm num"><p class="cr">{{ index.rownum }}</p></div>
 	                    <div class="sm">
 	                    	<p>
 	                        {{ index.pub_date }}
@@ -60,7 +60,12 @@
 	                    	</p>
 	                	</div>
 	                    <div class="lg"><p>{{ index.title|markdown }}</p></div>
-	                    <div class="md"><p>{{ index.author_founder }}</p></div>
+	                    <div class="md"><p>
+	                        {% if index.author_founder != None %}
+	                        {{ index.author_founder|markdown }}
+	                        {% else %}
+	                        {% endif %}
+	                    </p></div>
 	                </div>	
 	                <div class="index_drawer closed">
 	                    <div class="drawer_content">
