@@ -160,6 +160,9 @@ p.no_results {
   transition-duration: .3s;
   height: 100%
 }
+.index_drawer .img_section {
+  height: 100%;
+}
 .index_drawer .img_container img {
   cursor: pointer;
   height: 100px;
@@ -361,7 +364,18 @@ p a.cr {
   bottom: 20px;
   left: 20px;
 }
+.loading {
+  text-shadow: 0 0 16px #00ff00;
+  color: transparent;
+}
+#sorting_text {
+  position: absolute;
+  left: 37%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  display: none;
 
+}
 
 
 

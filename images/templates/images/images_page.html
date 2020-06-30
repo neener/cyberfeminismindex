@@ -73,16 +73,18 @@
                         </div>
                         <div onclick="slideIndex_drawer_images(this, '{{index.slug}}')" id="{{index.slug}}" class="index_entry">
                             <div class="sm num"><p class="cr">({{ index.rownum }})</p></div>
-                            {% for loop_cycle in index.images_list.all %}
-                                {% image loop_cycle.images height-220 as img %} 
-                                {% if loop_cycle.images is None %}
-                                {% else %}
-                                    <div class="img_container">
-                                        <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}">
-                                        <p>{{ loop_cycle.caption|markdown }}</p>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                            <div class="img_section">
+                                {% for loop_cycle in index.images_list.all %}
+                                    {% image loop_cycle.images height-220 as img %} 
+                                    {% if loop_cycle.images is None %}
+                                    {% else %}
+                                        <div class="img_container">
+                                            <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}">
+                                            <p>{{ loop_cycle.caption|markdown }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                 {% endfor %}
         {% endcache %} 

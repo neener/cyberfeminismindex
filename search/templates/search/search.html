@@ -48,12 +48,19 @@
                 {% for result in search_results %}
             <div id="search_list" class="main_index_style">
                     <div class="index_entry" onclick="slideIndex_drawer(this, '{{result.slug}}')" id="{{result.slug}}">
-                        <div class="sm num"><p class="cr">{{ result.rownum }}</p></div>
-                        <div class="sm"><p>{{ result.pub_date }}</p></div>
-                        <div class="lg"><p>{{ result.title }}</p></div>
+                        <div class="sm num"><p class="cr">({{ result.rownum }})</p></div>
+                        <div class="sm"><p>
+                            {% if result.pub_date != None %}
+                                {{ result.pub_date }}
+                            {% endif %}
+                            {% if result.end_date != None %}
+                                -{{ resukt.end_date }}
+                            {% endif %}
+                        </p></div>
+                        <div class="lg"><p>{{ result.title|markdown }}</p></div>
                         <div class="md"><p>
-                            {% if index.author_founder != None %}
-                            {{ index.author_founder|markdown }}
+                            {% if result.author_founder != None %}
+                            {{ result.author_founder|markdown }}
                             {% else %}
                             {% endif %}
                         </p></div>

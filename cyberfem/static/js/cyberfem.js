@@ -188,6 +188,18 @@ function slideIndex_drawer(elm, url) {
     }
 }
 
+function loading(order) {
+    $("#index_list").addClass("loading");
+    $('#sorting_text').show();
+    $.ajax({
+        type: "GET",
+        url: base_url +'/orderby/' + order,
+        success: function (resp) {
+            $('#sorting_text').hide();
+            $("#index_list").removeClass("loading")
+         }
+    });
+}
 
 function back_to_top(id) {
     var e = document.getElementById(id);

@@ -1,6 +1,6 @@
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel, FieldRowPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel, FieldRowPanel, ObjectList, TabbedInterface
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
@@ -23,6 +23,9 @@ from django.db.models.functions import Lower
 
 import simplejson as json
 from django.http import HttpResponse
+
+from django.dispatch import receiver
+from wagtail.core.signals import page_published
 
 class Cindex(models.Model):
     cindex_id = models.IntegerField(primary_key=True)
@@ -93,8 +96,6 @@ class IndexInternalLinks(models.Model):
         PageChooserPanel("link_page", 'index.IndexDetailPage'),
     ]
 
-    print("INTERNALlllllllllllllll")
-
     class Meta:
         unique_together = ('page', 'link_page')
     def __str__(self):
@@ -132,13 +133,6 @@ class IndexPage(RoutablePageMixin, Page):
     if orderby is None:
       pass
 
-    #update ligatures
-    if (order == "rownum"):
-      ligatures = IndexDetailPage.objects.live().public().order_by("pub_date")
-      for row_num, lig in enumerate(ligatures):
-        lig.rownum = row_num
-        lig.save()
-
     context["posts"] = orderby
     cache.clear()
     return render(request, "index/index_page.html", context)
@@ -148,6 +142,7 @@ class IndexPage(RoutablePageMixin, Page):
     context = self.get_context(request)
     try:
       category = IndexCategory.objects.get(slug=cat_slug)
+      render()
     except Exception:
       category = None
     if category is None:
@@ -211,6 +206,17 @@ class ImagesOrderable(Orderable):
       return str_return
 
 
+@receiver(page_published)
+def do_stuff_on_page_published(instance, **kwargs):
+    #update ligatures
+    ligatures = IndexDetailPage.objects.live().public().order_by("pub_date")
+    for row_num, lig in enumerate(ligatures):
+      lig.rownum = row_num
+      lig.save()
+    #clear_cache
+    cache.clear()
+    print('=======================done',instance,kwargs)
+
 class IndexDetailPage(Page):
   # custom_title = AutoSlugField(populate_from='title')
   about = MarkdownField(null=True, blank=True)
@@ -225,6 +231,7 @@ class IndexDetailPage(Page):
   autoincrement_num = models.PositiveSmallIntegerField(null=True, blank=True)
   rownum = models.PositiveSmallIntegerField(null=True, blank=True)
   location = models.CharField("location", max_length=255, null=True, blank=True)
+
 
   content_panels = Page.content_panels + [
 		MarkdownPanel('about', classname="full"),
@@ -264,6 +271,11 @@ class IndexDetailPage(Page):
     ]
 
 
+  promote_panels = []
+
+  class Meta:  # noqa
+    verbose_name = "Index Detail Page"
+    verbose_name_plural = "Index Detail Pages"
 
 
 

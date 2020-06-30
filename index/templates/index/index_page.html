@@ -14,6 +14,10 @@
 
 <script type="text/javascript">
     index_json = {{ json_dict|safe }};
+    var rownum_str = "rownum";
+    var author_founder_str = "author_founder";
+    var title_str = "title"
+    var pub_date_str = "pub_date"
 </script>
 
 <div class="left_content" id="left_index">
@@ -32,20 +36,21 @@
 
 
     <div id="top_location"></div>
+    <div id="sorting_text">sorting ..</div>
 
     <div id="index_list" class="main_index_style">
         <div class="index_entry arrows">
-            <div class="sm num">
-                <a href="{{ post.specific.get_parent.url }}/orderby/rownum/">↓</a>
+            <div class="sm num" onclick="loading(rownum_str)">
+                ↓
             </div>
-            <div class="sm pub_date">
-                <a href="{{ post.specific.get_parent.url }}/orderby/pub_date/">↓</a>
+            <div class="sm pub_date" onclick="loading(pub_date_str)">
+                ↓
             </div>
-            <div class="lg title">
-                <a href="{{ post.specific.get_parent.url }}/orderby/title/">↓</a>
+            <div class="lg title" onclick="loading(title_str)">
+                ↓
             </div>
-            <div class="md author_founder">
-                <a href="{{ post.specific.get_parent.url }}/orderby/author_founder/">↓</a>
+            <div class="md author_founder" onclick="loading(author_founder_str)">
+                ↓
             </div>
         </div>
         {% cache 604800 preview_index index.id %}
@@ -85,17 +90,18 @@
                         {% if index.location != None %}
                         <p>{{ index.location }}</p>
                         {% endif %}
-
-                        {% for loop_cycle in index.images_list.all %}
-                            {% image loop_cycle.images height-220 as img %} 
-                            {% if loop_cycle.images is None %}
-                            {% else %}
-                                <div class="img_container">
-                                    <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
-                                    <p>{{ loop_cycle.caption|markdown }}</p>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                        <div class="img_section">
+                            {% for loop_cycle in index.images_list.all %}
+                                {% image loop_cycle.images height-220 as img %} 
+                                {% if loop_cycle.images is None %}
+                                {% else %}
+                                    <div class="img_container">
+                                        <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}">
+                                        <p>{{ loop_cycle.caption|markdown }}</p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                         {% for cat in index.categories.all %}
                             {% if cat.name != None %}
                              <span>
