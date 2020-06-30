@@ -339,6 +339,10 @@ header #tag_btn button span {
   float: left;
   margin-right: 10px;
 }
+p a.cr {
+  text-decoration: none;
+  color: black;
+}
 
 
 .internal_pg_container {

@@ -21,6 +21,9 @@ from django.db.models.functions.window import RowNumber
 from django.db.models.expressions import RawSQL
 from django.db.models.functions import Lower
 
+import simplejson as json
+from django.http import HttpResponse
+
 class Cindex(models.Model):
     cindex_id = models.IntegerField(primary_key=True)
     pub_date = models.PositiveSmallIntegerField(blank=True, null=True) 
@@ -115,6 +118,8 @@ class IndexPage(RoutablePageMixin, Page):
     context["posts"] = IndexDetailPage.objects.live().public()
     context["categories"] = IndexCategory.objects.all()
     context["internal_links"] = IndexInternalLinks.objects.all()
+    json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum'))
+    context['json_dict'] = json.dumps(json_list)
     return context
   
   @route(r"^orderby/(?P<order>[-\w]+)/$", name="orderby_view")

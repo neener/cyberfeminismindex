@@ -136,8 +136,10 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
     }
 }
 
-function interal_reference(id) {
+function internal_reference(id) {
     var e = document.getElementById(id);
+    console.log(e)
+    console.log(id)
     e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     slideIndex_drawer(e, id)
 }
@@ -164,18 +166,24 @@ function slideIndex_drawer(elm, url) {
     var n = node.children
     var arr = [{"rownum":1,"title":"test"},{"rownum":2,"title":"test2"},{"rownum":3,"title":"test3"}]
 
-    for (i = 0; i < n.length; i++) { 
-        if(n[i] && n[i].nodeName == "A") {
-            var inline_link = n[i].href
-            var parts = inline_link.split('/');
-            var entry_title = ""
-            var entry_title = parts[parts.length - 2];
-            n[i].href= base_url+"#/" + entry_title
-            n[i].addEventListener("click", function(){interal_reference(entry_title)});
-            n[i].classList.add("cr")
-
-            let obj = arr.find(o => o.title === 'test2');
-            n[i].innerHTML = "("+ obj.rownum + ")";
+    if (node.classList != "external_links") {
+        for (i = 0; i < n.length; i++) { 
+            if(n[i] && n[i].nodeName == "A") {
+                var inline_link = n[i].href
+                var parts = inline_link.split('/');
+                var entry_title = ""
+                var entry_title = parts[parts.length - 2];
+                n[i].href= base_url +"/#/" + entry_title
+                
+                console.log(entry_title)
+                let obj = index_json.find(o => o.slug === entry_title);
+                console.log(obj)
+                n[i].innerHTML = "("+ obj.rownum + ")";
+                console.log(n[i])
+                n[i].addEventListener("click", function(){internal_reference(entry_title)});
+                n[i].classList.add("cr")
+                n[i].classList.add(entry_title)
+            }
         }
     }
 }
