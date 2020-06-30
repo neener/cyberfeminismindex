@@ -55,6 +55,17 @@ function getUrl() {
     }
 }
 
+function sort_loading(order) {
+    console.log(order)
+    $("#index_list").addClass("loading");
+    $('#sorting_text').show()
+    window.location = base_url+"/orderby/"+ order
+    setTimeout(function() {
+        $('#sorting_text').hide();
+        $("#index_list").removeClass("loading")
+    }, 18000);
+}
+
 function slideIndex_drawer_images(elm, url) {
     var elems = document.querySelectorAll(".index_drawer");
     var selected_drawer = elm.previousSibling.previousSibling;
@@ -188,18 +199,6 @@ function slideIndex_drawer(elm, url) {
     }
 }
 
-function loading(order) {
-    $("#index_list").addClass("loading");
-    $('#sorting_text').show();
-    $.ajax({
-        type: "GET",
-        url: base_url +'/orderby/' + order,
-        success: function (resp) {
-            $('#sorting_text').hide();
-            $("#index_list").removeClass("loading")
-         }
-    });
-}
 
 function back_to_top(id) {
     var e = document.getElementById(id);
