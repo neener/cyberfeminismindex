@@ -12,3 +12,10 @@ class AboutPage(Page):
     content_panels = Page.content_panels + [
         MarkdownPanel('body', classname="full"),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+    	context = super().get_context(request, *args, **kwargs)
+    	context["posts"] = IndexDetailPage.objects.live().public()
+    	json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum'))
+    	context['json_dict'] = json.dumps(json_list)
+    	return context
