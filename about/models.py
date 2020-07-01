@@ -6,6 +6,10 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtailmarkdown.fields import MarkdownField
 from wagtailmarkdown.edit_handlers import MarkdownPanel
 
+import simplejson as json
+
+from index.models import IndexDetailPage
+
 class AboutPage(Page):
     body = MarkdownField(null=True, blank=True)
 
