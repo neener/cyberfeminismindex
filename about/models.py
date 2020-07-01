@@ -7,7 +7,7 @@ from wagtailmarkdown.fields import MarkdownField
 from wagtailmarkdown.edit_handlers import MarkdownPanel
 
 class AboutPage(Page):
-    body = MarkdownField(blank=True)
+    body = MarkdownField(null=True, blank=True)
 
     content_panels = Page.content_panels + [
         MarkdownPanel('body', classname="full"),

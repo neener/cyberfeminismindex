@@ -35,6 +35,11 @@ function getUrl() {
         add_tag_button(selected_tag)
         console.log(3)
         break;
+      case "about":
+        menu.value = str;
+        var selected_drawer = document.getElementById("about_pg_content")
+        internal_ligatures(selected_drawer)
+        break;
       case "collections":
         console.log(4);
         menu.value = str;
@@ -148,8 +153,13 @@ function internal_ligatures(selected_drawer) {
     if(menu.value == "cyberfeminism index") {
         var node = selected_drawer.children[0].children[1];
         var n = node.children
-    } else {
+    } 
+    if(menu.value == "images") {
         var node = selected_drawer.children[0].children[4];
+        var n = node.children
+    }
+    if(menu.value == "about") {
+        var node = selected_drawer.children[1];
         var n = node.children
     }
 
