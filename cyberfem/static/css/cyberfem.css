@@ -73,6 +73,7 @@ select, button {
   height: 100px;
   display: inline-block;
   vertical-align: middle;
+  max-width: 100%;
 }
 .search_pg {
   margin: 85px 0 50px;

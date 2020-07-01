@@ -16,12 +16,15 @@ function getUrl() {
     //set menu to url
     var pathArray = window.location.pathname.split('/');
     var secondLevelLocation = pathArray[1];
-    var selected_tag = pathArray[2]
-    str = secondLevelLocation
+    var selected_tag = pathArray[2];
+    str = secondLevelLocation;
     switch(secondLevelLocation) {
       case "":
         menu.value = "cyberfeminism index";
         console.log(1)
+        var pathHash_array = window.location.hash.split('/');
+        var pathHash = pathHash_array[1];
+        internal_reference(pathHash)
         break;
       case "orderby":
         menu.value = "cyberfeminism index";
@@ -136,17 +139,19 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
 
 function internal_reference(id) {
     var e = document.getElementById(id);
-    console.log(e)
-    console.log(id)
     e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     slideIndex_drawer(e, id)
 }
 
 function internal_ligatures(selected_drawer) {
     // internal links
-    var node = selected_drawer.children[0].children[1];
-    var n = node.children
-    var arr = [{"rownum":1,"title":"test"},{"rownum":2,"title":"test2"},{"rownum":3,"title":"test3"}]
+    if(menu.value == "cyberfeminism index") {
+        var node = selected_drawer.children[0].children[1];
+        var n = node.children
+    } else {
+        var node = selected_drawer.children[0].children[4];
+        var n = node.children
+    }
 
     if (node.classList != "external_links") {
         for (i = 0; i < n.length; i++) { 
