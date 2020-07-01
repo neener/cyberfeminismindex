@@ -67,30 +67,6 @@ function sort_loading(order) {
     }, 18000);
 }
 
-function slideIndex_drawer_images(elm, url) {
-    var elems = document.querySelectorAll(".index_drawer");
-    var selected_drawer = elm.previousSibling.previousSibling;
-    images = elm.querySelectorAll(".img_container img");
-    [].forEach.call(images, function(el) {
-        el.style.height = "220px";
-        el.nextElementSibling.nextElementSibling.style.display = "block";
-    });
-
-    [].forEach.call(elems, function(el) {
-        if (el.classList.contains('closed')) {
-        } else {
-            el.classList.add("closed");
-        }
-    });
-    var elems = document.querySelectorAll(".index_entry");
-
-    elm.classList.add("green_text");
-    selected_drawer.classList.toggle('closed');
-
-    var hist_str = "#/" + url;
-    window.history.pushState(hist_str, 'Title', hist_str);
-}
-
 var trail_array = [];
 var trail_list = document.getElementById("trail_list");
 var trail_list_kids = trail_list.getElementsByTagName("SPAN");
@@ -208,6 +184,32 @@ function slideIndex_drawer(elm, url) {
         selected_drawer.classList.remove("closed")
     }
     var hist_str = "#/" + url
+    window.history.pushState(hist_str, 'Title', hist_str);
+
+    internal_ligatures(selected_drawer)
+}
+
+function slideIndex_drawer_images(elm, url) {
+    var elems = document.querySelectorAll(".index_drawer");
+    var selected_drawer = elm.previousSibling.previousSibling;
+    images = elm.querySelectorAll(".img_container img");
+    [].forEach.call(images, function(el) {
+        el.style.height = "220px";
+        el.nextElementSibling.nextElementSibling.style.display = "block";
+    });
+
+    [].forEach.call(elems, function(el) {
+        if (el.classList.contains('closed')) {
+        } else {
+            el.classList.add("closed");
+        }
+    });
+    var elems = document.querySelectorAll(".index_entry");
+
+    elm.classList.add("green_text");
+    selected_drawer.classList.toggle('closed');
+
+    var hist_str = "#/" + url;
     window.history.pushState(hist_str, 'Title', hist_str);
 
     internal_ligatures(selected_drawer)
