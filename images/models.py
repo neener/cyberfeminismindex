@@ -8,6 +8,8 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from django.shortcuts import render
 
+import simplejson as json
+
 from index.models import IndexDetailPage
 
 
@@ -17,6 +19,8 @@ class ImagesPage(Page):
 		context = super().get_context(request, *args, **kwargs)
 
 		context["posts"] = IndexDetailPage.objects.live().public()
+		json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum'))
+		context['json_dict'] = json.dumps(json_list)
 		context["image_entries"] = []
 		
 		for index in context["posts"]:

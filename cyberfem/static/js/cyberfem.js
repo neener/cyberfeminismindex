@@ -56,13 +56,14 @@ function getUrl() {
 }
 
 function sort_loading(order) {
-    console.log(order)
     $("#index_list").addClass("loading");
+    $(".arrows").addClass("loading");
     $('#sorting_text').show()
     window.location = base_url+"/orderby/"+ order
     setTimeout(function() {
         $('#sorting_text').hide();
         $("#index_list").removeClass("loading")
+        $(".arrows").removeClass("loading");
     }, 18000);
 }
 
@@ -118,9 +119,19 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         var cell4 = row.insertCell(3);
         cell1.innerHTML = "("+rownum+")";
         cell1.classList.add("cr")
-        cell2.innerHTML = pub_date;
+        if (pub_date == "None") {
+            cell2.innerHTML = "";
+        } else {
+            cell2.innerHTML = pub_date;
+        }
+
         cell3.innerHTML = title;
-        cell4.innerHTML = author_founder;
+        
+        if (author_founder == undefined || author_founder == "None") {
+            cell4.innerHTML = "";
+        } else {
+            cell4.innerHTML = author_founder;
+        }
         row.classList.add("base_tr")
         row.setAttribute("id", id);
         row.setAttribute("title", title);
@@ -155,6 +166,34 @@ function internal_reference(id) {
     slideIndex_drawer(e, id)
 }
 
+function internal_ligatures(selected_drawer) {
+    // internal links
+    var node = selected_drawer.children[0].children[1];
+    var n = node.children
+    var arr = [{"rownum":1,"title":"test"},{"rownum":2,"title":"test2"},{"rownum":3,"title":"test3"}]
+
+    if (node.classList != "external_links") {
+        for (i = 0; i < n.length; i++) { 
+            if(n[i] && n[i].nodeName == "A") {
+                var inline_link = n[i].href
+                var parts = inline_link.split('/');
+                var entry_title = parts[parts.length - 2];
+                n[i].href= base_url +"/#/" + entry_title
+                
+                let obj = index_json.find(o => o.slug === entry_title);
+                n[i].innerHTML = "("+ obj.rownum + ")";
+
+                n[i].classList.add("cr")
+                n[i].setAttribute("slug", entry_title)
+
+                n[i].addEventListener("click", function(e){
+                    return internal_reference(e.srcElement.attributes[2].nodeValue)
+                });
+            }
+        }
+    }
+}
+
 function slideIndex_drawer(elm, url) {
     var selected_drawer = elm.nextSibling.nextSibling;
 
@@ -171,32 +210,7 @@ function slideIndex_drawer(elm, url) {
     var hist_str = "#/" + url
     window.history.pushState(hist_str, 'Title', hist_str);
 
-
-    // internal links
-    var node = selected_drawer.children[0].children[1];
-    var n = node.children
-    var arr = [{"rownum":1,"title":"test"},{"rownum":2,"title":"test2"},{"rownum":3,"title":"test3"}]
-
-    if (node.classList != "external_links") {
-        for (i = 0; i < n.length; i++) { 
-            if(n[i] && n[i].nodeName == "A") {
-                var inline_link = n[i].href
-                var parts = inline_link.split('/');
-                var entry_title = ""
-                var entry_title = parts[parts.length - 2];
-                n[i].href= base_url +"/#/" + entry_title
-                
-                console.log(entry_title)
-                let obj = index_json.find(o => o.slug === entry_title);
-                console.log(obj)
-                n[i].innerHTML = "("+ obj.rownum + ")";
-                console.log(n[i])
-                n[i].addEventListener("click", function(){internal_reference(entry_title)});
-                n[i].classList.add("cr")
-                n[i].classList.add(entry_title)
-            }
-        }
-    }
+    internal_ligatures(selected_drawer)
 }
 
 
