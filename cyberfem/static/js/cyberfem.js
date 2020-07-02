@@ -64,6 +64,12 @@ function getUrl() {
     }
 }
 
+
+function toggle_contact() {
+    var contact_form = document.getElementById("about_form")
+    contact_form.classList.toggle('closed');
+}
+
 function sort_loading(order) {
     $("#index_list").addClass("loading");
     $(".arrows").addClass("loading");

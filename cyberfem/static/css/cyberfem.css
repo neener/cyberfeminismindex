@@ -312,7 +312,7 @@ header #menu.with_tag {
   /*width: 82%;*/
 }
 header #menu.with_about {
-  width: 77%;
+  width: 86%;
 }
 header #tag_btn {
   display: inline-block;
@@ -342,6 +342,25 @@ header #tag_btn button span {
 #about_buttons button {
   float: left;
   margin-right: 10px;
+}
+#about_form {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+#about_form input {
+  width: 100%;
+}
+#about_form p {
+  color: #aeaeae;
+  font-size: 1.2vw;
+}
+#about_form.closed {
+  max-height: 0;
+  display: none;
+}
+#about_form p#about_form_submitted {
+  display: none;
 }
 p a.cr {
   text-decoration: none;
