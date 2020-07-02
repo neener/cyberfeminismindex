@@ -1,4 +1,5 @@
 var base_url = window.location.origin;
+var base_host = window.location.hostname;
 let menu = document.getElementById('menu');
 var external_links = document.querySelectorAll('.external_links a')
 
@@ -150,7 +151,7 @@ function internal_reference(id) {
 
 function internal_ligatures(selected_drawer) {
     // internal links
-    if(menu.value == "cyberfeminism index") {
+    if(menu.value == "cyberfeminism index" || menu.value == "search" || menu.value == "collections") {
         var node = selected_drawer.children[0].children[1];
         var n = node.children
     } 
@@ -163,11 +164,12 @@ function internal_ligatures(selected_drawer) {
         var node = selected_drawer.children;
         for (i = 0; i < node.length; i++) { 
             for (j = 0; j < node[i].children.length; j++) {
-                if (node[i].children[j].nodeName == "A") {
+                if (node[i].children[j].nodeName == "A" && node[i].children[j].host == base_host) {
                     n.push(node[i].children[j])
                 }
             }
         }
+        console.log(n)
     }
 
     if (node.classList != "external_links") {
@@ -175,14 +177,14 @@ function internal_ligatures(selected_drawer) {
             if(n[i] && n[i].nodeName == "A") {
                 var inline_link = n[i].href
                 var parts = inline_link.split('/');
-                var entry_title = parts[parts.length - 2];
-                n[i].href= base_url +"/#/" + entry_title
+                var entry_slug = parts[parts.length - 2];
+                n[i].href= base_url +"/#/" + entry_slug
                 
-                let obj = index_json.find(o => o.slug === entry_title);
-                n[i].innerHTML = "("+ obj.rownum + ")";
+                let obj = index_json.find(o => o.slug === entry_slug);
+                n[i].innerHTML = "<span title='"+obj.title+"' class='tooltip'>("+ obj.rownum + ")</span>";
 
                 n[i].classList.add("cr")
-                n[i].setAttribute("slug", entry_title)
+                n[i].setAttribute("slug", entry_slug)
 
                 n[i].addEventListener("click", function(e){
                     return internal_reference(e.srcElement.attributes[2].nodeValue)
