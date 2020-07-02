@@ -159,8 +159,15 @@ function internal_ligatures(selected_drawer) {
         var n = node.children
     }
     if(menu.value == "about") {
-        var node = selected_drawer.children[1];
-        var n = node.children
+        var n = []
+        var node = selected_drawer.children;
+        for (i = 0; i < node.length; i++) { 
+            for (j = 0; j < node[i].children.length; j++) {
+                if (node[i].children[j].nodeName == "A") {
+                    n.push(node[i].children[j])
+                }
+            }
+        }
     }
 
     if (node.classList != "external_links") {
