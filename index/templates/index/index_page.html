@@ -36,7 +36,7 @@
 
 
     <div id="top_location"></div>
-    
+
     <div id="index_list" class="main_index_style">
         <div class="index_entry arrows">
             <div class="sm num" onclick="sort_loading(rownum_str)">
@@ -61,7 +61,7 @@
                             {{ index.pub_date }}
                         {% endif %}
                         {% if index.end_date != None %}
-                            -{{ index.end_date }}
+                            –{{ index.end_date }}
                         {% endif %}
                     </p></div>
                     <div class="lg"><p>{{ index.title|markdown }}</p></div>
@@ -108,14 +108,51 @@
                             </span>
                             {% endif %}
                         {% endfor %}
+                    </div>
 
+
+
+                    <!-- MOBILE -->
+                    <div class="drawer_content mobile">
+                        <p class="about_text">{{ index.about|markdown }}</p>
+                        {% if index.contributed_by != None %}
+                        <p>{{ index.contributed_by }}</p>
+                        {% endif %}
+                        <p class="external_links">
+                            {% if index.external_link != None %}
+                            <a href="{{index.external_link}}" target="_blank">{{ index.external_link }}</a>
+                            {% endif %}
+                            {% if index.external_link_two != None %}
+                            <a href="{{index.external_link_two}}" target="_blank">{{ index.external_link_two }}</a>
+                            {% endif %}
+                        </p>
+                        {% if index.location != None %}
+                        <p>{{ index.location }}</p>
+                        {% endif %}
+                        <div class="img_section">
+                            {% for loop_cycle in index.images_list.all %}
+                                {% image loop_cycle.images height-220 as img %} 
+                                {% if loop_cycle.images is None %}
+                                {% else %}
+                                    <div class="img_container">
+                                        <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
+                                        <p>{{ loop_cycle.caption|markdown }}</p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% for cat in index.categories.all %}
+                            {% if cat.name != None %}
+                             <span>
+                                <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
+                            </span>
+                            {% endif %}
+                        {% endfor %}
                     {% for internal in index.internal_links.all %}
                         <p>internal links:
                             {{ internal.link_copy }} {{ internal.link_page }}
                         </p>
                     {% endfor %}
-
-
                     </div>
                 </div>
             {% endfor %}

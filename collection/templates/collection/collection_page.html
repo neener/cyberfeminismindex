@@ -55,7 +55,7 @@
 	                    	<p>
 	                        {{ index.pub_date }}
 	                        {% if index.end_date != None %}
-	                            -{{ index.end_date }}
+	                            –{{ index.end_date }}
 	                        {% endif %}
 	                    	</p>
 	                	</div>
@@ -84,22 +84,25 @@
 	                        {% if index.location != None %}
 	                        <p>{{ index.location }}</p>
 	                        {% endif %}
-
-	                        {% for loop_cycle in index.images_list.all %}
-	                            {% image loop_cycle.images height-220 as img %} 
-	                            {% if loop_cycle.images is None %}
-	                            {% else %}
-	                                <div class="img_container">
-	                                    <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
-	                                    <p>{{ loop_cycle.caption|markdown }}</p>
-	                                </div>
+	                        <div class="img_section">
+	                            {% for loop_cycle in index.images_list.all %}
+	                                {% image loop_cycle.images height-220 as img %} 
+	                                {% if loop_cycle.images is None %}
+	                                {% else %}
+	                                    <div class="img_container">
+	                                        <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
+	                                        <p>{{ loop_cycle.caption|markdown }}</p>
+	                                    </div>
+	                                {% endif %}
+	                            {% endfor %}
+	                        </div>
+	                        {% for cat in index.categories.all %}
+	                            {% if cat.name != None %}
+	                             <span>
+	                                <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
+	                            </span>
 	                            {% endif %}
 	                        {% endfor %}
-	                        <p>
-	                            {% for cat in index.categories.all %}
-	                                <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
-	                            {% endfor %}
-	                        </p>
 	                    </div>
                 	</div>
 		    	{% endfor %}

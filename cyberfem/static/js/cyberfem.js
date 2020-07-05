@@ -65,6 +65,7 @@ function getUrl() {
 }
 
 
+
 function toggle_contact() {
     var contact_form = document.getElementById("about_form")
     contact_form.classList.toggle('closed');
@@ -76,34 +77,74 @@ function sort_loading(order) {
     $('#sorting_text').show()
     window.location = base_url+"/orderby/"+ order
     setTimeout(function() {
-        $('#sorting_text').hide();
         $("#index_list").removeClass("loading")
         $(".arrows").removeClass("loading");
-    }, 18000);
+        $("#index_list").addClass("loading2");
+        $(".arrows").addClass("loading2");
+    }, 200);
+    setTimeout(function() {
+        $("#index_list").removeClass("loading2")
+        $(".arrows").removeClass("loading2");
+        $("#index_list").addClass("loading");
+        $(".arrows").addClass("loading");
+    }, 500);
+    setTimeout(function() {
+        $("#index_list").removeClass("loading")
+        $(".arrows").removeClass("loading");
+        $("#index_list").addClass("loading2");
+        $(".arrows").addClass("loading2");
+    }, 7000);
+    setTimeout(function() {
+        $("#index_list").removeClass("loading2")
+        $(".arrows").removeClass("loading2");
+        $("#index_list").addClass("loading");
+        $(".arrows").addClass("loading");
+    }, 11000);
+    setTimeout(function() {
+        $("#index_list").removeClass("loading")
+        $(".arrows").removeClass("loading");
+    }, 15000);
 }
 
 var trail_array = [];
 var trail_list = document.getElementById("trail_list");
 var trail_list_kids = trail_list.getElementsByTagName("SPAN");
 var opened = false;
-function remove_trail_entry(elm, slug) {
+var download_btn = document.getElementById("download_btn");
+function create_pdf() {
+    console.log(trail_array)
+    var trail_content = "<p>"+trail_array+"</p>";
+    var info_content = "<p>This PDF contains selections from Cyberfeminism Index (https://cyberfeminismindex.com) by the person with the IP address 67.243.75.182. It was downloaded on 2020-06-14 at 17:18:56. The website and its contents may have changed since then.</p>"
+    var credit_content = "<p>Cyberfeminism Index is facilitated by <a href='https://mindyseu.com/'>Mindy Seu</a>. The website was developed by <a href='https://angeline-meitzler.com/'>Angeline Meitzler</a>. This font is Arial by Robin Nicholas and Patricia Saunders. The encircled cross-reference numbers are an adaptation of this font called Arial Symbol by <a href='http://lauracoombs.com/'>Laura Coombs</a>. All entry descriptions are excerpts; please refer to the credit at the bottom of each page.</p>"
+
+    var printWindow = window.open('', '', 'height=650,width=900');
+    printWindow.document.write('<html><head><title>Cyberfeminism Index</title>');
+    // printWindow.document.write('<link rel="stylesheet" href="..css/pdf.css />'); 
+    printWindow.document.write(' <style>body {height: 100vh;padding: 0;margin: 0.5em;font-size: 2.25vw;font-family: Arial, sans-serif;color: black;}</style>')
+    printWindow.document.write('</head><body id="print_pdf">');
+    printWindow.document.write(trail_content);
+    printWindow.document.write(info_content);
+    printWindow.document.write(credit_content);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
+
+function remove_trail_entry(elm, slug, title) {
     elm.remove();
     var index_elm = document.getElementById(slug);
     index_elm.classList.remove("green_text");
     index_elm.nextSibling.nextSibling.classList.add("closed")
-
-    trail_array.length = 0
-    for (var i=0, item; item = trail_list_kids[i]; i++) {
-        trail_array.push(trail_list_kids[i].title);
-    }
+    
+    trail_array = trail_array.filter(e => e !== slug);
+    download_btn.innerHTML = "Download ("+ trail_array.length + ")"
 }
 
 function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownum) {
     table = document.getElementById("base_index_table");
 
-    if (!trail_array.includes(title)) {
-        console.log("here")
-        trail_array.push(title);
+    if (!trail_array.includes(slug)) {
+        trail_array.push(slug);
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -127,12 +168,11 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         row.classList.add("base_tr")
         row.setAttribute("id", id);
         row.setAttribute("title", title);
-        row.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
+        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
         table.appendChild(row); 
     }
 
     if (trail_array.length <= 0) {
-        console.log("first")
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -146,7 +186,7 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         row.classList.add("base_tr")
         row.setAttribute("id", id);
         row.setAttribute("title", title);
-        row.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
+        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
         table.appendChild(row); 
     }
 
@@ -158,6 +198,8 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         right_content.classList.toggle("unopened");
         left_content.style.width = "73%";
     }
+
+    download_btn.innerHTML = "Download ("+ trail_array.length + ")"
 }
 
 function internal_reference(id) {
