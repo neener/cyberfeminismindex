@@ -152,6 +152,9 @@ p.no_results {
 .main_index_style .sm.num {
   padding-left: 20px;
 }
+.images_pg.main_index_style .sm {
+  width: 0;
+}
 .main_index_style .lg {
   width: 60%;
   word-break: break-word;
@@ -332,7 +335,7 @@ header #menu.with_tag {
   /*width: 82%;*/
 }
 header #menu.with_about {
-  width: 84%;
+  width: 92%;
 }
 header #tag_btn {
   display: inline-block;
