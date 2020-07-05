@@ -36,6 +36,7 @@
                 {% for index in image_entries %}
                         <div class="index_drawer closed">
                             <div class="drawer_content">
+                                <div class="sm num"><p class="cr">({{ index.rownum }})</p></div>
                                 <div class="sm">
                                     <p>
                                     {{ index.pub_date }}
@@ -74,14 +75,14 @@
                             </div>
                         </div>
                         <div onclick="slideIndex_drawer_images(this, '{{index.slug}}')" id="{{index.slug}}" class="index_entry">
-                            <div class="sm num"><p class="cr">({{ index.rownum }})</p></div>
+                            <div class="sm num"></div>
                             <div class="img_section">
                                 {% for loop_cycle in index.images_list.all %}
                                     {% image loop_cycle.images height-220 as img %} 
                                     {% if loop_cycle.images is None %}
                                     {% else %}
                                         <div class="img_container">
-                                            <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}">
+                                            <img src="{{ img.url }}" height="{{ img.height }}" alt="{{ loop_cycle.custom_alt }}" onclick="enlarge_img(this)">
                                             <p>{{ loop_cycle.caption|markdown }}</p>
                                         </div>
                                     {% endif %}

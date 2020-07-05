@@ -13,9 +13,7 @@
     font-feature-settings: "liga", "clig";
 }
 
-
-
-body {
+body,html {
 	margin: 0;
   font-size: 1.5vw;
   font-family: Arial, sans-serif;
@@ -28,12 +26,10 @@ select, button {
 #main_content {
   margin:0;
   padding: 0;
+  overflow: hidden;
 }
-/*#left_index {
-  height: 100%;
-}*/
 .left_content {
-  width: 73%;
+  width: 100%;
   display: inline-block;
   height: 100vh;
   margin:0;
@@ -55,6 +51,11 @@ select, button {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  display: inline-block;
+}
+#right_content.unopened {
+  width: 0%;
+  display: none;
 }
 .sm.num {
   font-family: Arial, sans-serif;
@@ -67,13 +68,14 @@ select, button {
 }
 .images_pg .img_container p {
   display: none;
-  font-size: 1.1vw;
+  font-size: 0.8vw;
+  margin-top: 0;
 }
 .images_pg img {
   height: 100px;
   display: inline-block;
   vertical-align: middle;
-  max-width: 100%;
+  max-width: 250px;
 }
 .search_pg {
   margin: 85px 0 50px;
@@ -111,11 +113,15 @@ p.no_results {
 .main_index_style .arrows div {
   display: inline-block;
 }
+.loading.main_index_style .index_entry:hover, #index_list.loading .index_entry.arrows .sm:hover, #index_list.loading .index_entry.arrows .md:hover, #index_list.loading .index_entry.arrows .lg:hover {
+  text-shadow: 0 0 16px #00ff00 !important;
+  color: transparent !important;
+}
 .main_index_style .arrows a:hover, .main_index_style .arrows a:active {
   color: #00ff00 !important;
 }
 .green_text {
-  background-color: #00ff00 !important;
+  color: #00ff00 !important;
 }
 .main_index_style .index_entry:hover.arrows {
   color: #000;
@@ -151,15 +157,21 @@ p.no_results {
 }
 
 .main_index_style .index_entry:hover {
-  background-color: #00ff00;
+  color: #00ff00;
   cursor: pointer;
 }
 .index_drawer {
-  background: #00ff00;
+  color: #00ff00;
   overflow-y: hidden;
   transition-property: all;
   transition-duration: .3s;
   height: 100%
+}
+.index_drawer .cr:hover {
+  color: #00ff00;
+}
+.index_drawer a {
+  color: #00ff00;
 }
 .index_drawer .img_section {
   height: 100%;
@@ -172,8 +184,9 @@ p.no_results {
   display: inline-block;
 }
 .index_drawer .img_container p {
-  font-size: 1.1vw;
+  font-size: 0.8vw;
   display: none;
+  margin-top: 0;
 }
 .enlarge_img {
   height: 220px !important;
@@ -246,7 +259,7 @@ th {
     text-align: left;
 }
 #base_index_list {
-  font-size: .76vw;
+  font-size: 0.8vw;
 }
 #base_index_list tr.base_tr:hover {
   color: #00ff00;
@@ -312,7 +325,7 @@ header #menu.with_tag {
   /*width: 82%;*/
 }
 header #menu.with_about {
-  width: 86%;
+  width: 84%;
 }
 header #tag_btn {
   display: inline-block;
@@ -390,6 +403,7 @@ p a.cr {
 }
 #sorting_text {
   position: absolute;
+  color: #00ff00;
   left: 37%;
   top: 50%;
   transform: translate(-50%,-50%);
@@ -440,7 +454,7 @@ p a.cr {
 
 @media (min-width: 300px) and (max-width: 800px) {
   body, select, button {
-    font-size: 2.9vw;
+    font-size: 3.5vw;
   }
   .left_content {
     width: 100%;
@@ -453,6 +467,22 @@ p a.cr {
   }
   #trail_container span {
     font-size: 2vw;
+  }
+  .main_index_style .lg {
+    width: 55%;
+  }
+  .main_index_style .md {
+    width: 18%;
+    word-wrap: break-word;
+  }
+  .main_index_style .sm {
+    width: 9%;
+  }
+  .enlarge_img {
+    width: 100%;
+  }
+  .index_drawer .img_container p, .images_pg .img_container p {
+    font-size: 3vw;
   }
 }
 

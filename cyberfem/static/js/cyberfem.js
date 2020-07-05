@@ -85,6 +85,7 @@ function sort_loading(order) {
 var trail_array = [];
 var trail_list = document.getElementById("trail_list");
 var trail_list_kids = trail_list.getElementsByTagName("SPAN");
+var opened = false;
 function remove_trail_entry(elm, slug) {
     elm.remove();
     var index_elm = document.getElementById(slug);
@@ -101,8 +102,8 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
     table = document.getElementById("base_index_table");
 
     if (!trail_array.includes(title)) {
+        console.log("here")
         trail_array.push(title);
-
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -131,13 +132,14 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
     }
 
     if (trail_array.length <= 0) {
+        console.log("first")
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         cell1.innerHTML = "("+rownum+")";
-        cell1.classList.add("cr")
+        cell1.classList.add("cr");
         cell2.innerHTML = pub_date;
         cell3.innerHTML = title;
         cell4.innerHTML = author_founder;
@@ -146,6 +148,15 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         row.setAttribute("title", title);
         row.addEventListener("click",  function(){ remove_trail_entry(this, slug); });
         table.appendChild(row); 
+    }
+
+    // open left_content drawer
+    if (trail_array.length == 1 && opened == false &&  window.innerWidth > 800) {
+        opened = true;
+        var right_content = document.querySelector('#right_content');
+        var left_content = document.querySelector('.left_content');
+        right_content.classList.toggle("unopened");
+        left_content.style.width = "73%";
     }
 }
 
@@ -223,10 +234,10 @@ function slideIndex_drawer_images(elm, url) {
     var elems = document.querySelectorAll(".index_drawer");
     var selected_drawer = elm.previousSibling.previousSibling;
     images = elm.querySelectorAll(".img_container img");
-    [].forEach.call(images, function(el) {
-        el.style.height = "220px";
-        el.nextElementSibling.nextElementSibling.style.display = "block";
-    });
+    // [].forEach.call(images, function(el) {
+    //     el.style.height = "220px";
+    //     el.nextElementSibling.nextElementSibling.style.display = "block";
+    // });
 
     [].forEach.call(elems, function(el) {
         if (el.classList.contains('closed')) {
