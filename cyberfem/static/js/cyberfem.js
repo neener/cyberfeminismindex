@@ -226,9 +226,11 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
 }
 
 function internal_reference(id) {
-    var e = document.getElementById(id);
-    e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-    slideIndex_drawer(e, id)
+    if (id) {
+        var e = document.getElementById(id);
+        e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+        slideIndex_drawer(e, id)
+    }
 }
 
 function internal_ligatures(selected_drawer) {
