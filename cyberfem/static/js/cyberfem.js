@@ -111,18 +111,41 @@ var trail_list = document.getElementById("trail_list");
 var trail_list_kids = trail_list.getElementsByTagName("SPAN");
 var opened = false;
 var download_btn = document.getElementById("download_btn");
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = yyyy + '-' + mm + '-' + dd;
 function create_pdf() {
     console.log(trail_array)
-    var trail_content = "<p>"+trail_array+"</p>";
-    var info_content = "<p>This PDF contains selections from Cyberfeminism Index (https://cyberfeminismindex.com) by the person with the IP address 67.243.75.182. It was downloaded on 2020-06-14 at 17:18:56. The website and its contents may have changed since then.</p>"
+    var dt = new Date().toLocaleString();
+    table = document.createElement('table');
+
+
+
+
+
+    var info_content = "<p>This PDF contains selections from Cyberfeminism Index (https://cyberfeminismindex.com). It was downloaded on " + dt +". The website and its contents may have changed since then.</p>"
     var credit_content = "<p>Cyberfeminism Index is facilitated by <a href='https://mindyseu.com/'>Mindy Seu</a>. The website was developed by <a href='https://angeline-meitzler.com/'>Angeline Meitzler</a>. This font is Arial by Robin Nicholas and Patricia Saunders. The encircled cross-reference numbers are an adaptation of this font called Arial Symbol by <a href='http://lauracoombs.com/'>Laura Coombs</a>. All entry descriptions are excerpts; please refer to the credit at the bottom of each page.</p>"
 
     var printWindow = window.open('', '', 'height=650,width=900');
     printWindow.document.write('<html><head><title>Cyberfeminism Index</title>');
-    // printWindow.document.write('<link rel="stylesheet" href="..css/pdf.css />'); 
+    printWindow.document.write('<link rel="stylesheet" type="text/css" href="/cyberfem/static/css/pdf.css />'); 
     printWindow.document.write(' <style>body {height: 100vh;padding: 0;margin: 0.5em;font-size: 2.25vw;font-family: Arial, sans-serif;color: black;}</style>')
     printWindow.document.write('</head><body id="print_pdf">');
-    printWindow.document.write(trail_content);
+
+    for (i = 0; i < trail_array.length; i++) {  
+        let obj = index_json.find(o => o.slug === trail_array[i])
+        var temp_top = '<div id="pdf_list" class="main_index_style"><div class="index_entry"><div class="sm num"><p class="cr">'+obj.rownum+'</p></div><div class="sm"><p>'+obj.pub_date+'</p></div><div class="lg"><p>'+ obj.title +'</p></div><div class="md"><p>'+ obj.author_founder +'</p></div></div></div>';
+        var temp_bottom = '<div class="index_drawer closed"><div class="drawer_content"><p class="about_text">'+ obj.about +'</p><p>' + obj.location + '</p><p class="external_links">'+ obj.external_link+'</p></div></div>'
+        printWindow.document.write(temp_top)
+        printWindow.document.write(temp_bottom)
+        printWindow.document.write("<hr></hr>")
+
+    }
+
+
+
     printWindow.document.write(info_content);
     printWindow.document.write(credit_content);
     printWindow.document.write('</body></html>');

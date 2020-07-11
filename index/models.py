@@ -119,7 +119,7 @@ class IndexPage(RoutablePageMixin, Page):
     context["posts"] = IndexDetailPage.objects.live().public()
     context["categories"] = IndexCategory.objects.all()
     context["internal_links"] = IndexInternalLinks.objects.all()
-    json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum', 'title'))
+    json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))
     context['json_dict'] = json.dumps(json_list)
     return context
   

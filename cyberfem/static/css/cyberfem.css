@@ -284,8 +284,8 @@ th {
   grid-template-columns: 
   minmax(30px, .2fr)
   minmax(30px, .2fr)
-  minmax(135px, 3fr)
-  minmax(100px, 1fr)
+  minmax(115px, 2.5fr)
+  minmax(100px, 1.2fr)
 }
 
 
@@ -335,7 +335,7 @@ header #menu.with_tag {
   /*width: 82%;*/
 }
 header #menu.with_about {
-  width: 92%;
+  width: 90%;
 }
 header #tag_btn {
   display: inline-block;
