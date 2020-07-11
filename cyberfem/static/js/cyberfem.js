@@ -230,6 +230,7 @@ function internal_reference(id) {
         var e = document.getElementById(id);
         e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
         slideIndex_drawer(e, id)
+        console.log("yes")
     }
 }
 
