@@ -15,11 +15,11 @@
 
 body,html {
 	margin: 0;
-  font-size: 1.5vw;
+  font-size: 2vw;
   font-family: Arial, sans-serif;
 }
 select, button {
-  font-size: 1.5vw;
+  font-size: 2vw;
   font-family: Arial, sans-serif;
   padding: 5px;
 }
@@ -40,7 +40,7 @@ select, button {
   -moz-box-sizing: border-box;
 }
 #right_content {
-  width: 27%;
+  width: 26%;
   margin:0;
   display: inline-block;
   float: right;
@@ -125,7 +125,7 @@ p.no_results {
   color: #00ff00 !important;
 }
 .green_text {
-  color: #00ff00 !important;
+  color: #00ff00;
 }
 .main_index_style .index_entry:hover.arrows {
   color: #000;
@@ -151,6 +151,7 @@ p.no_results {
 }
 .main_index_style .sm.num {
   padding-left: 20px;
+  width: 5%;
 }
 .images_pg.main_index_style .sm {
   width: 0;
@@ -158,6 +159,10 @@ p.no_results {
 .main_index_style .lg {
   width: 60%;
   word-break: break-word;
+  padding-right: 25px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 .main_index_style .md {
   width: 18%;
@@ -168,7 +173,7 @@ p.no_results {
   cursor: pointer;
 }
 .index_drawer {
-  color: #00ff00;
+  color: #000;
   overflow-y: hidden;
   transition-property: all;
   transition-duration: .3s;
@@ -178,6 +183,9 @@ p.no_results {
   color: #00ff00;
 }
 .index_drawer a {
+  color: #000;
+}
+.index_drawer a:hover {
   color: #00ff00;
 }
 .index_drawer .img_section {
@@ -203,7 +211,7 @@ p.no_results {
   word-break: break-all;
 }
 .index_drawer .drawer_content {
-  padding: 20px;
+  padding: 20px 20px 20px 20px;
   overflow-x: hidden;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -212,8 +220,15 @@ p.no_results {
 .index_drawer .drawer_content p:first-child {
   margin-top: 0;
 }
+.index_drawer p.external_links {
+  margin-top: 20px;
+}
 .index_drawer .drawer_content p:last-child {
   margin-bottom: 0;
+}
+.index_drawer .drawer_content p, .external_links  {
+  margin-bottom: 0;
+  margin-top: 0;
 }
 .index_drawer.closed {
   max-height: 0;
@@ -290,16 +305,16 @@ th {
 
 
 header {
-	margin: 20px 0 30px 0;
+	margin: 11px 0 30px 0;
 	width: inherit;
   position: fixed;
   text-align: center;
 }
 header .menu_section {
-	/*width: 95.5%;*/
-  width: calc(100% - 40px);
+  width: calc(100% - 30px);
   display:inline-block;
   height: 100%;
+  margin-left: -14px;
 }
 header #menu {
 	box-shadow: 1px 1px 10px 1px #00ff00;
@@ -334,9 +349,6 @@ header #menu select {
 header #menu.with_tag {
   /*width: 82%;*/
 }
-header #menu.with_about {
-  width: 90%;
-}
 header #tag_btn {
   display: inline-block;
   height: 100%;
@@ -358,13 +370,9 @@ header #tag_btn button span {
 	display: inline-block;
 }
 #about_buttons {
-  display: inline-block;
-  height: 100%;
-  vertical-align: top;
+  display: block;
 }
 #about_buttons button {
-  float: left;
-  margin-right: 10px;
 }
 #about_form {
   width: 100%;
@@ -384,6 +392,9 @@ header #tag_btn button span {
 }
 #about_form p#about_form_submitted {
   display: none;
+}
+#about_form input {
+  font-size: 2vw;
 }
 p a.cr {
   text-decoration: none;
@@ -407,21 +418,30 @@ p a.cr {
   bottom: 20px;
   left: 20px;
 }
+.transparent {
+  color: transparent !important;
+}
 .loading {
-  text-shadow: 0 0 8px #00ff00;
-  color: transparent;
+  text-shadow: 0 0 8px #00ff00 !important;
+  color: transparent !important;
   transition-timing-function: ease-in-out;
   transition-timing-function: cubic-bezier(0.15, 0.1, 0.15, 1);
 }
 .loading2 {
-  text-shadow: 0 0 16px #00ff00;
-  color: transparent;
+  text-shadow: 0 0 10px #00ff00 !important;
+  color: transparent !important;
   transition-timing-function: ease-in-out;
   transition-timing-function: cubic-bezier(0.15, 0.1, 0.15, 1);
 }
 .loading3 {
-  text-shadow: 0 0 12px #00ff00;
-  color: transparent;
+  text-shadow: 0 0 12px #00ff00 !important;
+  color: transparent !important;
+  transition-timing-function: ease-in-out;
+  transition-timing-function: cubic-bezier(0.15, 0.1, 0.2, 1);
+}
+.loading4 {
+  text-shadow: 0 0 15px #00ff00 !important;
+  color: transparent !important;
   transition-timing-function: ease-in-out;
   transition-timing-function: cubic-bezier(0.15, 0.1, 0.2, 1);
 }
@@ -459,7 +479,7 @@ p a.cr {
 
 
  
-#green_box {
+/*#green_box {
   height:1px;
   background: linear-gradient(90deg, rgba(0,255,0,0.4514180672268907) 0%, rgba(0,255,0,0.4514180672268907) 35%);
 }
@@ -473,7 +493,7 @@ p a.cr {
 #green_box.extend_green_three {
   height: 6px;
   box-shadow: 1px 1px 3000px 80px #00ff00;
-}
+}*/
 
 
 

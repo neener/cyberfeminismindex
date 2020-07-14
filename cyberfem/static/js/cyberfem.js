@@ -74,35 +74,32 @@ function toggle_contact() {
 function sort_loading(order) {
     $("#index_list").addClass("loading");
     $(".arrows").addClass("loading");
+    $(".index_content").addClass("transparent");
     $('#sorting_text').show()
+
     window.location = base_url+"/orderby/"+ order
     setTimeout(function() {
         $("#index_list").removeClass("loading")
         $(".arrows").removeClass("loading");
         $("#index_list").addClass("loading2");
         $(".arrows").addClass("loading2");
-    }, 200);
+    }, 400);
     setTimeout(function() {
         $("#index_list").removeClass("loading2")
         $(".arrows").removeClass("loading2");
-        $("#index_list").addClass("loading");
-        $(".arrows").addClass("loading");
-    }, 500);
+        $("#index_list").addClass("loading3");
+        $(".arrows").addClass("loading3");
+    }, 800);
     setTimeout(function() {
-        $("#index_list").removeClass("loading")
-        $(".arrows").removeClass("loading");
-        $("#index_list").addClass("loading2");
-        $(".arrows").addClass("loading2");
-    }, 7000);
+        $("#index_list").removeClass("loading3")
+        $(".arrows").removeClass("loading3");
+        $("#index_list").addClass("loading4");
+        $(".arrows").addClass("loading4");
+    }, 1200);
     setTimeout(function() {
-        $("#index_list").removeClass("loading2")
-        $(".arrows").removeClass("loading2");
-        $("#index_list").addClass("loading");
-        $(".arrows").addClass("loading");
-    }, 11000);
-    setTimeout(function() {
-        $("#index_list").removeClass("loading")
-        $(".arrows").removeClass("loading");
+        $("#index_list").removeClass("loading4")
+        $(".arrows").removeClass("loading4");
+        $(".index_content").removeClass("transparent");
     }, 15000);
 }
 
@@ -218,8 +215,12 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         opened = true;
         var right_content = document.querySelector('#right_content');
         var left_content = document.querySelector('.left_content');
+        var body = document.getElementsByTagName('BODY')[0];
+        var select = document.getElementById('menu');
         right_content.classList.toggle("unopened");
-        left_content.style.width = "73%";
+        left_content.style.width = "73.5%";
+        body.style.fontSize = "1.5vw";
+        select.style.fontSize = "1.5vw";
     }
 
     download_btn.innerHTML = "Download ("+ trail_array.length + ")"

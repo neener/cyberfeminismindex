@@ -22,16 +22,13 @@
 	                <option value="{{ item.title }}">{{ item.title }}</option>
 	                {% endfor %}
 	            </select>
-	            <div id="about_buttons">
-					<button onclick="toggle_contact()">contact</button>
-				</div>
 	        </div>
 	    </header>
 
-
-
-
 	    <div id="about_pg_content" class="internal_pg_container about_pg">
+	    	<div id="about_buttons">
+				<button onclick="toggle_contact()">contact</button>
+			</div>
 	    	<form id="about_form" class="closed" name="submit-to-google-sheet">
 	    		<p><input name="your_name" type="your_name" placeholder="Your Name" required><br>this would appear as "contributed by Jane Doe" underneath your entry</p>
 	    		<p><input name="email" type="email" placeholder="Email" required><br>this will not be made public. Please include your email so I can contact you for additional information, if needed<p>
