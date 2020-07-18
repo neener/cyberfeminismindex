@@ -156,7 +156,7 @@ p.no_results {
   padding-left: 20px;
   width: 5%;
 }
-.images_pg.main_index_style .sm {
+.images_pg.main_index_style .sm.buffer {
   width: 0;
 }
 .main_index_style .lg {
@@ -226,8 +226,9 @@ p.no_results {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-.index_drawer .drawer_content p:first-child {
+.index_drawer .drawer_content p:nth-child(2) {
   margin-top: 0;
+  margin-bottom: 20px;
 }
 .index_drawer p.external_links {
   margin-top: 20px;

@@ -39,9 +39,12 @@
                                 <!-- <div class="sm num"><p class="cr">({{ index.rownum }})</p></div> -->
                                 <div class="sm">
                                     <p>
-                                    {{ index.pub_date }}
+                                    {% if index.end_date == None and index.pub_date != None %}
+                                        {{ index.pub_date }}
+                                    {% endif %}
                                     {% if index.end_date != None %}
-                                        –{{ index.end_date }}
+                                        {{ index.pub_date }}–<br>
+                                        {{ index.end_date }}
                                     {% endif %}
                                     </p>
                                 </div>
@@ -75,7 +78,7 @@
                             </div>
                         </div>
                         <div onclick="slideIndex_drawer_images(this, '{{index.slug}}')" id="{{index.slug}}" class="index_entry">
-                            <div class="sm num"></div>
+                            <div class="sm num buffer"></div>
                             <div class="img_section">
                                 {% for loop_cycle in index.images_list.all %}
                                     {% image loop_cycle.images height-220 as img %} 
