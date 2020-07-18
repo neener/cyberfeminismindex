@@ -41,6 +41,7 @@ wagtail-markdown==0.6
 wagtailfontawesome==1.2.1
 wagtailmenus==3.0.1
 wagtailnetlify==0.4
+Wand==0.6.2
 webencodings==0.5.1
 whitenoise==5.0.1
 Willow==1.3

@@ -25,7 +25,6 @@ function getUrl() {
         console.log(1)
         var pathHash_array = window.location.hash.split('/');
         var pathHash = pathHash_array[1];
-        console.log(pathHash)
         internal_reference(pathHash)
         break;
       case "orderby":
@@ -59,7 +58,6 @@ function getUrl() {
 
     // force all external links only to be target=_blank
     for (var links = external_links, i = 0, a; a = links[i]; i++) {
-    	console.log("here")
         if (a.host !== location.host) {
             a.target = '_blank';
         }
@@ -257,13 +255,11 @@ function internal_ligatures(selected_drawer) {
                     n.push(node[i].children[j])
                 } 
                 if (node[i].children[j].nodeName == "A" && node[i].children[j].innerHTML != "(x)") {
-                	console.log("hello " + node[i].children[j])
 				    node[i].children[j].target = '_blank';
                 }
             }
         }
         console.log(n)
-        console.log("about")
     }
 
     if (node.classList != "external_links") {
