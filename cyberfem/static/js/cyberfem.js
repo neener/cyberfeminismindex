@@ -231,7 +231,6 @@ function internal_reference(id) {
         var e = document.getElementById(id);
         e.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
         slideIndex_drawer(e, id)
-        console.log("yes")
     }
 }
 
@@ -269,13 +268,13 @@ function internal_ligatures(selected_drawer) {
                 n[i].href= base_url +"/#/" + entry_slug
                 
                 let obj = index_json.find(o => o.slug === entry_slug);
-                n[i].innerHTML = "<span title='"+obj.title+"' class='tooltip'>("+ obj.rownum + ")</span>";
+                n[i].innerHTML = "<span slug='"+obj.slug+"' title='"+obj.title+"' class='tooltip'>("+ obj.rownum + ")</span>";
 
                 n[i].classList.add("cr")
                 n[i].setAttribute("slug", entry_slug)
 
                 n[i].addEventListener("click", function(e){
-                    return internal_reference(e.srcElement.attributes[2].nodeValue)
+                    return internal_reference(e.srcElement.attributes[0].nodeValue)
                 });
             }
         }
