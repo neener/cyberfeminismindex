@@ -455,13 +455,13 @@ p a.cr {
 
 }
 
-/*.tooltip:hover:after { content: attr(title); } 
+/*.tooltip:hover:after { content: attr(title); } */
 .tooltip {
   position: relative;
   color: #00ff00;
-  -webkit-transition: all 500ms ease-in-out;
+  /*-webkit-transition: all 500ms ease-in-out;*/
 }
-.tooltip:hover:after { 
+/*.tooltip:hover:after { 
     background: #00ff00;
     box-shadow: 0px 0px 10px 10px #00ff00;
     position: absolute;
@@ -475,8 +475,8 @@ p a.cr {
     text-align: center;
     -webkit-transition: all 200ms ease-in-out;
     z-index: 10;
-} 
-*/
+} */
+
 
  
 /*#green_box {
