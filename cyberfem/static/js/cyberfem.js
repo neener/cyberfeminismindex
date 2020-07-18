@@ -251,6 +251,7 @@ function internal_ligatures(selected_drawer) {
         for (i = 0; i < node.length; i++) { 
             for (j = 0; j < node[i].children.length; j++) {
   				console.log(node[i].children[j])
+  				console.log("base" +base_url)
                 if (node[i].children[j].nodeName == "A" && node[i].children[j].host == base_host) {
                     n.push(node[i].children[j])
                 }
