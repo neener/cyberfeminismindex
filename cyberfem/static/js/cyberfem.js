@@ -239,6 +239,7 @@ function internal_ligatures(selected_drawer) {
     if(menu.value == "cyberfeminism index" || menu.value == "search" || menu.value == "collections") {
         var node = selected_drawer.children[0].children[1];
         var n = node.children
+        console.log(n)
     } 
     if(menu.value == "images") {
         var node = selected_drawer.children[0].children[4];
