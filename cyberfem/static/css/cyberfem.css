@@ -455,7 +455,7 @@ p a.cr {
 
 }
 
-.tooltip:hover:after { content: attr(title); } 
+/*.tooltip:hover:after { content: attr(title); } 
 .tooltip {
   position: relative;
   color: #00ff00;
@@ -476,7 +476,7 @@ p a.cr {
     -webkit-transition: all 200ms ease-in-out;
     z-index: 10;
 } 
-
+*/
 
  
 /*#green_box {
