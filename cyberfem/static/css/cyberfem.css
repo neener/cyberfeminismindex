@@ -60,6 +60,9 @@ select, button {
 .sm.num {
   font-family: Arial, sans-serif;
 }
+.images_og .index_drawer {
+  height: auto;
+}
 .images_pg .index_entry {
   padding: 10px 0;
 }
