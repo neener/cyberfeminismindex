@@ -25,6 +25,7 @@ function getUrl() {
         console.log(1)
         var pathHash_array = window.location.hash.split('/');
         var pathHash = pathHash_array[1];
+        console.log(pathHash)
         internal_reference(pathHash)
         break;
       case "orderby":
@@ -58,6 +59,7 @@ function getUrl() {
 
     // force all external links only to be target=_blank
     for (var links = external_links, i = 0, a; a = links[i]; i++) {
+    	console.log("here")
         if (a.host !== location.host) {
             a.target = '_blank';
         }
@@ -251,8 +253,8 @@ function internal_ligatures(selected_drawer) {
         for (i = 0; i < node.length; i++) { 
             for (j = 0; j < node[i].children.length; j++) {
   				console.log(node[i].children[j])
-  				console.log("base" +base_url)
-                if (node[i].children[j].nodeName == "A" && node[i].children[j].host == base_host) {
+  				console.log("base " + base_url)
+                if (node[i].children[j].nodeName == "A" && node[i].children[j].innerHTML == "(x)") {
                     n.push(node[i].children[j])
                 }
             }
