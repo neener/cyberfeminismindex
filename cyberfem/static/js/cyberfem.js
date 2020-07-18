@@ -76,11 +76,12 @@ function sort_loading(order) {
     $(".arrows").addClass("loading");
     $(".index_content").addClass("transparent");
     $('#sorting_text').show()
+    document.getElementById('index_list').style.pointerEvents = 'none';
 
     window.location = base_url+"/orderby/"+ order
     setTimeout(function() {
-        $("#index_list").removeClass("loading")
-        $(".arrows").removeClass("loading");
+        // $("#index_list").removeClass("loading")
+        // $(".arrows").removeClass("loading");
         $("#index_list").addClass("loading2");
         $(".arrows").addClass("loading2");
     }, 400);

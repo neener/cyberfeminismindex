@@ -114,11 +114,11 @@ p.no_results {
   display: inline-block;
 }
 .loading.main_index_style .index_entry:hover, #index_list.loading .index_entry.arrows .sm:hover, #index_list.loading .index_entry.arrows .md:hover, #index_list.loading .index_entry.arrows .lg:hover {
-  text-shadow: 0 0 16px #00ff00 !important;
+  text-shadow: 0 0 0 #00ff00 !important;
   color: transparent !important;
 }
 .loading2.main_index_style .index_entry:hover, #index_list.loading2 .index_entry.arrows .sm:hover, #index_list.loading2 .index_entry.arrows .md:hover, #index_list.loading2 .index_entry.arrows .lg:hover {
-  text-shadow: 0 0 16px #00ff00 !important;
+  text-shadow: 0 0 0 #00ff00 !important;
   color: transparent !important;
 }
 .main_index_style .arrows a:hover, .main_index_style .arrows a:active {
@@ -172,6 +172,11 @@ p.no_results {
   color: #00ff00;
   cursor: pointer;
 }
+#index_list.loading .index_entry:hover, #index_list.loading .index_drawer, #index_list.loading .index_entry.green_text, #index_list.loading .index_drawer a {
+  color: transparent !important;
+  cursor: default !important;
+  text-shadow: 0 0 8px #00ff00 !important;
+}
 .index_drawer {
   color: #000;
   overflow-y: hidden;
@@ -190,6 +195,7 @@ p.no_results {
 }
 .index_drawer .img_section {
   height: 100%;
+  margin-top: 20px;
 }
 .index_drawer .img_container img {
   cursor: pointer;
