@@ -56,7 +56,8 @@
             {% for index in posts %}
                 <div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}'); add_to_trail('{{ index.title }}', '{{ index.id }}', '{{ index.slug }}', '{{ index.author_founder }}', '{{ index.pub_date }}', '{{ index.end_date }}', '{{index.rownum}}')" id="{{index.slug}}">
                     <div class="sm num"><p class="cr">({{ index.rownum }})</p></div>
-                    <div class="sm"><p>
+                    <div class="sm">
+                        <p>
                         {% if index.end_date == None and index.pub_date != None %}
                             {{ index.pub_date }}
                         {% endif %}
@@ -64,7 +65,8 @@
                             {{ index.pub_date }}–<br>
                             {{ index.end_date }}
                         {% endif %}
-                    </p></div>
+                        </p>
+                    </div>
                     <div class="lg"><p>{{ index.title }}</p></div>
                     <div class="md"><p>
                         {% if index.author_founder != None %}

@@ -128,7 +128,7 @@ function create_pdf() {
 
     var printWindow = window.open('', '', 'height=650,width=900');
     printWindow.document.write('<html><head><title>Cyberfeminism Index</title>');
-    printWindow.document.write('<link rel="stylesheet" type="text/css" href="/cyberfem/static/css/pdf.css />'); 
+    printWindow.document.write('<link rel="stylesheet" type="text/css" href="../cyberfem/static/css/pdf.css />'); 
     printWindow.document.write(' <style>body {height: 100vh;padding: 0;margin: 0.5em;font-size: 2.25vw;font-family: Arial, sans-serif;color: black;}</style>')
     printWindow.document.write('</head><body id="print_pdf">');
 
