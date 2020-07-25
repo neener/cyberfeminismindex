@@ -211,7 +211,7 @@ def do_stuff_on_page_published(instance, **kwargs):
     #update ligatures
     ligatures = IndexDetailPage.objects.live().public().order_by("pub_date")
     for row_num, lig in enumerate(ligatures):
-      lig.rownum = row_num
+      lig.rownum = row_num +1
       lig.save()
     #clear_cache
     cache.clear()
