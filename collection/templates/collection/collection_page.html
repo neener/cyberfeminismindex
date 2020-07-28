@@ -33,20 +33,6 @@
 			</div>
 			{% if curated_entries %}
 			<div id="collections_list" class="main_index_style">
-				<div class="index_entry arrows">
-		            <div class="sm num">
-		                <a href="{{ post.specific.get_parent.url }}/orderby/id/">↓</a>
-		            </div>
-		            <div class="sm pub_date">
-		                <a href="{{ post.specific.get_parent.url }}/orderby/pub_date/">↓</a>
-		            </div>
-		            <div class="lg title">
-		                <a href="{{ post.specific.get_parent.url }}/orderby/title/">↓</a>
-		            </div>
-		            <div class="md author_founder">
-		                <a href="{{ post.specific.get_parent.url }}/orderby/author_founder/">↓</a>
-		            </div>
-       			</div>
        			{% endif %}
 				{% for index in curated_entries %}
             		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}">

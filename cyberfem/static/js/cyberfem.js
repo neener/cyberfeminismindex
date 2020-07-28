@@ -80,8 +80,6 @@ function sort_loading(order) {
 
     window.location = base_url+"/orderby/"+ order
     setTimeout(function() {
-        // $("#index_list").removeClass("loading")
-        // $(".arrows").removeClass("loading");
         $("#index_list").addClass("loading2");
         $(".arrows").addClass("loading2");
     }, 400);
@@ -115,33 +113,71 @@ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
 function create_pdf() {
-    console.log(trail_array)
     var dt = new Date().toLocaleString();
     table = document.createElement('table');
-
-
-
-
-
     var info_content = "<p>This PDF contains selections from Cyberfeminism Index (https://cyberfeminismindex.com). It was downloaded on " + dt +". The website and its contents may have changed since then.</p>"
     var credit_content = "<p>Cyberfeminism Index is facilitated by <a href='https://mindyseu.com/'>Mindy Seu</a>. The website was developed by <a href='https://angeline-meitzler.com/'>Angeline Meitzler</a>. This font is Arial by Robin Nicholas and Patricia Saunders. The encircled cross-reference numbers are an adaptation of this font called Arial Symbol by <a href='http://lauracoombs.com/'>Laura Coombs</a>. All entry descriptions are excerpts; please refer to the credit at the bottom of each page.</p>"
 
-    var printWindow = window.open('', '', 'height=650,width=900');
+    var printWindow = window.open('', '', 'height=700,width=950');
     printWindow.document.write('<html><head><title>Cyberfeminism Index</title>');
-    printWindow.document.write('<link rel="stylesheet" type="text/css" href="../cyberfem/static/css/pdf.css />'); 
-    printWindow.document.write(' <style>body {height: 100vh;padding: 0;margin: 0.5em;font-size: 2.25vw;font-family: Arial, sans-serif;color: black;}</style>')
-    printWindow.document.write('</head><body id="print_pdf">');
+    // printWindow.document.write('<link rel="stylesheet" type="css" href="/static/css/pdf.css>')
+    printWindow.document.write(' <style>html,body {height: 100vh;padding: 0;margin: 0.5em;font-size: 2.25vw;font-family: Arial, sans-serif;color: black;}@font-face {font-family: "arial_lc_symbol_regularRg";src: url("arial_lc_symbol_v17-webfont.woff2") format("woff2"),url("Arial_LC_Symbol_v17.otf") format("otf");font-weight: normal;font-style: normal;}.cr {padding-top: 5px;font-family: "arial_lc_symbol_regularRg";font-variant-ligatures: common-ligatures;-moz-font-feature-settings: "liga", "clig";-webkit-font-feature-settings: "liga", "clig";font-feature-settings: "liga", "clig";}td {padding-right: 1em;vertical-align: top;}tr {display: table-row;vertical-align: inherit;border-color: inherit;}table {font-size:2.25vw;padding-bottom: 15px;width: 100%;float: left;}.sm {width:7%;} .lg{width:60%;}img{max-height:90px;margin-right:5px;}</style>')
+   	printWindow.document.write('</head>')
+    printWindow.document.write("<div id='pdf_list' class='main_index_style'><table><tbody>")
 
     for (i = 0; i < trail_array.length; i++) {  
         let obj = index_json.find(o => o.slug === trail_array[i])
-        var temp_top = '<div id="pdf_list" class="main_index_style"><div class="index_entry"><div class="sm num"><p class="cr">'+obj.rownum+'</p></div><div class="sm"><p>'+obj.pub_date+'</p></div><div class="lg"><p>'+ obj.title +'</p></div><div class="md"><p>'+ obj.author_founder +'</p></div></div></div>';
-        var temp_bottom = '<div class="index_drawer closed"><div class="drawer_content"><p class="about_text">'+ obj.about +'</p><p>' + obj.location + '</p><p class="external_links">'+ obj.external_link+'</p></div></div>'
+        var temp_top = `<tr>
+    						<td class="cr sm">`+obj.rownum+`</td>
+							${(obj.pub_date == null) ? '<td></td>' : '<td class="date sm">'+obj.pub_date+'</td>'} 
+							${(obj.title == null) ? '<td></td>' : '<td class="lg">'+obj.title+'</td>'} 
+							${(obj.author_founder == null) ? '<td></td>' : '<td class="author">'+obj.author_founder+'</td>'} 
+						</tr>`;
         printWindow.document.write(temp_top)
-        printWindow.document.write(temp_bottom)
-        printWindow.document.write("<hr></hr>")
-
     }
+    printWindow.document.write("</tbody></table></div>");
 
+    
+    for (i = 0; i < trail_array.length; i++) {  
+        let obj = index_json.find(o => o.slug === trail_array[i])
+        let img_titles = index_img_json.filter(x => x["slug"].includes(trail_array[i]))
+        printWindow.document.write("<div id='pdf_list' class='main_index_style'><table><tbody>")
+        var temp_bottom = `<tr>
+    						<td class="cr sm">`+obj.rownum+`</td>
+							${(obj.pub_date == null) ? '<td></td>' : '<td class="date sm">'+obj.pub_date+'</td>'} 
+							${(obj.title == null) ? '<td></td>' : '<td class="lg">'+obj.title+'</td>'} 
+							${(obj.author_founder == null) ? '<td></td>' : '<td class="author">'+obj.author_founder+'</td>'} 
+						</tr>`;
+        printWindow.document.write(temp_bottom)
+        printWindow.document.write("</tbody></table></div>");
+        //get images file path and extension
+        function get_images() {
+        	img_elm_list = []
+        	function fileNameAndExt(str){
+			  var file = str.split('/').pop();
+			  return [file.substr(0,file.lastIndexOf('.')),file.substr(file.lastIndexOf('.')+1,file.length)]
+			}
+        	for (i = 0; i < img_titles.length; i++) {  
+        		img_path = fileNameAndExt(img_titles[i].img_name)
+        		img_elm = '<img height="90" src="/media/images/' + img_path[0] + '.height-90.' + img_path[1] +'">';
+        		img_elm_list.push(img_elm)
+        	}
+        	return img_elm_list
+        }
+        var temp_content = `<p>
+							${(obj.about == null) ? '' : ''+obj.about+''} 
+							${(obj.location == null) ? '' : ''+obj.location+''} 
+							${(obj.external_link == null) ? '' : ''+obj.external_link+''} 
+							${(obj.external_link_two == null) ? '' : ''+obj.external_link_two+''} 
+						</p>`;
+		printWindow.document.write(temp_content)
+		if (obj.images_list !== null) {
+			img_elm_list = get_images()
+			img_elm_joined = img_elm_list.join('');
+			var img_content = '<p>'+img_elm_joined+'</p>'
+			printWindow.document.write(img_content);
+		}
+    }
 
 
     printWindow.document.write(info_content);

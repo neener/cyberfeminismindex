@@ -116,11 +116,20 @@ class IndexPage(RoutablePageMixin, Page):
 
   def get_context(self, request, *args, **kwargs):
     context = super().get_context(request, *args, **kwargs)
-    context["posts"] = IndexDetailPage.objects.live().public()
+    # context["posts"] = IndexDetailPage.objects.live().public()
+    context["posts"] = IndexDetailPage.objects.live().public().order_by(Lower("rownum"))
     context["categories"] = IndexCategory.objects.all()
     context["internal_links"] = IndexInternalLinks.objects.all()
     json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))
     context['json_dict'] = json.dumps(json_list)
+    context["image_entries"] = []
+
+    for index in context["posts"]:
+       for c in index.images_list.all():
+          context["image_entries"].append({"slug":index.slug, "img_name":str(c)})
+
+    context['json_img_dict'] = json.dumps(list(context["image_entries"]))
+
     return context
   
   @route(r"^orderby/(?P<order>[-\w]+)/$", name="orderby_view")
