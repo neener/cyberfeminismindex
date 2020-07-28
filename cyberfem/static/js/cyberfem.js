@@ -3,6 +3,9 @@ var base_host = window.location.hostname;
 let menu = document.getElementById('menu');
 var external_links = document.querySelectorAll('.external_links a')
 
+var index_json;
+var index_img_json;
+
 function handleMenu(id, elm) {
     str = elm.value
     str = str.toLowerCase();
@@ -121,7 +124,7 @@ function create_pdf() {
     var printWindow = window.open('', '', 'height=700,width=950');
     printWindow.document.write('<html><head><title>Cyberfeminism Index</title>');
     // printWindow.document.write('<link rel="stylesheet" type="css" href="/static/css/pdf.css>')
-    printWindow.document.write(' <style>html,body {height: 100vh;padding: 0;margin: 0.5em;font-size: 2.25vw;font-family: Arial, sans-serif;color: black;}@font-face {font-family: "arial_lc_symbol_regularRg";src: url("arial_lc_symbol_v17-webfont.woff2") format("woff2"),url("Arial_LC_Symbol_v17.otf") format("otf");font-weight: normal;font-style: normal;}.cr {padding-top: 5px;font-family: "arial_lc_symbol_regularRg";font-variant-ligatures: common-ligatures;-moz-font-feature-settings: "liga", "clig";-webkit-font-feature-settings: "liga", "clig";font-feature-settings: "liga", "clig";}td {padding-right: 1em;vertical-align: top;}tr {display: table-row;vertical-align: inherit;border-color: inherit;}table {font-size:2.25vw;padding-bottom: 15px;width: 100%;float: left;}.sm {width:7%;} .lg{width:60%;}img{max-height:90px;margin-right:5px;}</style>')
+    printWindow.document.write(' <style>html,body {height: 100vh;padding: 0;margin: 0.5em;font-size: 2.25vw;font-family: Arial, sans-serif;color: black;}@font-face {font-family: "arial_lc_symbol_regularRg";src: url("/static/css/arial_lc_symbol_v17-webfont.woff2") format("woff2"),url("/static/css/Arial_LC_Symbol_v17.otf") format("otf");font-weight: normal;font-style: normal;}.cr {padding-top: 5px;font-family: "arial_lc_symbol_regularRg";font-variant-ligatures: common-ligatures;-moz-font-feature-settings: "liga", "clig";-webkit-font-feature-settings: "liga", "clig";font-feature-settings: "liga", "clig";}td {padding-right: 1em;vertical-align: top;}tr {display: table-row;vertical-align: inherit;border-color: inherit;}table {font-size:2.25vw;padding-bottom: 15px;width: 100%;float: left;}.sm {width:7%;} .lg{width:60%;}img{max-height:90px;margin-right:5px;}</style>')
    	printWindow.document.write('</head>')
     printWindow.document.write("<div id='pdf_list' class='main_index_style'><table><tbody>")
 
