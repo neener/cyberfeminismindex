@@ -162,7 +162,7 @@ function create_pdf() {
 			}
         	for (i = 0; i < img_titles.length; i++) {  
         		img_path = fileNameAndExt(img_titles[i].img_name)
-        		img_elm = '<img height="90" src="/media/images/' + img_path[0] + '.height-90.' + img_path[1] +'">';
+        		img_elm = '<img height="220" src="/media/images/' + img_path[0] + '.height-220.' + img_path[1] +'">';
         		img_elm_list.push(img_elm)
         	}
         	return img_elm_list
