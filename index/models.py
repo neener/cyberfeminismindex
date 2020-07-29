@@ -116,8 +116,7 @@ class IndexPage(RoutablePageMixin, Page):
 
   def get_context(self, request, *args, **kwargs):
     context = super().get_context(request, *args, **kwargs)
-    # context["posts"] = IndexDetailPage.objects.live().public()
-    context["posts"] = IndexDetailPage.objects.live().public().order_by(Lower("rownum"))
+    context["posts"] = IndexDetailPage.objects.live().public().order_by(Lower("pub_date"))
     context["categories"] = IndexCategory.objects.all()
     context["internal_links"] = IndexInternalLinks.objects.all()
     json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))

@@ -60,7 +60,7 @@ select, button {
 .sm.num {
   font-family: Arial, sans-serif;
 }
-.images_og .index_drawer {
+.images_pg .index_drawer {
   height: auto;
 }
 .images_pg .index_entry {
@@ -148,6 +148,7 @@ p.no_results {
 }
 .main_index_style .index_entry div p {
   margin: 5px 0;
+  max-width: 250px;
 }
 .main_index_style .sm {
   width: 7%;
@@ -253,7 +254,7 @@ p.no_results {
   text-align: left;
   padding: 20px 0 15px;
 }
-#trail_container #download_btn {
+#trail_container #download_btn, #trail_container #mobile_download_btn {
   font-size: .85vw;
   vertical-align: top;
   float: left;
@@ -462,7 +463,10 @@ p a.cr {
   top: 50%;
   transform: translate(-50%,-50%);
   display: none;
+}
 
+#mobile_download_btn {
+  display: none;
 }
 
 /*.tooltip:hover:after { content: attr(title); } */
@@ -528,14 +532,30 @@ p a.cr {
   }
   .left_content {
     width: 100%;
+    height: 100%;
   }
   #right_content {
     display: block;
-    position: absolute;
+    position: fixed;
     width: 100%;
     bottom: 0;
-    height: 150px;
+    height: 65px;
     float: none;
+  }
+  #right_content.download_open {
+    height: auto;
+    background-color: white;
+    padding: 0 10px 20px;
+  }
+  #download_btn {
+    display: none;
+  }
+  #trail_container #mobile_download_btn {
+    display: block;
+    font-size: 3.5vw;
+  }
+  .back_to_top {
+    display: none;
   }
   #index_list {
       margin-top: 80px;
@@ -559,6 +579,16 @@ p a.cr {
   .index_drawer .img_container p, .images_pg .img_container p {
     font-size: 3vw;
   }
-
+  header .menu_section {
+    width: 95%;
+    margin-left:0;
+  }
+  #main_content {
+    overflow: auto;
+  }
+  .main_index_style .sm.num {
+    padding-left: 9px;
+    width: 9%;
+  }
 }
 
