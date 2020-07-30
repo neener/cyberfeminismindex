@@ -26,6 +26,8 @@ from django.http import HttpResponse
 
 from django.dispatch import receiver
 from wagtail.core.signals import page_published, page_unpublished
+from wagtail.search import index
+
 
 class Cindex(models.Model):
     cindex_id = models.IntegerField(primary_key=True)
@@ -253,6 +255,15 @@ class IndexDetailPage(Page):
   rownum = models.PositiveSmallIntegerField(null=True, blank=True)
   location = models.CharField("location", max_length=255, null=True, blank=True)
 
+  search_fields = Page.search_fields + [
+        index.SearchField('title'),
+        index.SearchField('author_founder'),
+        index.SearchField('about'),
+        index.SearchField('contributed_by'),
+        index.SearchField('location'),
+        index.SearchField('pub_date'),
+        index.SearchField('end_date'),
+    ]
 
   content_panels = Page.content_panels + [
 		MarkdownPanel('about', classname="full"),

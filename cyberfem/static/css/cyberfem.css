@@ -148,6 +148,8 @@ p.no_results {
 }
 .main_index_style .index_entry div p {
   margin: 5px 0;
+}
+.main_index_style .index_entry div p.caption {
   max-width: 250px;
 }
 .main_index_style .sm {
