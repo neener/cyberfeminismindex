@@ -198,7 +198,6 @@ function remove_trail_entry(elm, slug, title) {
     
     trail_array = trail_array.filter(e => e !== slug);
     download_btn.innerHTML = "Download ("+ trail_array.length + ")"
-    mobile_download_btn.innerHTML = "Download ("+ trail_array.length + ")";
 }
 
 function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownum) {
@@ -257,7 +256,6 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
     var body = document.getElementsByTagName('BODY')[0];
     var select = document.getElementById('menu');
     var download_btn = document.getElementById('download_btn');
-    var mobile_download_btn = document.getElementById('mobile_download_btn');
     if (trail_array.length == 1 && opened == false &&  window.innerWidth > 800) {
         opened = true;
         right_content.classList.toggle("unopened");
@@ -266,23 +264,10 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         select.style.fontSize = "1.5vw";
     }
     if (trail_array.length == 1 && opened == false &&  window.innerWidth < 800) {
-    	opened = true;
-    	right_content.classList.toggle("unopened");
-    }
-    if (opened == true &&  window.innerWidth < 800 && mobile_download_btn.innerHTML != "View Selections") {
-    	console.log("true")
-    	right_content.classList.remove("download_open")
+    	right_content.style.display = "none";
     }
 
     download_btn.innerHTML = "Download ("+ trail_array.length + ")";
-}
-
-function mobile_view_selections() {
-	mobile_download_btn.innerHTML = "Download ("+ trail_array.length + ")";
-	mobile_download_btn.addEventListener("click", create_pdf);
-	right_content.classList.add("download_open")
-	document.getElementById('base_index_list').style.fontSize = "inherit";
-	document.getElementById('trail_container').style.padding = "0 0 15px";
 }
 
 function internal_reference(id) {
@@ -419,12 +404,12 @@ function get_curator() {
 }
 
 function enlarge_img(el) {
-	images = elm.querySelectorAll(".img_container img");
-
-    [].forEach.call(elems, function(el) {
-        if (elm.classList.contains('enlarge_img')) {
-        	 elm.classList.remove("enlarge_img");
-        } else {
+	images = document.querySelectorAll(".img_container img");
+	console.log(images);
+    [].forEach.call(images, function(el) {
+        if (el.classList.contains('enlarge_img')) {
+        	el.classList.remove("enlarge_img");
+        	caption.style.display = "none";
         }
     });
 

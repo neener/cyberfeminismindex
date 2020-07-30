@@ -25,7 +25,7 @@ import simplejson as json
 from django.http import HttpResponse
 
 from django.dispatch import receiver
-from wagtail.core.signals import page_published
+from wagtail.core.signals import page_published, page_unpublished
 
 class Cindex(models.Model):
     cindex_id = models.IntegerField(primary_key=True)
@@ -212,6 +212,19 @@ class ImagesOrderable(Orderable):
     def __str__(self):
       str_return = str(self.images)
       return str_return
+
+
+@receiver(page_unpublished)
+def do_stuff_on_page_unpublished(instance, **kwargs):
+    #update ligatures
+    ligatures = IndexDetailPage.objects.live().public().order_by("pub_date")
+    for row_num, lig in enumerate(ligatures):
+      lig.rownum = row_num +1
+      lig.save()
+    #clear_cache
+    cache.clear()
+    print('=======================done',instance,kwargs)
+
 
 
 @receiver(page_published)
