@@ -106,8 +106,6 @@ function sort_loading(order) {
 }
 
 var trail_array = [];
-var trail_list = document.getElementById("trail_list");
-var trail_list_kids = trail_list.getElementsByTagName("SPAN");
 var opened = false;
 var download_btn = document.getElementById("download_btn");
 var today = new Date();
@@ -350,20 +348,36 @@ function slideIndex_drawer(elm, url) {
 
 function slideIndex_drawer_images(elm, url) {
     var elems = document.querySelectorAll(".index_drawer");
+    var elem_entry = document.querySelectorAll(".index_entry");
     var selected_drawer = elm.previousSibling.previousSibling;
-    images = elm.querySelectorAll(".img_container img");
+
+    // images = elm.querySelectorAll(".img_container img");
     // [].forEach.call(images, function(el) {
-    //     el.style.height = "220px";
-    //     el.nextElementSibling.nextElementSibling.style.display = "block";
+    //     if (el.classList.contains('enlarge_img')) {
+    //     	console.log("here");
+    //     	el.classList.remove("enlarge_img");
+    //     	caption.style.display = "none";
+    //     }
     // });
+
 
     [].forEach.call(elems, function(el) {
         if (el.classList.contains('closed')) {
         } else {
             el.classList.add("closed");
+            e_index_entry = el.nextElementSibling
+            images = e_index_entry.querySelectorAll(".img_container img");
+            console.log(images);
+		    // [].forEach.call(images, function(el) {
+		    //     if (el.classList.contains('enlarge_img')) {
+		    //     	el.classList.remove("enlarge_img");
+		    //     	caption = el.nextElementSibling.nextElementSibling
+		    //     	caption.style.display = "none";
+		    //     }
+		    // });
         }
     });
-    var elems = document.querySelectorAll(".index_entry");
+    
 
     elm.classList.add("green_text");
     selected_drawer.classList.toggle('closed');
@@ -405,14 +419,6 @@ function get_curator() {
 }
 
 function enlarge_img(el) {
-	images = document.querySelectorAll(".img_container img");
-    [].forEach.call(images, function(el) {
-        if (el.classList.contains('enlarge_img')) {
-        	el.classList.remove("enlarge_img");
-        	caption.style.display = "none";
-        }
-    });
-
     if (el.classList.contains('enlarge_img')) {
         el.classList.remove("enlarge_img");
         caption = el.nextElementSibling.nextElementSibling

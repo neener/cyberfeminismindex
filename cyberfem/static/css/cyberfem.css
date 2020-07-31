@@ -52,6 +52,7 @@ select, button {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   display: inline-block;
+  position: relative;
 }
 #right_content.unopened {
   width: 0%;
@@ -148,9 +149,11 @@ p.no_results {
 }
 .main_index_style .index_entry div p {
   margin: 5px 0;
+  color: #000;
 }
 .main_index_style .index_entry div p.caption {
   max-width: 250px;
+  color: #000;
 }
 .main_index_style .sm {
   width: 7%;
@@ -255,11 +258,17 @@ p.no_results {
   width: 100%;
   text-align: left;
   padding: 20px 0 15px;
+  bottom: 0;
+  position: absolute;
+  width: 97%;
+  box-sizing: border-box;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+
 }
-#trail_container #download_btn, #trail_container #mobile_download_btn {
-  font-size: .85vw;
+#trail_container #download_btn {
+  font-size: 0.8vw;
   vertical-align: top;
-  float: left;
   width: 100%
 }
 #trail_container span {
