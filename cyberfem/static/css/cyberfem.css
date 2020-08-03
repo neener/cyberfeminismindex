@@ -47,7 +47,7 @@ select, button {
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
-  padding: 0 10px;
+  padding: 10px 10px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -136,7 +136,7 @@ p.no_results {
   background: #fff;
 }
 #index_list .index_entry.arrows .sm:hover, #index_list .index_entry.arrows .md:hover, #index_list .index_entry.arrows .lg:hover {
-  color: #00ff00;
+  color: #00ff00 !important;
 }
 .main_index_style .index_entry {
   width: 100%;  
@@ -149,7 +149,6 @@ p.no_results {
 }
 .main_index_style .index_entry div p {
   margin: 5px 0;
-  color: #000;
 }
 .main_index_style .index_entry div p.caption {
   max-width: 250px;
@@ -178,7 +177,7 @@ p.no_results {
 }
 
 .main_index_style .index_entry:hover {
-  color: #00ff00;
+  color: #00ff00 !important;
   cursor: pointer;
 }
 #index_list.loading .index_entry:hover, #index_list.loading .index_drawer, #index_list.loading .index_entry.green_text, #index_list.loading .index_drawer a {
@@ -257,14 +256,15 @@ p.no_results {
   display: inline-block;
   width: 100%;
   text-align: left;
-  padding: 20px 0 15px;
-  bottom: 0;
+  bottom: 11px;
+  padding-left: inherit;
+  padding-right: inherit;
   position: absolute;
-  width: 97%;
+  left: 0;
+  right: 0;
   box-sizing: border-box;
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
-
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 #trail_container #download_btn {
   font-size: 0.8vw;
@@ -309,7 +309,7 @@ th {
   font-size: 0.8vw;
 }
 #base_index_list tr.base_tr:hover {
-  color: #00ff00;
+  color: #00ff00 !important;
   /*cursor: pointer;*/
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="30" style="font-size: 20px;"><text y="15">×</text></svg>'), auto;
 
