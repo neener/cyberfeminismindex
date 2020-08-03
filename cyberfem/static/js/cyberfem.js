@@ -385,6 +385,8 @@ function slideIndex_drawer_images(elm, url) {
     var hist_str = "#/" + url;
     window.history.pushState(hist_str, 'Title', hist_str);
 
+    elm.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+
     internal_ligatures(selected_drawer)
 }
 
