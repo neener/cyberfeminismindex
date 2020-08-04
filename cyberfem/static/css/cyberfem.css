@@ -70,6 +70,10 @@ select, button {
 .images_pg .drawer_content div {
   display: inline-block;
 }
+.images_pg .img_container {
+  max-width: 250px;
+  word-break: break-all;
+}
 .images_pg .img_container p {
   display: none;
   font-size: 0.8vw;
@@ -77,7 +81,7 @@ select, button {
 }
 .images_pg img {
   height: 100px;
-  display: inline-block;
+  display: block;
   vertical-align: middle;
   max-width: 250px;
 }
@@ -542,7 +546,7 @@ p a.cr {
     font-size: 3.5vw;
   }
   .left_content {
-    width: 100%;
+    width: 100% !important;
     height: 100%;
   }
   #right_content {

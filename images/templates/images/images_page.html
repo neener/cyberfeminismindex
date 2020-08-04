@@ -33,11 +33,10 @@
         <div id="top_location"></div>
 	    
 	  	<div class="images_pg main_index_style">
-            {% cache 604800 preview_index_image index_image.id %}
+            <!-- {% cache 604800 preview_index_image index_image.id %} -->
                 {% for index in image_entries %}
                         <div class="index_drawer closed">
                             <div class="drawer_content">
-                                <!-- <div class="sm num"><p class="cr">({{ index.rownum }})</p></div> -->
                                 <div class="sm">
                                     <p>
                                     {% if index.end_date == None and index.pub_date != None %}
@@ -94,7 +93,7 @@
                             </div>
                         </div>
                 {% endfor %}
-            {% endcache %} 
+            <!-- {% endcache %}  -->
     	</div>
         <button class="back_to_top" onclick="back_to_top('top_location')">↑</button>
 

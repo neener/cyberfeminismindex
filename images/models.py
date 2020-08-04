@@ -26,7 +26,6 @@ class ImagesPage(Page):
 		for index in context["posts"]:
 			 for c in index.images_list.all():
 			 	if index not in context["image_entries"]:
-				 	print('hi ', c, index.title)
 				 	context["image_entries"].append(index)
 
 		return context

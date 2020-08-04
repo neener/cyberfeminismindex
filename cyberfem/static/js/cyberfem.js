@@ -431,6 +431,8 @@ function get_curator() {
 }
 
 function enlarge_img(el) {
+	img_width = el.offsetWidth
+	console.log(img_width)
     if (el.classList.contains('enlarge_img')) {
         el.classList.remove("enlarge_img");
         caption = el.nextElementSibling.nextElementSibling
@@ -439,6 +441,8 @@ function enlarge_img(el) {
         el.classList.add("enlarge_img")
         caption = el.nextElementSibling.nextElementSibling
         caption.style.display = "block";
+        caption.style.color = "black";
+        caption.style.width = img_width+"px";
     }
 }
 
