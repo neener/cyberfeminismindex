@@ -25,41 +25,17 @@
 	        </div>
 	    </header>
 
+	    <div id="top_location"></div>
+
 	    <div id="about_pg_content" class="internal_pg_container about_pg">
-	    	<div id="about_buttons">
-				<button onclick="toggle_contact()">contact</button>
-			</div>
-	    	<form id="about_form" class="closed" name="submit-to-google-sheet">
-	    		<p><input name="your_name" type="your_name" placeholder="Your Name" required><br>this would appear as "contributed by Jane Doe" underneath your entry</p>
-	    		<p><input name="email" type="email" placeholder="Email" required><br>this will not be made public. Please include your email so I can contact you for additional information, if needed<p>
-		  		<p><input name="title" type="title" placeholder="Title" required><br>this can be the name of a text, collective, project, etc.</p>
-		  		<p><input name="names" type="names" placeholder="Names(s)" required><br>please list the names of people who initiated this project</p>
-		  		<p><input name="links" type="links" placeholder="Link(s)"></p>
-		  		<p><input name="dates" type="dates" placeholder="Date(s)"></p>
-		  		<p></p>
-		  		<!-- <p id="about_form_submitted">Thank you!</p> -->
-		  		<button type="submit">submit</button>
-			</form>
+	    	
 			{{ page.body|markdown }}
+			<button class="back_to_top" onclick="back_to_top('top_location')">↑</button>
+			<div id="about_buttons">
+				<button><a href="mailto:Mindyseu@gmail.com">contact</a></button>
+				<button><a href="submit">submit</a></button>
 			</div>
-
-			<script>
-			  const scriptURL = 'https://script.google.com/macros/s/AKfycbwNbE7C9sXyei6NYQ-efXHg4gzCKTwKXHiMy-1diNi9hkOW-KZv/exec'
-			  const form = document.forms['submit-to-google-sheet']
-
-			  form.addEventListener('submit', e => {
-			    e.preventDefault()
-			    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-			      .then(function(response) {
-			      	return response.json()
-			      }).then(function(data){
-			      	alert("Thank you!")
-			      	// var submitted = document.getElementById("about_form_submitted")
-			      	// submitted.style.display = "inline-block"
-			      })
-			      .catch(error => console.error('Error!', error.message))
-			  })
-			</script>
+			
    	</div>
 
 

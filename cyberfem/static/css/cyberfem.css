@@ -104,7 +104,7 @@ select, button {
 p.no_results {
   margin-left: 20px;
 }
-.collections_pg, .images_pg {
+.collections_pg, .images_pg, .about_pg {
   margin: 100px 0 50px;
   height: 100%;
 }
@@ -396,9 +396,17 @@ header #tag_btn button span {
 	display: inline-block;
 }
 #about_buttons {
-  display: block;
+  padding: 7px 10px;
+  position: fixed;
+  bottom: 14px;
+  left: 140px;
 }
 #about_buttons button {
+  padding: 5px 0;
+}
+#about_buttons button a {
+  text-decoration: none;
+  color: #000;
 }
 #about_form {
   width: 100%;
@@ -407,6 +415,7 @@ header #tag_btn button span {
 }
 #about_form input {
   width: 100%;
+  box-sizing: border-box;
 }
 #about_form p {
   color: #aeaeae;
@@ -429,7 +438,7 @@ p a.cr {
 
 
 .internal_pg_container {
-  margin: 100px 20px 50px;
+  margin: 120px 20px 50px;
   height: 100%;
 }
 

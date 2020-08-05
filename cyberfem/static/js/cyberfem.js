@@ -328,10 +328,17 @@ function internal_ligatures(selected_drawer) {
                 n[i].classList.add("cr")
                 n[i].setAttribute("slug", entry_slug)
 
-                n[i].addEventListener("click", function(e){
-                	add_to_trail(obj.title, obj.id, obj.slug, obj.author_founder, obj.pub_date, obj.end_date, obj.rownum)
-                    return internal_reference(e.srcElement.attributes[0].nodeValue)
-                });
+                if(menu.value == "about") {
+                	n[i].addEventListener("click", function(e){
+                    	return internal_reference(e.srcElement.attributes[0].nodeValue)
+                	});
+               	} else {
+               		n[i].addEventListener("click", function(e){
+                		add_to_trail(obj.title, obj.id, obj.slug, obj.author_founder, obj.pub_date, obj.end_date, obj.rownum)
+                    	return internal_reference(e.srcElement.attributes[0].nodeValue)
+                	});
+               	}
+                
             }
         }
     }
@@ -426,19 +433,14 @@ function add_tag_button(selected_tag) {
     menu.style.width = s+"px"
 }
 
-function get_curator() {
-    console.log("curator")
-}
-
 function enlarge_img(el) {
-	img_width = el.offsetWidth
-	console.log(img_width)
     if (el.classList.contains('enlarge_img')) {
         el.classList.remove("enlarge_img");
         caption = el.nextElementSibling.nextElementSibling
         caption.style.display = "none";
     } else {
         el.classList.add("enlarge_img")
+        img_width = el.offsetWidth
         caption = el.nextElementSibling.nextElementSibling
         caption.style.display = "block";
         caption.style.color = "black";
