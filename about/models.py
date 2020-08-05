@@ -29,7 +29,6 @@ class AboutPage(RoutablePageMixin, Page):
 
     @route(r'^submit/$', name="submit_page")
     def submit_page(self, request):
-        print("submit")
         return TemplateResponse(
           request,
            'about/about_submit_page.html'

@@ -68,12 +68,6 @@ function getUrl() {
 }
 
 
-
-function toggle_contact() {
-    var contact_form = document.getElementById("about_form")
-    contact_form.classList.toggle('closed');
-}
-
 function sort_loading(order) {
     $("#index_list").addClass("loading");
     $(".arrows").addClass("loading");
@@ -300,9 +294,16 @@ function internal_ligatures(selected_drawer) {
     if(menu.value == "about") {
         var n = []
         var node = selected_drawer.children;
+        console.log(node)
         for (i = 0; i < node.length; i++) { 
             for (j = 0; j < node[i].children.length; j++) {
-  				console.log(node[i].children[j])
+  				if (node[i].children[j].nodeName == "EM") {
+  					for (k = 0; k < node[i].children[j].childNodes.length; k++) {
+  						if (node[i].children[j].childNodes[k].nodeName == "A" && node[i].children[j].childNodes[k].innerHTML == "(x)") {
+  							n.push(node[i].children[j].childNodes[k])
+  						}
+  					} 
+  				}
                 if (node[i].children[j].nodeName == "A" && node[i].children[j].innerHTML == "(x)") {
                     n.push(node[i].children[j])
                 } 
@@ -322,7 +323,8 @@ function internal_ligatures(selected_drawer) {
                 var entry_slug = parts[parts.length - 2];
                 n[i].href= base_url +"/#/" + entry_slug
                 
-                let obj = index_json.find(o => o.slug === entry_slug);
+                let obj = index_json.find(o => o.slug === decodeURIComponent(entry_slug));
+
                 n[i].innerHTML = "<span slug='"+obj.slug+"' title='"+obj.title+"' class='tooltip'>("+ obj.rownum + ")</span>";
 
                 n[i].classList.add("cr")
@@ -338,7 +340,6 @@ function internal_ligatures(selected_drawer) {
                     	return internal_reference(e.srcElement.attributes[0].nodeValue)
                 	});
                	}
-                
             }
         }
     }

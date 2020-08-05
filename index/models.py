@@ -241,7 +241,6 @@ def do_stuff_on_page_published(instance, **kwargs):
     print('=======================done',instance,kwargs)
 
 class IndexDetailPage(Page):
-  # custom_title = AutoSlugField(populate_from='title')
   about = MarkdownField(null=True, blank=True)
   sourceforabouttext = models.CharField("Source for about text", max_length=255, null=True, blank=True)
   categories = ParentalManyToManyField("index.IndexCategory", blank=True)
@@ -254,6 +253,7 @@ class IndexDetailPage(Page):
   autoincrement_num = models.PositiveSmallIntegerField(null=True, blank=True)
   rownum = models.PositiveSmallIntegerField(null=True, blank=True)
   location = models.CharField("location", max_length=255, null=True, blank=True)
+  # slug = models.SlugField(verbose_name=_('slug'), allow_unicode=True, max_length=255)
 
   search_fields = Page.search_fields + [
         index.SearchField('title'),
