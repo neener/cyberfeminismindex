@@ -442,6 +442,9 @@ function enlarge_img(el) {
     } else {
         el.classList.add("enlarge_img")
         img_width = el.offsetWidth
+        if(img_width > 250) {
+        	el.style.height = "auto";
+        }
         caption = el.nextElementSibling.nextElementSibling
         caption.style.display = "block";
         caption.style.color = "black";

@@ -11,8 +11,10 @@ from django.shortcuts import render
 import simplejson as json
 
 from index.models import IndexDetailPage
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
-
+@method_decorator(cache_page(300), name="serve")
 class ImagesPage(Page):
 
 	def get_context(self, request, *args, **kwargs):
