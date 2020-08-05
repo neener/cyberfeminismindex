@@ -396,7 +396,6 @@ header #tag_btn button span {
 	display: inline-block;
 }
 #about_buttons {
-  padding: 7px 10px;
   position: fixed;
   bottom: 20px;
   left: 75px;

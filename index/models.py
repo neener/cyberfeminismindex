@@ -27,6 +27,8 @@ from django.http import HttpResponse
 from django.dispatch import receiver
 from wagtail.core.signals import page_published, page_unpublished
 from wagtail.search import index
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
 
 class Cindex(models.Model):
@@ -103,7 +105,7 @@ class IndexInternalLinks(models.Model):
     def __str__(self):
         return self.link_copy
 
-
+@method_decorator(cache_page(300), name="serve")
 class IndexPage(RoutablePageMixin, Page):
   print("index")
   custom_title = models.CharField(
