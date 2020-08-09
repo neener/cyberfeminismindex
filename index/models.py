@@ -105,9 +105,8 @@ class IndexInternalLinks(models.Model):
     def __str__(self):
         return self.link_copy
 
-@method_decorator(cache_page(300), name="serve")
+@method_decorator(cache_page(600), name="serve")
 class IndexPage(RoutablePageMixin, Page):
-  print("index")
   custom_title = models.CharField(
       max_length=100,
       blank=False,
@@ -122,8 +121,7 @@ class IndexPage(RoutablePageMixin, Page):
     context = super().get_context(request, *args, **kwargs)
     context["posts"] = IndexDetailPage.objects.live().public().order_by(Lower("pub_date"))
     context["categories"] = IndexCategory.objects.all()
-    # context["internal_links"] = IndexInternalLinks.objects.all()
-    json_list = list(IndexDetailPage.objects.live().public().values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))
+    json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))
     context['json_dict'] = json.dumps(json_list)
     context["image_entries"] = []
 
@@ -139,7 +137,7 @@ class IndexPage(RoutablePageMixin, Page):
   def orderby_view(self,request,order):
     context = self.get_context(request)
     try:
-      orderby = IndexDetailPage.objects.live().public().order_by(Lower(order))
+      orderby = context["posts"].order_by(Lower(order))
     except Exception:
       orderby = None
     if orderby is None:

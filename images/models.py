@@ -14,21 +14,21 @@ from index.models import IndexDetailPage
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 
-@method_decorator(cache_page(300), name="serve")
+@method_decorator(cache_page(600), name="serve")
 class ImagesPage(Page):
 
 	def get_context(self, request, *args, **kwargs):
 		context = super().get_context(request, *args, **kwargs)
-
 		context["posts"] = IndexDetailPage.objects.live().public()
-		json_list = list(context["posts"].values('slug','rownum', 'title'))
+		json_list = list(IndexDetailPage.objects.live().values('slug','rownum', 'title'))
 		context['json_dict'] = json.dumps(json_list)
 		context["image_entries"] = []
 		
-		# for index in context["posts"]:
-		# 	 for c in index.images_list.all():
-		# 	 	if index not in context["image_entries"]:
-		# 		 	context["image_entries"].append(index)
+		for index in context["posts"]:
+			print("hi")
+			for c in index.images_list.all():
+			 	if index not in context["image_entries"]:
+				 	context["image_entries"].append(index)
 
 		return context
 		

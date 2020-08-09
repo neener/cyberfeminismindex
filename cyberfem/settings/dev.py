@@ -11,15 +11,15 @@ SECRET_KEY = 'gb1o331=@6*(05d@7#hii4r#kasli7-%-+6464p0oza-ldl3t4'
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['*'] 
 
-INSTALLED_APPS = INSTALLED_APPS + [
-    'debug_toolbar',
-]
+# INSTALLED_APPS = INSTALLED_APPS + [
+#     'debug_toolbar',
+# ]
 
-MIDDLEWARE = MIDDLEWARE + [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-]
+# MIDDLEWARE = MIDDLEWARE + [
+#     'debug_toolbar.middleware.DebugToolbarMiddleware',
+# ]
 
-INTERNAL_IPS = ("127.0.0.1", "172.17.0.1")
+# INTERNAL_IPS = ("127.0.0.1", "172.17.0.1")
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
