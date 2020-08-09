@@ -9,6 +9,8 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 from django.views.generic import TemplateView
 
+from django.urls import path
+
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
 
@@ -23,6 +25,10 @@ urlpatterns = [
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
