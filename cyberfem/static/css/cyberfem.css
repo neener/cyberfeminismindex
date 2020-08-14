@@ -15,14 +15,25 @@
 
 body,html {
 	margin: 0;
-  font-size: 2vw;
+  font-size: 24px;
   font-family: Arial, sans-serif;
 }
 select, button {
-  font-size: 2vw;
+  font-size: auto;
   font-family: Arial, sans-serif;
   padding: 5px;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 56px 76px auto 35%;
+  grid-gap: 2px;
+}
+
+.grid-container > div {
+  text-align: center;
+}
+
 #main_content {
   margin:0;
   padding: 0;
@@ -159,11 +170,11 @@ p.no_results {
   color: #000;
 }
 .main_index_style .sm {
-  width: 7%;
+  width: 76px;
 }
 .main_index_style .sm.num {
   padding-left: 24px;
-  width: 5%;
+  width: 56px;
 }
 .images_pg.main_index_style .sm.buffer {
   width: 0;
@@ -310,7 +321,7 @@ th {
     text-align: left;
 }
 #base_index_list {
-  font-size: 0.8vw;
+  font-size: 16px;
 }
 #base_index_list tr.base_tr:hover {
   color: #00ff00 !important;
