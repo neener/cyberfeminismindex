@@ -19,7 +19,7 @@ import simplejson as json
 def get_json():
     context = dict()
     context["posts"] = IndexDetailPage.objects.live().public()
-    json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list','page_ptr_id'))
+    json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list','page_ptr_id', 'page_ptr_id'))
     json_dict = json.dumps(json_list)
     return json_dict
 

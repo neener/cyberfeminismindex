@@ -138,7 +138,7 @@ class IndexPage(RoutablePageMixin, Page):
     context = super().get_context(request, *args, **kwargs)
     context["posts"] = IndexDetailPage.objects.live().public().order_by(Lower("pub_date"))
     context["categories"] = IndexCategory.objects.all()
-    json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list','page_ptr_id'))
+    json_list = list(context["posts"].values('slug', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list','page_ptr_id'))
     context['json_dict'] = json.dumps(json_list)
     context["image_entries"] = []
 
@@ -184,12 +184,6 @@ class IndexPage(RoutablePageMixin, Page):
     context["posts"] = IndexDetailPage.objects.live().public().filter(categories__in=[category])
     print(context["posts"])
     return render(request, "index/index_page.html", context)
-
-  @route(r"^downloadpdf/(?P<entries_slug>[-\w]+)/$", name="new_download_snip")
-  def new_download_snip(self,request,entries_slug):
-    print("aaaaaaaaaaaaaaaaaaaaaa")
-    new_snip = IndexDownloads(quantity = 5, entries = entries_slug)
-    new_snip.save()
 
 
     # def category_sort():

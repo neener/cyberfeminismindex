@@ -20,7 +20,7 @@ class ImagesPage(Page):
 	def get_context(self, request, *args, **kwargs):
 		context = super().get_context(request, *args, **kwargs)
 		context["posts"] = IndexDetailPage.objects.live().public()
-		json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))
+		json_list = list(context["posts"].values('slug', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list', 'page_ptr_id'))
 		context['json_dict'] = json.dumps(json_list)
 		context["image_entries"] = []
 		
