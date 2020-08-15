@@ -12,6 +12,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from autoslug import AutoSlugField
 from django.shortcuts import render
 from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from wagtailmarkdown.fields import MarkdownField
 from wagtailmarkdown.edit_handlers import MarkdownPanel
 from django.db import connection
@@ -29,7 +30,7 @@ from wagtail.core.signals import page_published, page_unpublished
 from wagtail.search import index
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
-
+from django.utils import timezone
 
 class Cindex(models.Model):
     cindex_id = models.IntegerField(primary_key=True)
@@ -86,6 +87,22 @@ class IndexCurators(models.Model):
 
 register_snippet(IndexCurators)
 
+class IndexDownloads(models.Model):
+    """index category for a snippet."""
+    quantity = models.IntegerField("quantity", null=True, blank=True)
+    entries = models.CharField("entries", max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField("created_at", auto_now_add=True)
+
+    # panels = []
+
+    class Meta:
+        verbose_name = "Downloads"
+        verbose_name_plural = "Downloads"
+    def __str__(self):
+        return self.entries
+
+register_snippet(IndexDownloads)
+
 
 
 class IndexInternalLinks(models.Model):
@@ -121,7 +138,7 @@ class IndexPage(RoutablePageMixin, Page):
     context = super().get_context(request, *args, **kwargs)
     context["posts"] = IndexDetailPage.objects.live().public().order_by(Lower("pub_date"))
     context["categories"] = IndexCategory.objects.all()
-    json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))
+    json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list','page_ptr_id'))
     context['json_dict'] = json.dumps(json_list)
     context["image_entries"] = []
 
@@ -144,7 +161,13 @@ class IndexPage(RoutablePageMixin, Page):
       pass
 
     context["posts"] = orderby
-    cache.clear()
+    # clear index page only
+    key = make_template_fragment_key(
+            "preview_index",
+            [self.id]
+        )
+    cache.delete(key)
+    # cache.clear()
     return render(request, "index/index_page.html", context)
 
   @route(r"^tag/(?P<cat_slug>[-\w]+)/$", name="tag_view")
@@ -161,6 +184,13 @@ class IndexPage(RoutablePageMixin, Page):
     context["posts"] = IndexDetailPage.objects.live().public().filter(categories__in=[category])
     print(context["posts"])
     return render(request, "index/index_page.html", context)
+
+  @route(r"^downloadpdf/(?P<entries_slug>[-\w]+)/$", name="new_download_snip")
+  def new_download_snip(self,request,entries_slug):
+    print("aaaaaaaaaaaaaaaaaaaaaa")
+    new_snip = IndexDownloads(quantity = 5, entries = entries_slug)
+    new_snip.save()
+
 
     # def category_sort():
     #   print("sorrrrtttt")

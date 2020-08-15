@@ -2,9 +2,15 @@ var base_url = window.location.origin;
 var base_host = window.location.hostname;
 let menu = document.getElementById('menu');
 var external_links = document.querySelectorAll('.external_links a')
+var right_content = document.querySelector('#right_content');
+var left_content = document.querySelector('.left_content');
+var body = document.getElementsByTagName('BODY')[0];
+var select = document.getElementById('menu');
+var download_btn = document.getElementById('download_btn');
 
 var index_json;
 var index_img_json;
+let session_trail_array = JSON.parse(sessionStorage.getItem("trail"));
 
 function handleMenu(id, elm) {
     str = elm.value
@@ -99,14 +105,13 @@ function sort_loading(order) {
     }, 15000);
 }
 
-var trail_array = [];
-var opened = false;
 var download_btn = document.getElementById("download_btn");
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
+var trail_array_rownum = []
 
 function create_pdf() {
     var dt = new Date().toLocaleString();
@@ -128,10 +133,13 @@ function create_pdf() {
 							${(obj.author_founder == null) ? '<td></td>' : '<td class="author">'+obj.author_founder+'</td>'} 
 						</tr>`;
         temp_top_array.push(temp_top)
+        trail_array_rownum.push(obj.rownum)
     }
     temp_top_array.push("</tbody></table></div>")
     temp_top_joined = temp_top_array.join('');
     printWindow.document.write(temp_top_joined);
+
+    window.history.pushState('index', 'Title', '/downloadpdf/'+ trail_array_rownum);
     
     //second page
     temp_bottom_array = ["<div style='position:relative; display: inline-block; page-break-before: always;'"];
@@ -201,62 +209,42 @@ function remove_trail_entry(elm, slug, title) {
     download_btn.innerHTML = "Download ("+ trail_array.length + ")"
 }
 
-function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownum) {
+var trail_array = [];
+var opened = false;
+function add_to_trail(slug) {
     table = document.getElementById("base_index_table");
+    let obj = index_json.find(o => o.slug === slug);
 
-    if (!trail_array.includes(slug)) {
+    if (!trail_array.includes(obj.slug)) {
         trail_array.push(slug);
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
-        cell1.innerHTML = "("+rownum+")";
+        cell1.innerHTML = "("+obj.rownum+")";
         cell1.classList.add("cr")
-        if (pub_date == "None") {
+        if (obj.pub_date == "None") {
             cell2.innerHTML = "";
         } else {
-            cell2.innerHTML = pub_date;
+            cell2.innerHTML = obj.pub_date;
         }
 
-        cell3.innerHTML = title;
+        cell3.innerHTML = obj.title;
         
-        if (author_founder == undefined || author_founder == "None") {
+        if (obj.author_founder == undefined || obj.author_founder == "None") {
             cell4.innerHTML = "";
         } else {
-            cell4.innerHTML = author_founder;
+            cell4.innerHTML = obj.author_founder;
         }
         row.classList.add("base_tr")
-        row.setAttribute("id", id);
-        row.setAttribute("title", title);
-        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
-        table.appendChild(row); 
-    }
-
-    if (trail_array.length <= 0) {
-        var row = table.insertRow(0);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        cell1.innerHTML = "("+rownum+")";
-        cell1.classList.add("cr");
-        cell2.innerHTML = pub_date;
-        cell3.innerHTML = title;
-        cell4.innerHTML = author_founder;
-        row.classList.add("base_tr")
-        row.setAttribute("id", id);
-        row.setAttribute("title", title);
-        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
+        row.setAttribute("id", obj.id);
+        row.setAttribute("title", obj.title);
+        row.addEventListener("click",  function(){ remove_trail_entry(this, obj.slug, obj.title); });
         table.appendChild(row); 
     }
 
     // open left_content drawer
-    var right_content = document.querySelector('#right_content');
-    var left_content = document.querySelector('.left_content');
-    var body = document.getElementsByTagName('BODY')[0];
-    var select = document.getElementById('menu');
-    var download_btn = document.getElementById('download_btn');
     if (trail_array.length == 1 && opened == false &&  window.innerWidth > 800) {
         opened = true;
         right_content.classList.toggle("unopened");
@@ -270,6 +258,23 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
 
     download_btn.innerHTML = "Download ("+ trail_array.length + ")";
     console.log("added to trail")
+    sessionStorage.setItem('trail', JSON.stringify(trail_array));
+}
+
+function session_trail(){
+    console.log(session_trail_array)
+    if (session_trail_array) {
+        for (i = 0; i < session_trail_array.length; i++) {
+            let obj = index_json.find(o => o.slug === session_trail_array[i]);
+            add_to_trail(obj.slug)
+            console.log(obj.page_ptr_id)
+        }
+        opened = true;
+        right_content.classList.remove("unopened");
+        left_content.style.width = "73.5%";
+        body.style.fontSize = "1.5vw";
+        select.style.fontSize = "1.5vw";
+    }
 }
 
 function internal_reference(id) {
@@ -317,12 +322,11 @@ function internal_ligatures(selected_drawer) {
 
     if (node.classList != "external_links") {
         for (i = 0; i < n.length; i++) { 
-            if(n[i] && n[i].nodeName == "A") {
+            if(n[i] && n[i].nodeName == "A" && n[i].text == "(x)") {
                 var inline_link = n[i].href
                 var parts = inline_link.split('/');
                 var entry_slug = parts[parts.length - 2];
                 n[i].href= base_url +"/#/" + entry_slug
-                
                 let obj = index_json.find(o => o.slug === decodeURIComponent(entry_slug));
 
                 n[i].innerHTML = "<span slug='"+obj.slug+"' title='"+obj.title+"' class='tooltip'>("+ obj.rownum + ")</span>";
@@ -336,7 +340,7 @@ function internal_ligatures(selected_drawer) {
                 	});
                	} else {
                		n[i].addEventListener("click", function(e){
-                		add_to_trail(obj.title, obj.id, obj.slug, obj.author_founder, obj.pub_date, obj.end_date, obj.rownum)
+                		add_to_trail(obj.slug)
                     	return internal_reference(e.srcElement.attributes[0].nodeValue)
                 	});
                	}
@@ -474,56 +478,6 @@ function img_click(url) {
 
 
 
-
-
-
-// d = document.getElementById("left_index")
-
-// $(d).on('mousewheel', function(event) {
-//     console.log(event.deltaX, event.deltaY, event.deltaFactor);
-// });
-
-// const checkScrollSpeed = (function(settings) {
-//   settings = settings || {};
-
-//   let lastPos, newPos, timer, delta,
-//       delay = settings.delay || 50;
-
-//   function clear() {
-//     lastPos = null;
-//     delta = 0;
-//   }
-
-//   clear();
-
-//   return function() {
-//     newPos = d.scrollY;
-//     if (lastPos != null) { // && newPos < maxScroll
-//       delta = newPos - lastPos;
-//     }
-//     lastPos = newPos;
-//     clearTimeout(timer);
-//     timer = setTimeout(clear, delay);
-//     return delta;
-//   };
-// })();
-
-// const container = document.querySelector('#menu');
-
-// d.addEventListener('scroll', function() {
-//   var speed = checkScrollSpeed();
-//   console.log(speed);
-//   if (speed > 150) {
-//     console.log('150+');
-//     container.classList.add('red');
-//   }
-// });
-
-
-
-
-
-
 function search_url(cat_name) {
     window.location = base_url+"/tag/"+ cat_name;
 }
@@ -533,8 +487,5 @@ function collection_url(col_name) {
 }
 
 
-
 getUrl()
-
-
-
+session_trail()

@@ -4,6 +4,10 @@
 {% block content %}
 {% load wagtailmarkdown %}
 
+<script type="text/javascript">
+    index_json = {{ json_dict|safe }};
+</script>
+
 {% if search_results == None %}
 
 	{% if search_results_ajax %}
@@ -16,7 +20,7 @@
                         {{ result.pub_date }}
                     {% endif %}
                     {% if result.end_date != None %}
-                        –{{ resukt.end_date }}
+                        –{{ result.end_date }}
                     {% endif %}
                 </p></div>
                 <div class="lg"><p>{{ result.title }}</p></div>

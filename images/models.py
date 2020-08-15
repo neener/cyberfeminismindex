@@ -20,12 +20,11 @@ class ImagesPage(Page):
 	def get_context(self, request, *args, **kwargs):
 		context = super().get_context(request, *args, **kwargs)
 		context["posts"] = IndexDetailPage.objects.live().public()
-		json_list = list(IndexDetailPage.objects.live().values('slug','rownum', 'title'))
+		json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list'))
 		context['json_dict'] = json.dumps(json_list)
 		context["image_entries"] = []
 		
 		for index in context["posts"]:
-			print("hi")
 			for c in index.images_list.all():
 			 	if index not in context["image_entries"]:
 				 	context["image_entries"].append(index)

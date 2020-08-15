@@ -14,15 +14,30 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from wagtail.search import index
 
+import simplejson as json
+
+def get_json():
+    context = dict()
+    context["posts"] = IndexDetailPage.objects.live().public()
+    json_list = list(context["posts"].values('slug', 'rownum', 'title', 'author_founder','rownum','pub_date','end_date', 'about', 'location', 'external_link', 'external_link_two', 'images_list','page_ptr_id'))
+    json_dict = json.dumps(json_list)
+    return json_dict
+
 def autocomplete_search(request):
     search_categories = IndexCategory.objects.all()
+
     if request.is_ajax():
         search_query = request.GET.get('q', None)
         search_results_ajax = IndexDetailPage.objects.live().search(search_query)
 
         html = render_to_string(
             template_name="search/search-results-partial.html", 
-            context={'search_query': search_query, "search_results": None, "search_results_ajax": search_results_ajax,'search_categories': search_categories}
+            context={
+            "search_query": search_query, 
+            "search_results": None, 
+            "search_results_ajax": search_results_ajax,
+            "search_categories": search_categories, 
+            "json_dict": get_json()}
         )
         data_dict = {"html_from_view": html}
 
@@ -45,8 +60,10 @@ def search(request):
     else:
         search_results = IndexDetailPage.objects.none()
 
+
     return render(request, 'search/search.html', {
         'search_query': search_query,
         'search_results': search_results,
         'search_categories': search_categories,
+        'json_dict': get_json(),
     })

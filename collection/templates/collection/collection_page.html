@@ -11,6 +11,10 @@
 {% load wagtailcore_tags wagtailimages_tags cache %}
 {% load wagtailmarkdown %}
 
+<script type="text/javascript">
+    index_json = {{ json_dict|safe }};
+</script>
+
 	<div class="left_content">
 	    <header>
 	        <div class="menu_section">
@@ -35,7 +39,7 @@
 			<div id="collections_list" class="main_index_style">
        			{% endif %}
 				{% for index in curated_entries %}
-            		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}">
+            		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}'); add_to_trail('{{ index.slug }}')" id="{{index.slug}}">
 	                    <div class="sm num"><p class="cr">{{ index.rownum }}</p></div>
 	                    <div class="sm">
 	                    	<p>
