@@ -55,7 +55,8 @@
         </div>
         <!-- {% cache 604800 preview_index index.id %} -->
             {% for index in posts %}
-                <div class="index_entry grid-container" onclick="slideIndex_drawer(this, '{{index.slug}}'); add_to_trail('{{ index.title }}', '{{ index.id }}', '{{ index.slug }}', '{{ index.author_founder }}', '{{ index.pub_date }}', '{{ index.end_date }}', '{{index.rownum}}')" id="{{index.slug}}">
+                <div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}'); add_to_trail('{{ index.title }}', '{{ index.id }}', '{{ index.slug }}', '{{ index.author_founder }}', '{{ index.pub_date }}', '{{ index.end_date }}', '{{index.rownum}}')" id="{{index.slug}}">
+                  <div class="grid-container">
                     <div class="sm num"><p class="cr">({{ index.rownum }})</p></div>
                     <div class="sm">
                         <p>
@@ -75,6 +76,8 @@
                         {% else %}
                         {% endif %}
                     </p></div>
+                  </div>
+                
                 </div>
                 <div class="index_drawer closed">
                     <div class="drawer_content">
@@ -162,6 +165,8 @@
             {% endfor %}
         <!-- {% endcache %}  -->
         <button class="back_to_top" onclick="back_to_top('top_location')">back to top</button>
+        <button class="contact" ahref="mailto:mindyseu@gmail.com">contact</button>
+        <button class="submit">submit</button>
 
 
 
