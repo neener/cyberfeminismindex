@@ -18,6 +18,7 @@ body,html {
   font-size: 24px;
   font-family: Arial, sans-serif;
 }
+
 select, button {
   /* font-size: default; */
   font-family: Arial, sans-serif;
@@ -28,11 +29,11 @@ select, button {
   display: grid;
   grid-template-columns: 1fr 1fr 50% 30%;
   grid-gap: 2px;
-  background-color: #2196F3;
+  /* background-color: #2196F3; */
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  /* background-color: rgba(255, 255, 255, 0.8); */
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
@@ -467,6 +468,21 @@ p a.cr {
   bottom: 20px;
   left: 20px;
 }
+
+.contact {
+  padding: 7px 10px;
+  position: fixed;
+  bottom: 20px;
+  left: 116px;
+}
+
+.submit {
+  padding: 7px 10px;
+  position: fixed;
+  bottom: 20px;
+  left: 194px;
+}
+
 .transparent {
   color: transparent !important;
 }
@@ -565,9 +581,9 @@ p a.cr {
 
 
 @media (min-width: 300px) and (max-width: 800px) {
-  body, select, button {
+  /* body, select, button {
     font-size: 3.5vw;
-  }
+  } */
   .left_content {
     width: 100% !important;
     height: 100%;
@@ -582,16 +598,16 @@ p a.cr {
     display: block;
     font-size: 3.5vw;
   }
-  .back_to_top {
+  /* .back_to_top {
     display: none;
-  }
+  } */
   #index_list {
       margin-top: 80px;
   }
   #trail_container span {
     font-size: 2vw;
   }
-  .main_index_style .lg {
+  /* .main_index_style .lg {
     width: 55%;
   }
   .main_index_style .md {
@@ -600,7 +616,12 @@ p a.cr {
   }
   .main_index_style .sm {
     width: 9%;
+  } */
+
+  .grid-container > div {
+    font-size: 16px;
   }
+
   .enlarge_img {
     width: 100%;
   }
