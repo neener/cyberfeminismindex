@@ -7,8 +7,7 @@ from django.shortcuts import render
 
 import simplejson as json
 
-from index.models import IndexCurators
-from index.models import IndexDetailPage
+from index.models import IndexDetailPage, IndexCurators, IndexDownloads
 
 class CollectionPage(RoutablePageMixin, Page):
 	def get_context(self, request, *args, **kwargs):
@@ -23,7 +22,21 @@ class CollectionPage(RoutablePageMixin, Page):
 				context["image_entries"].append({"slug":index.slug, "img_name":str(c)})
 
 		context['json_img_dict'] = json.dumps(list(context["image_entries"]))
+		self.new_download_snip(request)
 		return context
+
+	def new_download_snip(self,request):
+		titles_array = []
+		page_ptr_id_str = request.GET.get('downloadpdf')
+		if page_ptr_id_str:
+			page_ptr_id_array = page_ptr_id_str.split(",")
+			for p in page_ptr_id_array:
+			    obj = IndexDetailPage.objects.get(page_ptr_id=p)
+			    titles_array.append(obj.title)
+			titles_string = ','.join(titles_array)
+			new_snip = IndexDownloads(quantity = len(titles_array), entries = titles_string)
+			new_snip.save()
+		
 
 	@route(r"^(?P<cur_slug>[-\w]+)/$", name="collections_view")
 	def collections_view(self,request,cur_slug):

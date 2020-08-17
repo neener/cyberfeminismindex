@@ -10,7 +10,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 import simplejson as json
 
-from index.models import IndexDetailPage
+from index.models import IndexDetailPage, IndexDownloads
 
 class AboutPage(RoutablePageMixin, Page):
     body = MarkdownField(null=True, blank=True)
@@ -31,13 +31,20 @@ class AboutPage(RoutablePageMixin, Page):
               context["image_entries"].append({"slug":index.slug, "img_name":str(c)})
 
         context['json_img_dict'] = json.dumps(list(context["image_entries"]))
+        self.new_download_snip(request)
         return context
 
-    @route(r"^downloadpdf/(?P<page_ptr_id_array>[-\w]+)/$", name="new_download_snip")
-    def new_download_snip(self,request,page_ptr_id_array):
-        print("aaaaaaaaaaaaaaaaaaaaaa")
-        # new_snip = IndexDownloads(quantity = 5, entries = entries_slug)
-        # new_snip.save()
+    def new_download_snip(self,request):
+        titles_array = []
+        page_ptr_id_str = request.GET.get('downloadpdf')
+        if page_ptr_id_str:
+            page_ptr_id_array = page_ptr_id_str.split(",")
+            for p in page_ptr_id_array:
+                obj = IndexDetailPage.objects.get(page_ptr_id=p)
+                titles_array.append(obj.title)
+            titles_string = ','.join(titles_array)
+            new_snip = IndexDownloads(quantity = len(titles_array), entries = titles_string)
+            new_snip.save()
 
 
     @route(r'^submit/$', name="submit_page")
