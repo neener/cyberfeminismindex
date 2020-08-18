@@ -122,6 +122,9 @@ select, button {
   padding: 0 20px;
   columns: 900px 4;
 }
+.search_pg #categories_list label {
+  color: #00ff00;
+}
 .search_pg form {
   padding: 0 20px;
 }
@@ -129,6 +132,10 @@ select, button {
   width: 99.5%;
   /* font-size: 1.5vw; */
   padding: 5px;
+}
+.search_pg form input#user-input {
+  border-style: none;
+  color: #d3d3d3;
 }
 p.no_results {
   margin-left: 20px;
@@ -440,10 +447,17 @@ header #tag_btn button span {
 #about_form input {
   width: 100%;
   box-sizing: border-box;
+  border-style: none;
 }
 #about_form p {
-  color: #aeaeae;
-  font-size: 1.2vw;
+  /* color: #d3d3d3; */
+  font-size: 24px;
+}
+#about_form input, select{
+  color: #d3d3d3;
+}
+#about_form input:focus {
+  color: #00ff00;
 }
 #about_form.closed {
   max-height: 0;
