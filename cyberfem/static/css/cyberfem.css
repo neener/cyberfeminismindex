@@ -22,13 +22,12 @@ body,html {
 select, button {
   /* font-size: default; */
   font-family: Arial, sans-serif;
-  padding: 5px;
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 50% 30%;
-  grid-gap: 2px;
+  grid-template-columns: 70px 69px 50% 30%;
+  grid-gap: 18px;
   /* background-color: #2196F3; */
 }
 /* 
@@ -45,8 +44,6 @@ select, button {
 .grid-container > div {
   /* background-color: rgba(255, 255, 255, 0.8); */
   text-align: left;
-  padding: 20px 0;
-  font-size: 30px;
 }
 
 #main_content {
@@ -54,6 +51,11 @@ select, button {
   padding: 0;
   overflow: hidden;
 }
+
+#main_content.template-indexpage {
+  font-size: 24px !important;
+}
+
 .left_content {
   width: 100%;
   display: inline-block;
@@ -125,7 +127,7 @@ select, button {
 }
 .search_pg form input {
   width: 99.5%;
-  font-size: 1.5vw;
+  /* font-size: 1.5vw; */
   padding: 5px;
 }
 p.no_results {
@@ -256,6 +258,7 @@ p.no_results {
   word-break: break-all;
 }
 .index_drawer .drawer_content {
+  margin-left: 155px;
   padding: 20px 20px 20px 20px;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -410,7 +413,7 @@ header #tag_btn {
   vertical-align: top;
 }
 header #tag_btn button {
-  font-size: 1.5vw;
+  /* font-size: 1.5vw; */
   padding: 5px 5px;
 }
 header #tag_btn button:hover {
@@ -476,21 +479,18 @@ p a.cr {
 }
 
 .back_to_top {
-  padding: 7px 10px;
   position: fixed;
   bottom: 20px;
   left: 20px;
 }
 
 .contact {
-  padding: 7px 10px;
   position: fixed;
   bottom: 20px;
   left: 116px;
 }
 
 .submit {
-  padding: 7px 10px;
   position: fixed;
   bottom: 20px;
   left: 194px;
@@ -598,6 +598,11 @@ p a.cr {
   /* body, select, button {
     font-size: 3.5vw;
   } */
+
+  .grid-container {
+    grid-template-columns: 41px 40px 43% 25%;
+  }
+
   .left_content {
     width: 100% !important;
     height: 100%;
@@ -654,8 +659,16 @@ p a.cr {
     overflow: auto;
   }
   .main_index_style .sm.num {
-    padding-left: 9px;
-    width: 9%;
+    padding-left: 12px;
+    /* width: 9%; */
+  }
+  #main_content.template-indexpage {
+    font-size: 16px !important;
+  }
+
+  .index_drawer .drawer_content {
+    margin: 0;
+    padding: 10px 0px 10px 12px;
   }
 }
 

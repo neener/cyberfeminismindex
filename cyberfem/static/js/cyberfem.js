@@ -216,7 +216,7 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         if (pub_date == "None") {
             cell2.innerHTML = "";
         } else {
-            cell2.innerHTML = pub_date;
+            cell2.innerHTML = "";
         }
 
         cell3.innerHTML = title;
