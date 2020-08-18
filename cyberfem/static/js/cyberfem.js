@@ -208,23 +208,23 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         trail_array.push(slug);
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
+        // var cell2 = row.insertCell(1);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
         cell1.innerHTML = "("+rownum+")";
         cell1.classList.add("cr")
-        if (pub_date == "None") {
-            cell2.innerHTML = "";
-        } else {
-            cell2.innerHTML = "";
-        }
+        // if (pub_date == "None") {
+        //     cell2.innerHTML = "";
+        // } else {
+        //     cell2.innerHTML = "";
+        // }
 
-        cell3.innerHTML = title;
+        cell2.innerHTML = title;
         
         if (author_founder == undefined || author_founder == "None") {
-            cell4.innerHTML = "";
+            cell3.innerHTML = "";
         } else {
-            cell4.innerHTML = author_founder;
+            cell3.innerHTML = author_founder;
         }
         row.classList.add("base_tr")
         row.setAttribute("id", id);
@@ -236,14 +236,14 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
     if (trail_array.length <= 0) {
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
+        // var cell2 = row.insertCell(1);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
         cell1.innerHTML = "("+rownum+")";
         cell1.classList.add("cr");
-        cell2.innerHTML = pub_date;
-        cell3.innerHTML = title;
-        cell4.innerHTML = author_founder;
+        // cell2.innerHTML = pub_date;
+        cell2.innerHTML = title;
+        cell3.innerHTML = author_founder;
         row.classList.add("base_tr")
         row.setAttribute("id", id);
         row.setAttribute("title", title);

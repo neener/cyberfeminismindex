@@ -352,13 +352,8 @@ th {
 }
 #base_index_list table {
   display: grid;
-  border-collapse: collapse;
-  min-width: 100%;
-  grid-template-columns: 
-  minmax(30px, .2fr)
-  minmax(30px, .2fr)
-  minmax(115px, 2.5fr)
-  minmax(100px, 1.2fr)
+  grid-template-columns: 38px 55% 30%;
+  grid-gap: 10px;
 }
 
 
