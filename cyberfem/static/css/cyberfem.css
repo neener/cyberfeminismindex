@@ -176,7 +176,11 @@ p.no_results {
   background: #fff;
 }
 #index_list .index_entry .sm:hover, #index_list .index_entry .md:hover, #index_list .index_entry .lg:hover {
-  color: #00ff00 !important;
+  color: #00ff00;
+}
+
+.grid-container:hover {
+  color: #00ff00;
 }
 /* .main_index_style .index_entry {
   width: 100%;  
