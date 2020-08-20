@@ -35,16 +35,19 @@
 			<div id="collections_list" class="main_index_style">
        			{% endif %}
 				{% for index in curated_entries %}
-            		<div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}">
+            		<div class="grid-container" onclick="slideIndex_drawer(this, '{{index.slug}}')" id="{{index.slug}}">
 	                    <div class="sm num"><p class="cr">{{ index.rownum }}</p></div>
 	                    <div class="sm">
 	                    	<p>
-	                        {{ index.pub_date }}
-	                        {% if index.end_date != None %}
-	                            –{{ index.end_date }}
-	                        {% endif %}
-	                    	</p>
-	                	</div>
+                          {% if index.end_date == None and index.pub_date != None %}
+                              {{ index.pub_date }}
+                          {% endif %}
+                          {% if index.end_date != None %}
+                              {{ index.pub_date }}–<br>
+                              {{ index.end_date }}
+                          {% endif %}
+                        </p>
+	                	  </div>
 	                    <div class="lg"><p>{{ index.title }}</p></div>
 	                    <div class="md"><p>
 	                        {% if index.author_founder != None %}
