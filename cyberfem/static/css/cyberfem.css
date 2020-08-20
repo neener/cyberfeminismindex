@@ -175,7 +175,7 @@ p.no_results {
   color: #000;
   background: #fff;
 }
-#index_list .index_entry.arrows .sm:hover, #index_list .index_entry.arrows .md:hover, #index_list .index_entry.arrows .lg:hover {
+#index_list .index_entry .sm:hover, #index_list .index_entry .md:hover, #index_list .index_entry .lg:hover {
   color: #00ff00 !important;
 }
 /* .main_index_style .index_entry {
@@ -450,14 +450,17 @@ header #tag_btn button span {
   width: 100%;
   box-sizing: border-box;
   border-style: none;
+  color: #d3d3d3;
 }
 #about_form p {
   /* color: #d3d3d3; */
   font-size: 24px;
 }
-#about_form input, select{
+/* #about_form input, select{
   color: #d3d3d3;
-}
+} */
+
+#user-input
 #about_form input:focus {
   color: #00ff00;
 }
