@@ -188,7 +188,7 @@ p.no_results {
   height: 100%;
 } */
 .main_index_style .index_entry div p {
-  margin: 5px 0;
+  margin-top: 10px;
 }
 .main_index_style .index_entry div p.caption {
   max-width: 250px;
@@ -307,22 +307,7 @@ p.no_results {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-#trail_container #download_btn {
-  font-size: 0.8vw;
-  vertical-align: top;
-  position: fixed;
-  bottom: 20px;
-  width: 100px;
-}
 
-#trail_container #view-all-downloads {
-  font-size: 0.8vw;
-  vertical-align: top;
-  position: absolute;
-  bottom: 9px;
-  right: 99px;
-  width: 120px;
-}
 #trail_container span {
   font-size: .85vw;
   display: inline-block;
@@ -497,22 +482,18 @@ p a.cr {
   cursor: pointer;
 }
 
-.back_to_top {
+.bottom-buttons {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  left: 18px;
 }
 
-.contact {
-  position: fixed;
-  bottom: 20px;
-  left: 116px;
+.bottom-buttons button a {
+  text-decoration: none;
+  color: black;
 }
 
 .submit {
-  position: fixed;
-  bottom: 20px;
-  left: 194px;
   box-shadow: 0 0 10px #00ff00;
 }
 
