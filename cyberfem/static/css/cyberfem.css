@@ -314,6 +314,15 @@ p.no_results {
   bottom: 20px;
   width: 100px;
 }
+
+#trail_container #view-all-downloads {
+  font-size: 0.8vw;
+  vertical-align: top;
+  position: absolute;
+  bottom: 9px;
+  right: 99px;
+  width: 120px;
+}
 #trail_container span {
   font-size: .85vw;
   display: inline-block;
@@ -405,6 +414,9 @@ header #menu select {
     border-style: solid;
     border-color: rgb(166, 166, 166);
     border-image: initial;
+}
+select#menu.nav {
+  color: black;
 }
 header #menu.with_tag {
   /*width: 82%;*/
