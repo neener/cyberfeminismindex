@@ -217,7 +217,7 @@ p.no_results {
 } */
 
 .main_index_style .index_entry:hover {
-  color: #00ff00 !important;
+  /* color: #00ff00 !important; */
   cursor: pointer;
 }
 #index_list.loading .index_entry:hover, #index_list.loading .index_drawer, #index_list.loading .index_entry.green_text, #index_list.loading .index_drawer a {
