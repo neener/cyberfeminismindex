@@ -188,7 +188,7 @@ p.no_results {
   height: 100%;
 } */
 .main_index_style .index_entry div p {
-  margin-top: 10px;
+  margin: 0;
 }
 .main_index_style .index_entry div p.caption {
   max-width: 250px;
@@ -258,7 +258,7 @@ p.no_results {
   margin-top: 0;
 }
 .enlarge_img {
-  height: 220px !important;
+  height: 250px !important;
 }
 .index_drawer .external_links a {
   display: block;
