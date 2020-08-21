@@ -476,6 +476,32 @@ function img_click(url) {
 }
 
 
+
+var index_list = document.getElementById("left_index");
+var scrollpos = index_list.scrollTop;
+var green_box = document.getElementById("green_box");
+
+index_list.addEventListener('scroll', function(){ 
+    
+    scrollpos = index_list.scrollTop;
+
+    if(scrollpos < 100){
+       green_box.classList.remove("extend_green", "extend_green_two", "extend_green_three");
+    }
+    else if(scrollpos >= 100 && scrollpos < 200) {
+      green_box.classList.add("extend_green");
+      green_box.classList.remove("extend_green_two", "extend_green_three");
+    }
+    else if(scrollpos >= 200 && scrollpos < 300) {
+      green_box.classList.add("extend_green_two");
+      green_box.classList.remove("extend_green_one", "extend_green_three");
+    }
+    else {
+      green_box.classList.add("extend_green_three");
+      green_box.classList.remove("extend_green_one", "extend_green_two");
+    }
+});
+
 // d = document.getElementById("left_index")
 
 // $(d).on('mousewheel', function(event) {
