@@ -11,7 +11,7 @@ var download_btn = document.getElementById('download_btn');
 var index_json;
 var index_img_json;
 let session_trail_array = JSON.parse(sessionStorage.getItem("trail"));
-
+    
 function handleMenu(id, elm) {
     str = elm.value
     str = str.toLowerCase();
@@ -223,7 +223,7 @@ function add_to_trail(slug) {
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
 
-        cell1.innerHTML = "("+rownum+")";
+        cell1.innerHTML = "("+obj.rownum+")";
         cell1.classList.add("cr")
         // if (pub_date == "None") {
         //     cell2.innerHTML = "";
@@ -231,37 +231,18 @@ function add_to_trail(slug) {
         //     cell2.innerHTML = "";
         // }
 
-        cell2.innerHTML = title;
+        cell2.innerHTML = obj.title;
         
-        if (author_founder == undefined || author_founder == "None") {
+        if (obj.author_founder == undefined || obj.author_founder == "None") {
             cell3.innerHTML = "";
         } else {
-            cell3.innerHTML = author_founder;
+            cell3.innerHTML = obj.author_founder;
         }
         row.classList.add("base_tr")
-        row.setAttribute("id", id);
-        row.setAttribute("title", title);
-        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
-        table.appendChild(row); 
-    }
-
-    if (trail_array.length <= 0) {
-        var row = table.insertRow(0);
-        var cell1 = row.insertCell(0);
-        // var cell2 = row.insertCell(1);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        cell1.innerHTML = "("+rownum+")";
-        cell1.classList.add("cr");
-        // cell2.innerHTML = pub_date;
-        cell2.innerHTML = title;
-        cell3.innerHTML = author_founder;
-        row.classList.add("base_tr")
-        row.setAttribute("id", id);
-        row.setAttribute("title", title);
-        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
-
-        table.appendChild(row); 
+        row.setAttribute("id", obj.id);
+        row.setAttribute("title", obj.title);
+        row.addEventListener("click",  function(){ remove_trail_entry(this, obj.slug, obj.title); });
+        table.appendChild(row);  
     }
 
     // open left_content drawer
