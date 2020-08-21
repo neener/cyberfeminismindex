@@ -35,51 +35,10 @@
 	  	<div class="images_pg main_index_style">
             <!-- {% cache 604800 preview_index_image index_image.id %} -->
                 {% for index in image_entries %}
-                        <div class="index_drawer closed">
-                            <div class="drawer_content">
-                                <div class="sm">
-                                    <p>
-                                    {% if index.end_date == None and index.pub_date != None %}
-                                        {{ index.pub_date }}
-                                    {% endif %}
-                                    {% if index.end_date != None %}
-                                        {{ index.pub_date }}–<br>
-                                        {{ index.end_date }}
-                                    {% endif %}
-                                    </p>
-                                </div>
-                                <div class="lg"><p>{{ index.title }}</p></div>
-                                <div class="md"><p>
-                                    {% if index.author_founder != None %}
-                                    {{ index.author_founder|markdown }}
-                                    {% else %}
-                                    {% endif %}
-                                </p></div>
-                                <p class="about_text">{{ index.about|markdown }}</p>
-                                {% if index.contributed_by != None %}
-                                <p>{{ index.contributed_by }}</p>
-                                {% endif %}
-                                <p class="external_links">
-                                    {% if index.external_link != None %}
-                                    <a href="{{index.external_link}}" target="_blank">{{ index.external_link }}</a>
-                                    {% endif %}
-                                    {% if index.external_link_two != None %}
-                                    <a href="{{index.external_link_two}}" target="_blank">{{ index.external_link_two }}</a>
-                                    {% endif %}
-                                </p>
-                                {% if index.location != None %}
-                                <p>{{ index.location }}</p>
-                                {% endif %}
-                                <p>
-                                    {% for cat in index.categories.all %}
-                                        <a href="{{ post.specific.get_parent.url }}/tag/{{ cat.slug }}">{{ cat.name}}</a>
-                                    {% endfor %}
-                                </p>
-                            </div>
-                        </div>
+  
                         <div onclick="slideIndex_drawer_images(this, '{{index.slug}}')" id="{{index.slug}}" class="index_entry">
                             <div class="sm num buffer"></div>
-                            <div class="img_section">
+                           
                                 {% for loop_cycle in index.images_list.all %}
                                     {% image loop_cycle.images height-220 as img %} 
                                     {% if loop_cycle.images is None %}
@@ -90,7 +49,7 @@
                                         </div>
                                     {% endif %}
                                 {% endfor %}
-                            </div>
+                            
                         </div>
                 {% endfor %}
             <!-- {% endcache %}  -->

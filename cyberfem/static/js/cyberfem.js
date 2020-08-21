@@ -219,28 +219,48 @@ function add_to_trail(slug) {
         trail_array.push(slug);
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
+        // var cell2 = row.insertCell(1);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        cell1.innerHTML = "("+obj.rownum+")";
-        cell1.classList.add("cr")
-        if (obj.pub_date == "None") {
-            cell2.innerHTML = "";
-        } else {
-            cell2.innerHTML = obj.pub_date;
-        }
 
-        cell3.innerHTML = obj.title;
+        cell1.innerHTML = "("+rownum+")";
+        cell1.classList.add("cr")
+        // if (pub_date == "None") {
+        //     cell2.innerHTML = "";
+        // } else {
+        //     cell2.innerHTML = "";
+        // }
+
+        cell2.innerHTML = title;
         
-        if (obj.author_founder == undefined || obj.author_founder == "None") {
-            cell4.innerHTML = "";
+        if (author_founder == undefined || author_founder == "None") {
+            cell3.innerHTML = "";
         } else {
-            cell4.innerHTML = obj.author_founder;
+            cell3.innerHTML = author_founder;
         }
         row.classList.add("base_tr")
-        row.setAttribute("id", obj.id);
-        row.setAttribute("title", obj.title);
-        row.addEventListener("click",  function(){ remove_trail_entry(this, obj.slug, obj.title); });
+        row.setAttribute("id", id);
+        row.setAttribute("title", title);
+        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
+        table.appendChild(row); 
+    }
+
+    if (trail_array.length <= 0) {
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        // var cell2 = row.insertCell(1);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = "("+rownum+")";
+        cell1.classList.add("cr");
+        // cell2.innerHTML = pub_date;
+        cell2.innerHTML = title;
+        cell3.innerHTML = author_founder;
+        row.classList.add("base_tr")
+        row.setAttribute("id", id);
+        row.setAttribute("title", title);
+        row.addEventListener("click",  function(){ remove_trail_entry(this, slug, title); });
+
         table.appendChild(row); 
     }
 
@@ -473,6 +493,50 @@ function img_click(url) {
 
     console.log(s)
 }
+
+
+// d = document.getElementById("left_index")
+
+// $(d).on('mousewheel', function(event) {
+//     console.log(event.deltaX, event.deltaY, event.deltaFactor);
+// });
+
+// const checkScrollSpeed = (function(settings) {
+//   settings = settings || {};
+
+//   let lastPos, newPos, timer, delta,
+//       delay = settings.delay || 50;
+
+//   function clear() {
+//     lastPos = null;
+//     delta = 0;
+//   }
+
+//   clear();
+
+//   return function() {
+//     newPos = d.scrollY;
+//     if (lastPos != null) { // && newPos < maxScroll
+//       delta = newPos - lastPos;
+//     }
+//     lastPos = newPos;
+//     clearTimeout(timer);
+//     timer = setTimeout(clear, delay);
+//     return delta;
+//   };
+// })();
+
+// const container = document.querySelector('#menu');
+
+// d.addEventListener('scroll', function() {
+//   var speed = checkScrollSpeed();
+//   console.log(speed);
+//   if (speed > 150) {
+//     console.log('150+');
+//     container.classList.add('red');
+//   }
+// });
+
 
 
 
