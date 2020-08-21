@@ -264,6 +264,7 @@ p.no_results {
   margin-bottom: 10px;
   margin-top: 0;
 }
+
 .index_drawer.closed {
   max-height: 0;
 }
