@@ -53,7 +53,8 @@
                 ↓
             </div>
         </div>
-        <!-- {% cache 604800 preview_index index.id %} -->
+
+          {% cache 604800 preview_index index.id %}
             {% for index in posts %}
                 <div class="index_entry" onclick="slideIndex_drawer(this, '{{index.slug}}'); add_to_trail('{{ index.title }}', '{{ index.id }}', '{{ index.slug }}', '{{ index.author_founder }}', '{{ index.pub_date }}', '{{ index.end_date }}', '{{index.rownum}}')" id="{{index.slug}}">
                   <div class="grid-container">
@@ -162,16 +163,16 @@
                     {% endfor %}
                     </div>
                 </div>
+
             {% endfor %}
-        <!-- {% endcache %}  -->
+        {% endcache %} 
         <div class="bottom-buttons">
           <button class="back_to_top" onclick="back_to_top('top_location')">back to top</button>
           <button><a href="mailto:Mindyseu@gmail.com">contact</button>
           <button><a href="submit">submit</a></button>
         </div>
        
-    
-       
+   
     </div>
     
 </div>

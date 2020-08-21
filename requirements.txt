@@ -10,6 +10,7 @@ Django==3.0.5
 django-autoslug-iplweb==1.9.5
 django-bakery==0.12.7
 django-cogwheels==0.3
+django-debug-toolbar==2.2
 django-extensions==2.2.9
 django-htmlmin==0.11.0
 django-modelcluster==5.0.1
@@ -27,10 +28,12 @@ jmespath==0.9.5
 l18n==2018.5
 Markdown==2.6.11
 Pillow==6.2.2
+psutil==5.7.2
 pysqlite3==0.4.3
 python-dateutil==2.8.1
 pytz==2019.3
 redis==3.5.3
+redislite==5.0.165407
 requests==2.23.0
 s3transfer==0.3.3
 simplejson==3.17.0
@@ -44,6 +47,7 @@ wagtail-markdown==0.6
 wagtailfontawesome==1.2.1
 wagtailmenus==3.0.1
 wagtailnetlify==0.4
+walrus==0.8.1
 Wand==0.6.2
 webencodings==0.5.1
 whitenoise==5.0.1

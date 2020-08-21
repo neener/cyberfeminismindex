@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags %}
 {% load wagtailcore_tags wagtailimages_tags cache %}
-
-
 {% block body_class %}template-searchresults{% endblock %}
-
 {% block title %}Search{% endblock %}
-
 {% block content %}
-
 {% load wagtailmarkdown %}
 
+<script type="text/javascript">
+    index_json = {{ json_dict|safe }};
+    index_img_json = {{ json_img_dict|safe }};
+</script>
 
     <div class="left_content">
         <header>
