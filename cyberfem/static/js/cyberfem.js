@@ -473,10 +473,6 @@ function img_click(url) {
 }
 
 
-
-
-
-
 // d = document.getElementById("left_index")
 
 // $(d).on('mousewheel', function(event) {

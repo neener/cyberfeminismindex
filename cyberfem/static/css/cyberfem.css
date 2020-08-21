@@ -530,7 +530,7 @@ p a.cr {
 
 
  
-/*#green_box {
+#green_box {
   height:1px;
   background: linear-gradient(90deg, rgba(0,255,0,0.4514180672268907) 0%, rgba(0,255,0,0.4514180672268907) 35%);
 }
@@ -544,9 +544,7 @@ p a.cr {
 #green_box.extend_green_three {
   height: 6px;
   box-shadow: 1px 1px 3000px 80px #00ff00;
-}*/
-
-
+}
 
 
 
