@@ -198,7 +198,7 @@ function remove_trail_entry(elm, slug, title) {
     index_elm.nextSibling.nextSibling.classList.add("closed")
     
     trail_array = trail_array.filter(e => e !== slug);
-    download_btn.innerHTML = "Download ("+ trail_array.length + ")"
+    download_btn.innerHTML = "download ("+ trail_array.length + ")"
 }
 
 function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownum) {
@@ -261,14 +261,14 @@ function add_to_trail(title, id, slug, author_founder, pub_date, end_date, rownu
         opened = true;
         right_content.classList.toggle("unopened");
         left_content.style.width = "73.5%";
-        body.style.fontSize = "1.5vw";
-        select.style.fontSize = "1.5vw";
+        // body.style.fontSize = "1.5vw";
+        // select.style.fontSize = "1.5vw";
     }
     if (trail_array.length == 1 && opened == false &&  window.innerWidth < 800) {
     	right_content.style.display = "none";
     }
 
-    download_btn.innerHTML = "Download ("+ trail_array.length + ")";
+    download_btn.innerHTML = "download ("+ trail_array.length + ")";
     console.log("added to trail")
 }
 
@@ -503,17 +503,14 @@ index_list.addEventListener('scroll', function(){
 var isScrolling;
 
 index_list.addEventListener('scroll', function ( event ) {
-
 	window.clearTimeout( isScrolling );
-
 	isScrolling = setTimeout(function() {
-
     // console.log( 'Scrolling has stopped.' );
     green_box.classList.remove("extend_green", "extend_green_two", "extend_green_three");
-
 	}, 1000);
-
 }, false);
+
+
 
 // d = document.getElementById("left_index")
 
