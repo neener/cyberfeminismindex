@@ -499,6 +499,22 @@ index_list.addEventListener('scroll', function(){
     }
 });
 
+// Setup isScrolling variable
+var isScrolling;
+
+index_list.addEventListener('scroll', function ( event ) {
+
+	window.clearTimeout( isScrolling );
+
+	isScrolling = setTimeout(function() {
+
+    // console.log( 'Scrolling has stopped.' );
+    green_box.classList.remove("extend_green", "extend_green_two", "extend_green_three");
+
+	}, 1000);
+
+}, false);
+
 // d = document.getElementById("left_index")
 
 // $(d).on('mousewheel', function(event) {

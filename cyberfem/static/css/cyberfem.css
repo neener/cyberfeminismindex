@@ -349,7 +349,7 @@ header .menu_section {
   margin-left: -14px;
 }
 header #menu {
-	box-shadow: 1px 1px 10px 1px #00ff00;
+	/* box-shadow: 1px 1px 10px 1px #00ff00; */
   width: 100%;
 }
 header #menu select {
@@ -393,7 +393,7 @@ header #tag_btn button:hover {
   cursor: pointer;
 }
 header #tag_btn button span {
-  font-size: 1vw;
+  /* font-size: 1vw; */
   vertical-align: middle;
 }
 #categories_section {
@@ -535,18 +535,17 @@ p a.cr {
 
  
 #green_box {
-  height:1px;
   background: linear-gradient(90deg, rgba(0,255,0,0.4514180672268907) 0%, rgba(0,255,0,0.4514180672268907) 35%);
+  transition: box-shadow 2s;
+  transition-timing-function: ease;
 }
 #green_box.extend_green {
   box-shadow: 1px 1px 800px 20px #00ff00;
 }
 #green_box.extend_green_two {
-  height: 6px;
   box-shadow: 1px 1px 2000px 50px #00ff00;
 }
 #green_box.extend_green_three {
-  height: 6px;
   box-shadow: 1px 1px 3000px 80px #00ff00;
 }
 
@@ -590,14 +589,14 @@ p a.cr {
   }
   #trail_container #mobile_download_btn {
     display: block;
-    font-size: 3.5vw;
+    /* font-size: 3.5vw; */
   }
  
   #index_list {
       margin-top: 80px;
   }
   #trail_container span {
-    font-size: 2vw;
+    /* font-size: 2vw; */
   }
 
   .grid-container > div {
@@ -612,7 +611,7 @@ p a.cr {
     width: 100%;
   }
   .index_drawer .img_container p, .images_pg .img_container p {
-    font-size: 3vw;
+    /* font-size: 3vw; */
   }
   header .menu_section {
     width: 95%;
