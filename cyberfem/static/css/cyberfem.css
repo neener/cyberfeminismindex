@@ -235,8 +235,7 @@ p.no_results {
 }
 .enlarge_img {
   height: auto !important;
-  max-width: 450px !important;
-  width: 450px;
+  width: auto !important;
 }
 .index_drawer .external_links a {
   display: block;
@@ -565,8 +564,12 @@ p a.cr {
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat( auto-fill, minmax(240px, 1fr) );
+  display: block;
+}
+
+.images_pg.main_index_style.gallery .img_container {
+  float: left;
+  margin: 5px;
 }
 
 @media (min-width: 300px) and (max-width: 800px) {
