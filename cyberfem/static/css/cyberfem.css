@@ -124,13 +124,14 @@ a {
 }
 .search_pg form input#user-input {
   border-style: none;
-  color: #d3d3d3;
+  color: #00ff00;
+  font-size: 24px;
 }
 p.no_results {
   margin-left: 20px;
 }
 .collections_pg, .images_pg, .about_pg {
-  margin: 100px 0 50px;
+  margin: 60px 0 50px;
   height: 100%;
 }
 .collections_pg #curator_list {
@@ -469,6 +470,11 @@ td.cr {
 .bottom-buttons {
   position: fixed;
   bottom: 20px;
+  left: 18px;
+}
+
+.go {
+  position: fixed;
   left: 18px;
 }
 
