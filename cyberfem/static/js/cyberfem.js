@@ -271,8 +271,8 @@ function session_trail(){
         opened = true;
         right_content.classList.remove("unopened");
         left_content.style.width = "73.5%";
-        body.style.fontSize = "1.5vw";
-        select.style.fontSize = "1.5vw";
+        // body.style.fontSize = "1.5vw";
+        // select.style.fontSize = "1.5vw";
     }
 }
 

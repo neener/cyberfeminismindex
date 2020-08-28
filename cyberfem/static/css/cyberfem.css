@@ -87,7 +87,7 @@ select, button {
   display: inline-block;
 }
 .images_pg .img_container {
-  max-width: 250px;
+  /* max-width: 250px; */
   word-break: break-all;
 }
 .images_pg .img_container p {
@@ -363,7 +363,7 @@ header .menu_section {
 }
 header #menu {
 	/* box-shadow: 1px 1px 10px 1px #00ff00; */
-  width: 100%;
+  width: calc(100% - 10px);
 }
 header #menu select {
     -webkit-writing-mode: horizontal-tb !important;
