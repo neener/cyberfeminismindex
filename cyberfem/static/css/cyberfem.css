@@ -97,11 +97,15 @@ select, button {
   margin-top: 0;
 }
 .images_pg img {
-  height: 100px;
-  display: block;
-  vertical-align: middle;
-  max-width: 250px;
+  height: auto;
+  display: inline;
+  vertical-align: top;
+  max-width: 125px;
 }
+/* 
+.images_pg img .enlarge_img {
+  width: 550px !important;
+} */
 .search_pg {
   margin: 85px 0 50px;
 }
@@ -247,7 +251,7 @@ p.no_results {
 .enlarge_img {
   height: auto !important;
   max-width: 550px !important;
-  width: 450px;
+  width: 550px !important;
 }
 .gallery .enlarge_img {
   width: auto;
