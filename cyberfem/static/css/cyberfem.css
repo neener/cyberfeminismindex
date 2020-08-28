@@ -132,7 +132,7 @@ p.no_results {
   margin-left: 20px;
 }
 .collections_pg, .images_pg {
-  margin: 60px 0 50px;
+  margin: 60px 20px 50px 20px;
   height: 100%;
 }
 
@@ -467,7 +467,7 @@ td.cr {
 }
 
 .internal_pg_container {
-  margin: 60px 20px 0px;
+  margin: 60px 24px 0px;
   /* height: 100%; */
 }
 
@@ -595,6 +595,10 @@ td.cr {
 .images_pg.main_index_style.gallery .img_container {
   float: left;
   margin: 5px;
+}
+
+#about_pg_content {
+  margin-bottom: 64px;
 }
 
 @media (min-width: 300px) and (max-width: 800px) {
