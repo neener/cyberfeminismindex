@@ -93,7 +93,7 @@ select, button {
 }
 .images_pg .img_container p {
   display: none;
-  font-size: 0.8vw;
+  font-size: 12px;
   margin-top: 0;
 }
 .images_pg img {
@@ -125,8 +125,12 @@ a {
 }
 .search_pg form input#user-input {
   border-style: none;
-  color: #00ff00;
+  color: #d3d3d3;
   font-size: 24px;
+}
+
+.search_pg form input#user-input:focus {
+  color: #00ff00;
 }
 p.no_results {
   margin-left: 20px;
@@ -236,7 +240,7 @@ p.no_results {
   vertical-align: top;
 }
 .index_drawer .img_container p {
-  font-size: 0.8vw;
+  font-size: 12px;
   display: none;
   margin-top: 0;
 }
@@ -433,10 +437,13 @@ header #tag_btn button span {
   width: 100%;
   box-sizing: border-box;
   border-style: none;
-  color: #00ff00;
+  color: #d3d3d3;
 }
 #about_form p {
   font-size: 24px;
+}
+#about_form input:focus {
+  color: #00ff00;
 }
 
 #user-input
@@ -485,6 +492,7 @@ td.cr {
 .go {
   position: fixed;
   left: 18px;
+  top: 150px;
 }
 
 .bottom-buttons button a {
@@ -670,6 +678,14 @@ td.cr {
 
   #about_form input {
     font-size: 16px;
+  }
+
+  .index_drawer .img_container {
+    max-width: 350px;
+  }
+
+  .index_drawer .img_section .img_container .enlarge_img {
+    width: 100%;
   }
 }
 
