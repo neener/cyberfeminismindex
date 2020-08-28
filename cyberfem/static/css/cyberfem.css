@@ -27,6 +27,7 @@ select, button {
   display: grid;
   grid-template-columns: 70px 69px 50% 30%;
   grid-gap: 18px;
+  margin-left: 6px;
 }
 
 .grid-container > div {
@@ -62,7 +63,7 @@ select, button {
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
-  padding: 10px 10px;
+  padding: 20px 10px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -344,8 +345,8 @@ th {
 }
 #base_index_list table {
   display: grid;
-  grid-template-columns: 38px 55% 30%;
-  grid-gap: 10px;
+  grid-template-columns: 30px 55% 30%;
+  grid-gap: 0 10px;
 }
 
 
