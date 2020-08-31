@@ -11,7 +11,13 @@ var download_btn = document.getElementById('download_btn');
 var index_json;
 var index_img_json;
 let session_trail_array = JSON.parse(sessionStorage.getItem("trail"));
-    
+
+// function ready() {
+//   alert('DOM is ready');
+// }
+
+// document.addEventListener("DOMContentLoaded", ready);
+
 function handleMenu(id, elm) {
     str = elm.value
     str = str.toLowerCase();
@@ -447,6 +453,8 @@ function enlarge_img(el) {
         img_width = el.offsetWidth
         if(img_width > 250) {
             el.style.height = "auto";
+            // img_container = el.parentElement;
+            // img_container.style.display = "block";
         }
         caption = el.nextElementSibling.nextElementSibling
         caption.style.display = "block";

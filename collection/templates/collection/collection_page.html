@@ -15,7 +15,7 @@
     index_json = {{ json_dict|safe }};
 </script>
 
-	<div class="left_content">
+	<div class="left_content" id="left_index">
 	    <header>
 	        <div class="menu_section">
 	            <select id="menu" name="menu" onchange="javascript:handleMenu(id, this)">
@@ -23,7 +23,8 @@
 	                {% for item in navigation.menu_items.all %}
 	                <option value="{{ item.title }}">{{ item.title }}</option>
 	                {% endfor %}
-	            </select>
+              </select>
+              <div id="green_box"></div>
 	        </div>
 	    </header>   
 	    <div id="top_location"></div>

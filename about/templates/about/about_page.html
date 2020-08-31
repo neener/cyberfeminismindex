@@ -21,23 +21,25 @@
 	                {% for item in navigation.menu_items.all %}
 	                <option value="{{ item.title }}">{{ item.title }}</option>
 	                {% endfor %}
-	            </select>
+              </select>
+              <div id="green_box"></div>
 	        </div>
 	    </header>
 
 	    <div id="top_location"></div>
-
-	    <div id="about_pg_content" class="internal_pg_container about_pg">
-	    	
-			{{ page.body|markdown }}
+     
+        <div id="about_pg_content" class="internal_pg_container about_pg">
+          
+        {{ page.body|markdown }}
+        
+        <div class="bottom-buttons">
+          <button class="back_to_top" onclick="back_to_top('top_location')">back to top</button>
+          <button class="contact"><a href="mailto:mindyseu@gmail.com">contact</a></button>
+          <button class="submit"><a href="submit">submit</a></button>
+        </div>
 			
-			<div class="bottom-buttons">
-        <button class="back_to_top" onclick="back_to_top('top_location')">back to top</button>
-        <button class="contact"><a href="mailto:mindyseu@gmail.com">contact</a></button>
-        <button class="submit"><a href="submit">submit</a></button>
-      </div>
-			
-   	</div>
+        </div>
+   
 
 
 </script>
