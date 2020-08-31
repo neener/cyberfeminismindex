@@ -601,12 +601,14 @@ td.cr {
 }
 
 .gallery {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
 
 .images_pg.main_index_style.gallery .img_container {
   float: left;
-  display: contents;
+  display: inline-block;
 }
 
 .images_pg.main_index_style.gallery .img_container img {
