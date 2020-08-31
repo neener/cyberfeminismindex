@@ -698,5 +698,10 @@ td.cr {
   .index_drawer .img_section .img_container .enlarge_img {
     width: 100%;
   }
+  .enlarge_img {
+    height: auto !important;
+    max-width: 450px !important;
+    width: 450px !important;
+  }
 }
 
