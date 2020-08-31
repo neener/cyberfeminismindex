@@ -609,6 +609,7 @@ td.cr {
 .images_pg.main_index_style.gallery .img_container {
   float: left;
   display: inline-block;
+  padding: 5px;
 }
 
 .images_pg.main_index_style.gallery .img_container img {
