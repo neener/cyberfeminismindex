@@ -12,11 +12,9 @@ var index_json;
 var index_img_json;
 let session_trail_array = JSON.parse(sessionStorage.getItem("trail"));
 
-// function ready() {
-//   alert('DOM is ready');
-// }
-
-// document.addEventListener("DOMContentLoaded", ready);
+window.addEventListener('DOMContentLoaded', (event) => {
+  document.getElementById("main_content").classList.remove("green-blur");
+});
 
 function handleMenu(id, elm) {
     str = elm.value

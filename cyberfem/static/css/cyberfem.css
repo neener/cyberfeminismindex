@@ -675,6 +675,11 @@ td.cr {
   #main_content {
     overflow: auto;
   }
+
+  .green-blur {
+    color: #00ff00;
+  }
+
   .main_index_style .sm.num {
     padding-left: 12px;
   }
